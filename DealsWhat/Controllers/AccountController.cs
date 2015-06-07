@@ -18,7 +18,7 @@ namespace DealsWhat.Controllers
     public class AccountController : Controller
     {
         //
-        // GET: /Account/Login
+        // GET: /Account/Logina
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
