@@ -1,0 +1,55 @@
+﻿@model DealsWhat.ViewModels.ViewShoppingCartViewModel
+
+<div class="gap"></div>
+
+<h3>View Cart</h3>
+<div class="row">
+    <div class="col-md-8">
+        <table class="table cart-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Name</th>
+                    <th>QTY</th>
+                    <th>Price</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CartItems)
+                {
+                    <tr>
+                        <td class="cart-item-image">
+                            <a href="#">
+                                @Html.Raw("<img height='70px' width='70px' src=\"" + @Url.Content(DealsWhat.Helpers.PathHelper.ConvertRelativeToAbsoluteDealImagePath(item.Deal.ImageUrls.First())) + "\"/>")
+                            </a>
+                        </td>
+                        <td><a href="@Url.Action("Index", "Deal", new { id = item.Deal.CanonicalUrl })">@item.Deal.ShortTitle</a>
+                        </td>
+                        <td class="cart-item-quantity"><i class="fa fa-minus cart-item-minus"></i>
+                            <input type="text" name="cart-quantity" class="cart-quantity" value="1" /><i class="fa fa-plus cart-item-plus"></i>
+                        </td>
+                        <td>@item.TotalPrice.ToString("C")</td>
+                        <td class="cart-item-remove">
+                            <a class="fa fa-times" href="#"></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="#" class="btn btn-primary">Update the cart</a>
+    </div>
+    <div class="col-md-3">
+        <ul class="cart-total-list">
+            <li><span>Sub Total</span><span>@Model.TotalPrice.ToString("RM 0.00")</span>
+            </li>
+            <li><span>Shipping</span><span>$0.00</span>
+            </li>
+            <li><span>Taxes</span><span>$0.00</span>
+            </li>
+            <li><span>Total</span><span>@Model.TotalPrice.ToString("C")</span>
+            </li>
+        </ul>
+        <a href="@Url.Action("CheckOut", "Order")" class="btn btn-primary btn-lg">Checkout</a>
+    </div>
+</div>

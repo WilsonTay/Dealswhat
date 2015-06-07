@@ -1,0 +1,1384 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    
+    
+    <title>select2/select2 · GitHub</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-144.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144.png">
+    <meta property="fb:app_id" content="1401488693436528">
+
+      <meta content="@github" name="twitter:site" /><meta content="summary" name="twitter:card" /><meta content="select2/select2" name="twitter:title" /><meta content="select2 - Select2 is a jQuery based replacement for select boxes. It supports searching, remote data sets, and infinite scrolling of results." name="twitter:description" /><meta content="https://avatars2.githubusercontent.com/u/8077542?v=3&amp;s=400" name="twitter:image:src" />
+      <meta content="GitHub" property="og:site_name" /><meta content="object" property="og:type" /><meta content="https://avatars2.githubusercontent.com/u/8077542?v=3&amp;s=400" property="og:image" /><meta content="select2/select2" property="og:title" /><meta content="https://github.com/select2/select2" property="og:url" /><meta content="select2 - Select2 is a jQuery based replacement for select boxes. It supports searching, remote data sets, and infinite scrolling of results." property="og:description" />
+      <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
+    <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
+    <link rel="assets" href="https://assets-cdn.github.com/">
+    
+    <meta name="pjax-timeout" content="1000">
+    
+
+    <meta name="msapplication-TileImage" content="/windows-tile.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="selected-link" value="repo_source" data-pjax-transient>
+      <meta name="google-analytics" content="UA-3769691-2">
+
+    <meta content="collector.githubapp.com" name="octolytics-host" /><meta content="collector-cdn.github.com" name="octolytics-script-host" /><meta content="github" name="octolytics-app-id" /><meta content="3C33754C:07EC:5E88817:555783C5" name="octolytics-dimension-request_id" />
+    
+    <meta content="Rails, view, files#disambiguate" name="analytics-event" />
+    <meta class="js-ga-set" name="dimension1" content="Logged Out">
+    <meta class="js-ga-set" name="dimension2" content="Header v3">
+    <meta name="is-dotcom" content="true">
+    <meta name="hostname" content="github.com">
+    <meta name="user-login" content="">
+
+    
+    <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="M507Rb5lFmwvGrBPLZiJz7/DeDiGr15FY9vyqF5ekBR3keGn1F/creQFMQTi4+TJiKpEFnjF3lugzp7BRPQsdA==" name="csrf-token" />
+
+    <link href="https://assets-cdn.github.com/assets/github/index-d80e093fe7c48ff920ce83dfd2ad7c02806722220d164b49101ed783098ea618.css" media="all" rel="stylesheet" />
+    <link href="https://assets-cdn.github.com/assets/github2/index-99a58ea750b0547d1266460cd4ade0c2c81ed8c524cbba4ea5e3b37e18daec79.css" media="all" rel="stylesheet" />
+    
+    
+
+
+    <meta http-equiv="x-pjax-version" content="282d80bd51fc0e03270191711c02f726">
+
+      
+  <meta name="description" content="select2 - Select2 is a jQuery based replacement for select boxes. It supports searching, remote data sets, and infinite scrolling of results.">
+  <meta name="go-import" content="github.com/select2/select2 git https://github.com/select2/select2.git">
+
+  <meta content="8077542" name="octolytics-dimension-user_id" /><meta content="select2" name="octolytics-dimension-user_login" /><meta content="3620194" name="octolytics-dimension-repository_id" /><meta content="select2/select2" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="false" name="octolytics-dimension-repository_is_fork" /><meta content="3620194" name="octolytics-dimension-repository_network_root_id" /><meta content="select2/select2" name="octolytics-dimension-repository_network_root_nwo" />
+  <link href="https://github.com/select2/select2/commits/master.atom" rel="alternate" title="Recent Commits to select2:master" type="application/atom+xml">
+
+  </head>
+
+
+  <body class="logged_out  env-production  vis-public">
+    <a href="#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a>
+    <div class="wrapper">
+      
+      
+      
+
+
+        
+        <div class="header header-logged-out" role="banner">
+  <div class="container clearfix">
+
+    <a class="header-logo-wordmark" href="https://github.com/" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
+      <span class="mega-octicon octicon-logo-github"></span>
+    </a>
+
+    <div class="header-actions" role="navigation">
+        <a class="btn btn-primary" href="/join" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">Sign up</a>
+      <a class="btn" href="/login?return_to=%2Fselect2%2Fselect2" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</a>
+    </div>
+
+    <div class="site-search repo-scope js-site-search" role="search">
+      <form accept-charset="UTF-8" action="/select2/select2/search" class="js-site-search-form" data-global-search-url="/search" data-repo-search-url="/select2/select2/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+  <label class="js-chromeless-input-container form-control">
+    <div class="scope-badge">This repository</div>
+    <input type="text"
+      class="js-site-search-focus js-site-search-field is-clearable chromeless-input"
+      data-hotkey="s"
+      name="q"
+      placeholder="Search"
+      data-global-scope-placeholder="Search GitHub"
+      data-repo-scope-placeholder="Search"
+      tabindex="1"
+      autocapitalize="off">
+  </label>
+</form>
+    </div>
+
+      <ul class="header-nav left" role="navigation">
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="/explore" data-ga-click="(Logged out) Header, go to explore, text:explore">Explore</a>
+          </li>
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="/features" data-ga-click="(Logged out) Header, go to features, text:features">Features</a>
+          </li>
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="https://enterprise.github.com/" data-ga-click="(Logged out) Header, go to enterprise, text:enterprise">Enterprise</a>
+          </li>
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="/blog" data-ga-click="(Logged out) Header, go to blog, text:blog">Blog</a>
+          </li>
+      </ul>
+
+  </div>
+</div>
+
+
+
+      <div id="start-of-content" class="accessibility-aid"></div>
+          <div class="site" itemscope itemtype="http://schema.org/WebPage">
+    <div id="js-flash-container">
+      
+    </div>
+    <div class="pagehead repohead instapaper_ignore readability-menu">
+      <div class="container">
+        
+<ul class="pagehead-actions">
+
+  <li>
+      <a href="/login?return_to=%2Fselect2%2Fselect2"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+    aria-label="You must be signed in to watch a repository" rel="nofollow">
+    <span class="octicon octicon-eye"></span>
+    Watch
+  </a>
+  <a class="social-count" href="/select2/select2/watchers">
+    605
+  </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2Fselect2%2Fselect2"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+    aria-label="You must be signed in to star a repository" rel="nofollow">
+    <span class="octicon octicon-star"></span>
+    Star
+  </a>
+
+    <a class="social-count js-social-count" href="/select2/select2/stargazers">
+      13,913
+    </a>
+
+  </li>
+
+    <li>
+      <a href="/login?return_to=%2Fselect2%2Fselect2"
+        class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+        aria-label="You must be signed in to fork a repository" rel="nofollow">
+        <span class="octicon octicon-repo-forked"></span>
+        Fork
+      </a>
+      <a href="/select2/select2/network" class="social-count">
+        2,739
+      </a>
+    </li>
+</ul>
+
+        <h1 itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="entry-title public">
+          <span class="mega-octicon octicon-repo"></span>
+          <span class="author"><a href="/select2" class="url fn" itemprop="url" rel="author"><span itemprop="title">select2</span></a></span><!--
+       --><span class="path-divider">/</span><!--
+       --><strong><a href="/select2/select2" class="js-current-repository" data-pjax="#js-repo-pjax-container">select2</a></strong>
+
+          <span class="page-context-loader">
+            <img alt="" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </span>
+
+        </h1>
+      </div><!-- /.container -->
+    </div><!-- /.repohead -->
+
+    <div class="container">
+      <div class="repository-with-sidebar repo-container new-discussion-timeline with-full-navigation ">
+        <div class="repository-sidebar clearfix">
+            
+<nav class="sunken-menu repo-nav js-repo-nav js-sidenav-container-pjax js-octicon-loaders"
+     role="navigation"
+     data-pjax="#js-repo-pjax-container"
+     data-issue-count-url="/select2/select2/issues/counts">
+  <ul class="sunken-menu-group">
+    <li class="tooltipped tooltipped-w" aria-label="Code">
+      <a href="/select2/select2" aria-label="Code" class="selected js-selected-navigation-item sunken-menu-item" data-hotkey="g c" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches /select2/select2">
+        <span class="octicon octicon-code"></span> <span class="full-word">Code</span>
+        <img alt="" class="mini-loader" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+</a>    </li>
+
+      <li class="tooltipped tooltipped-w" aria-label="Issues">
+        <a href="/select2/select2/issues" aria-label="Issues" class="js-selected-navigation-item sunken-menu-item" data-hotkey="g i" data-selected-links="repo_issues repo_labels repo_milestones /select2/select2/issues">
+          <span class="octicon octicon-issue-opened"></span> <span class="full-word">Issues</span>
+          <span class="js-issue-replace-counter"></span>
+          <img alt="" class="mini-loader" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+</a>      </li>
+
+    <li class="tooltipped tooltipped-w" aria-label="Pull requests">
+      <a href="/select2/select2/pulls" aria-label="Pull requests" class="js-selected-navigation-item sunken-menu-item" data-hotkey="g p" data-selected-links="repo_pulls /select2/select2/pulls">
+          <span class="octicon octicon-git-pull-request"></span> <span class="full-word">Pull requests</span>
+          <span class="js-pull-replace-counter"></span>
+          <img alt="" class="mini-loader" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+</a>    </li>
+
+      <li class="tooltipped tooltipped-w" aria-label="Wiki">
+        <a href="/select2/select2/wiki" aria-label="Wiki" class="js-selected-navigation-item sunken-menu-item" data-hotkey="g w" data-selected-links="repo_wiki /select2/select2/wiki">
+          <span class="octicon octicon-book"></span> <span class="full-word">Wiki</span>
+          <img alt="" class="mini-loader" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+</a>      </li>
+  </ul>
+  <div class="sunken-menu-separator"></div>
+  <ul class="sunken-menu-group">
+
+    <li class="tooltipped tooltipped-w" aria-label="Pulse">
+      <a href="/select2/select2/pulse" aria-label="Pulse" class="js-selected-navigation-item sunken-menu-item" data-selected-links="pulse /select2/select2/pulse">
+        <span class="octicon octicon-pulse"></span> <span class="full-word">Pulse</span>
+        <img alt="" class="mini-loader" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+</a>    </li>
+
+    <li class="tooltipped tooltipped-w" aria-label="Graphs">
+      <a href="/select2/select2/graphs" aria-label="Graphs" class="js-selected-navigation-item sunken-menu-item" data-selected-links="repo_graphs repo_contributors /select2/select2/graphs">
+        <span class="octicon octicon-graph"></span> <span class="full-word">Graphs</span>
+        <img alt="" class="mini-loader" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+</a>    </li>
+  </ul>
+
+
+</nav>
+
+              <div class="only-with-full-nav">
+                  
+<div class="clone-url open"
+  data-protocol-type="http"
+  data-url="/users/set_protocol?protocol_selector=http&amp;protocol_type=clone">
+  <h3><span class="text-emphasized">HTTPS</span> clone URL</h3>
+  <div class="input-group js-zeroclipboard-container">
+    <input type="text" class="input-mini input-monospace js-url-field js-zeroclipboard-target"
+           value="https://github.com/select2/select2.git" readonly="readonly">
+    <span class="input-group-button">
+      <button aria-label="Copy to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button"><span class="octicon octicon-clippy"></span></button>
+    </span>
+  </div>
+</div>
+
+  
+<div class="clone-url "
+  data-protocol-type="subversion"
+  data-url="/users/set_protocol?protocol_selector=subversion&amp;protocol_type=clone">
+  <h3><span class="text-emphasized">Subversion</span> checkout URL</h3>
+  <div class="input-group js-zeroclipboard-container">
+    <input type="text" class="input-mini input-monospace js-url-field js-zeroclipboard-target"
+           value="https://github.com/select2/select2" readonly="readonly">
+    <span class="input-group-button">
+      <button aria-label="Copy to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button"><span class="octicon octicon-clippy"></span></button>
+    </span>
+  </div>
+</div>
+
+
+
+<p class="clone-options">You can clone with
+  <a href="#" class="js-clone-selector" data-protocol="http">HTTPS</a> or <a href="#" class="js-clone-selector" data-protocol="subversion">Subversion</a>.
+  <a href="https://help.github.com/articles/which-remote-url-should-i-use" class="help tooltipped tooltipped-n" aria-label="Get help on which URL is right for you.">
+    <span class="octicon octicon-question"></span>
+  </a>
+</p>
+
+
+
+
+                <a href="/select2/select2/archive/master.zip"
+                   class="btn btn-sm sidebar-button"
+                   aria-label="Download the contents of select2/select2 as a zip file"
+                   title="Download the contents of select2/select2 as a zip file"
+                   rel="nofollow">
+                  <span class="octicon octicon-cloud-download"></span>
+                  Download ZIP
+                </a>
+              </div>
+        </div><!-- /.repository-sidebar -->
+
+        <div id="js-repo-pjax-container" class="repository-content context-loader-container" data-pjax-container>
+
+          
+<span id="js-show-full-navigation"></span>
+
+<div class="repository-meta js-details-container ">
+    <div class="repository-description">
+      Select2 is a jQuery based replacement for select boxes. It supports searching, remote data sets, and infinite scrolling of results.
+    </div>
+
+    <div class="repository-website">
+      <p><a href="https://select2.github.io/" rel="nofollow">https://select2.github.io/</a></p>
+    </div>
+
+
+</div>
+
+<div class="overall-summary overall-summary-bottomless">
+
+  <div class="stats-switcher-viewport js-stats-switcher-viewport">
+    <div class="stats-switcher-wrapper">
+    <ul class="numbers-summary">
+      <li class="commits">
+        <a data-pjax href="/select2/select2/commits/master">
+            <span class="octicon octicon-history"></span>
+            <span class="num text-emphasized">
+              1,820
+            </span>
+            commits
+        </a>
+      </li>
+      <li>
+        <a data-pjax href="/select2/select2/branches">
+          <span class="octicon octicon-git-branch"></span>
+          <span class="num text-emphasized">
+            4
+          </span>
+          branches
+        </a>
+      </li>
+
+      <li>
+        <a data-pjax href="/select2/select2/releases">
+          <span class="octicon octicon-tag"></span>
+          <span class="num text-emphasized">
+            26
+          </span>
+          releases
+        </a>
+      </li>
+
+      <li>
+        
+  <a href="/select2/select2/graphs/contributors">
+    <span class="octicon octicon-organization"></span>
+    <span class="num text-emphasized">
+      315
+    </span>
+    contributors
+  </a>
+      </li>
+    </ul>
+
+      <div class="repository-lang-stats">
+        <ol class="repository-lang-stats-numbers">
+          <li>
+              <a href="/select2/select2/search?l=javascript">
+                <span class="color-block language-color" style="background-color:#f1e05a;"></span>
+                <span class="lang">JavaScript</span>
+                <span class="percent">93.7%</span>
+              </a>
+          </li>
+          <li>
+              <a href="/select2/select2/search?l=css">
+                <span class="color-block language-color" style="background-color:#563d7c;"></span>
+                <span class="lang">CSS</span>
+                <span class="percent">5.6%</span>
+              </a>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  <div class="repository-lang-stats-graph js-toggle-lang-stats" title="Click for language details">
+    <span class="language-color" aria-label="JavaScript 93.7%" style="width:93.7%; background-color:#f1e05a;" itemprop="keywords">JavaScript</span>
+    <span class="language-color" aria-label="CSS 5.6%" style="width:5.6%; background-color:#563d7c;" itemprop="keywords">CSS</span>
+  </div>
+
+<include-fragment src="/select2/select2/show_partial?partial=tree%2Frecently_touched_branches_list"></include-fragment>
+
+<div class="file-navigation in-mid-page">
+  <a href="/select2/select2/find/master"
+        class="js-show-file-finder btn btn-sm empty-icon tooltipped tooltipped-s right"
+        data-pjax
+        data-hotkey="t"
+        aria-label="Quickly jump between files">
+    <span class="octicon octicon-list-unordered"></span>
+  </a>
+    <a href="/select2/select2/compare" aria-label="Compare, review, create a pull request" class="btn btn-sm btn-primary tooltipped tooltipped-se left compare-button" aria-label="Compare &amp; review" data-pjax data-ga-click="Repository, go to compare view, location:repo overview; icon:git-compare">
+      <span class="octicon octicon-git-compare"></span>
+    </a>
+
+  
+<div class="select-menu js-menu-container js-select-menu left">
+  <span class="btn btn-sm select-menu-button js-menu-target css-truncate" data-hotkey="w"
+    data-master-branch="master"
+    data-ref="master"
+    title="master"
+    role="button" aria-label="Switch branches or tags" tabindex="0" aria-haspopup="true">
+    <span class="octicon octicon-git-branch"></span>
+    <i>branch:</i>
+    <span class="js-select-button css-truncate-target">master</span>
+  </span>
+
+  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax aria-hidden="true">
+
+    <div class="select-menu-modal">
+      <div class="select-menu-header">
+        <span class="select-menu-title">Switch branches/tags</span>
+        <span class="octicon octicon-x js-menu-close" role="button" aria-label="Close"></span>
+      </div>
+
+      <div class="select-menu-filters">
+        <div class="select-menu-text-filter">
+          <input type="text" aria-label="Filter branches/tags" id="context-commitish-filter-field" class="js-filterable-field js-navigation-enable" placeholder="Filter branches/tags">
+        </div>
+        <div class="select-menu-tabs">
+          <ul>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="branches" data-filter-placeholder="Filter branches/tags" class="js-select-menu-tab">Branches</a>
+            </li>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="tags" data-filter-placeholder="Find a tag…" class="js-select-menu-tab">Tags</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="branches">
+
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/select2/select2/tree/docs-improvements"
+               data-name="docs-improvements"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <span class="select-menu-item-text css-truncate-target" title="docs-improvements">
+                docs-improvements
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/select2/select2/tree/gh-pages"
+               data-name="gh-pages"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <span class="select-menu-item-text css-truncate-target" title="gh-pages">
+                gh-pages
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open selected"
+               href="/select2/select2/tree/master"
+               data-name="master"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <span class="select-menu-item-text css-truncate-target" title="master">
+                master
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/select2/select2/tree/stable/3.5"
+               data-name="stable/3.5"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <span class="select-menu-item-text css-truncate-target" title="stable/3.5">
+                stable/3.5
+              </span>
+            </a>
+        </div>
+
+          <div class="select-menu-no-results">Nothing to show</div>
+      </div>
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="tags">
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/4.0.0-rc.2"
+                 data-name="4.0.0-rc.2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="4.0.0-rc.2">4.0.0-rc.2</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/4.0.0-rc.1"
+                 data-name="4.0.0-rc.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="4.0.0-rc.1">4.0.0-rc.1</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/4.0.0-beta.3"
+                 data-name="4.0.0-beta.3"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="4.0.0-beta.3">4.0.0-beta.3</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/4.0.0-beta.2"
+                 data-name="4.0.0-beta.2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="4.0.0-beta.2">4.0.0-beta.2</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/4.0.0-beta.1"
+                 data-name="4.0.0-beta.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="4.0.0-beta.1">4.0.0-beta.1</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/4.0.0"
+                 data-name="4.0.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="4.0.0">4.0.0</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.5.2"
+                 data-name="3.5.2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.5.2">3.5.2</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.5.1"
+                 data-name="3.5.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.5.1">3.5.1</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.5.0"
+                 data-name="3.5.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.5.0">3.5.0</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.4.8"
+                 data-name="3.4.8"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.4.8">3.4.8</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.4.7"
+                 data-name="3.4.7"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.4.7">3.4.7</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.4.6"
+                 data-name="3.4.6"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.4.6">3.4.6</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.4.5"
+                 data-name="3.4.5"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.4.5">3.4.5</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.4.4"
+                 data-name="3.4.4"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.4.4">3.4.4</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.4.3"
+                 data-name="3.4.3"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.4.3">3.4.3</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.4.2"
+                 data-name="3.4.2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.4.2">3.4.2</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.4.1"
+                 data-name="3.4.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.4.1">3.4.1</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.4.0"
+                 data-name="3.4.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.4.0">3.4.0</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.3.2"
+                 data-name="3.3.2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.3.2">3.3.2</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.3.1"
+                 data-name="3.3.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.3.1">3.3.1</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.3.0"
+                 data-name="3.3.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.3.0">3.3.0</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.2.0"
+                 data-name="3.2.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.2.0">3.2.0</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.1.0"
+                 data-name="3.1.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.1.0">3.1.0</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/3.0.0"
+                 data-name="3.0.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="3.0.0">3.0.0</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/2.1.0"
+                 data-name="2.1.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="2.1.0">2.1.0</a>
+            </div>
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/select2/select2/tree/1.0.0"
+                 data-name="1.0.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text css-truncate-target"
+                 title="1.0.0">1.0.0</a>
+            </div>
+        </div>
+
+        <div class="select-menu-no-results">Nothing to show</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="breadcrumb"><span class='repo-root js-repo-root'><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/select2/select2" class="" data-branch="master" data-direction="back" data-pjax="true" itemscope="url"><span itemprop="title">select2</span></a></span></span><span class="separator">/</span>
+    <a class="btn-link disabled tooltipped tooltipped-e" href="#" aria-label="You must be signed in to make or propose changes">
+      <span class="octicon octicon-plus"></span>
+    </a>
+</div>
+</div>
+
+
+
+  
+  <div class="commit commit-tease js-details-container" >
+    <p class="commit-title ">
+        <a href="/select2/select2/commit/dd9af6893450bbb054ca79546a16bb18198f3e88" class="message" data-pjax="true" title="Merge pull request #3357 from pgilad/patch-1
+
+Update ajax example to reflect pagination">Merge pull request</a> <a href="https://github.com/select2/select2/pull/3357" class="issue-link" title="Update ajax example to reflect pagination">#3357</a> <a href="/select2/select2/commit/dd9af6893450bbb054ca79546a16bb18198f3e88" class="message" data-pjax="true" title="Merge pull request #3357 from pgilad/patch-1
+
+Update ajax example to reflect pagination">from pgilad/patch-1</a>
+        <span class="hidden-text-expander inline"><a href="#" class="js-details-target">…</a></span>
+    </p>
+      <div class="commit-desc"><pre>Update ajax example to reflect pagination</pre></div>
+    <div class="commit-meta">
+      <button aria-label="Copy SHA" class="js-zeroclipboard zeroclipboard-link tooltipped tooltipped-s" data-clipboard-text="dd9af6893450bbb054ca79546a16bb18198f3e88" data-copied-hint="Copied!" type="button"><span class="octicon octicon-clippy"></span></button>
+      <a href="/select2/select2/commit/dd9af6893450bbb054ca79546a16bb18198f3e88" class="sha-block" data-pjax>latest commit <span class="sha">dd9af68934</span></a>
+
+      <div class="authorship">
+        <img alt="@kevin-brown" class="avatar" data-user="1991850" height="20" src="https://avatars0.githubusercontent.com/u/1991850?v=3&amp;s=40" width="20" />
+        <span class="author-name"><a href="/kevin-brown" rel="contributor">kevin-brown</a></span>
+        authored <time class="updated" datetime="2015-05-13T14:42:21Z" is="relative-time">May 13, 2015</time>
+
+      </div>
+    </div>
+  </div>
+
+  
+<div class="file-wrap">
+  <a href="/select2/select2/tree/dd9af6893450bbb054ca79546a16bb18198f3e88" class="hidden js-permalink-shortcut" data-hotkey="y">Permalink</a>
+
+  <table class="files" data-pjax>
+
+
+    <tbody>
+      <tr class="warning include-fragment-error">
+        <td class="icon"><span class="octicon octicon-alert"></span></td>
+        <td class="content" colspan="3">Failed to load latest commit information.</td>
+      </tr>
+
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-directory"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/tree/master/dist" class="js-directory-link" id="2a6d07eef8b10b84129b42424ed99327-0182fa44d95a45156bdea6a287ddeb6fe575a634" title="dist">dist</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/a9beac83c35d09426e6402aba921d9ef9499e19b" class="message" data-pjax="true" title="Update Sass vertical gradient mixin to latest version from Bootstrap.
+
+As described in https://github.com/select2/select2/issues/3304#issuecomment-98395238, this updates the mixin to the latest stable version from Bootstrap Sass which adds Sass&#39; http://sass-lang.com/documentation/Sass/Script/Functions.html#ie_hex_str-instance_method to ensure that colors are converted &quot;into the format understood by IE filters&quot;.">Update Sass vertical gradient mixin to latest version from Bootstrap.</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-05-02T20:38:18Z" is="time-ago">May 2, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-directory"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/tree/master/docs" class="js-directory-link" id="e3e2a9bfd88566b05001b02a3f51d286-a048d2fa0fd344b2aed0a9dc3219cd6c88dab54e" title="docs">docs</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/45cfac7456d9ce5b548fcfc5ae39c12a7a36071f" class="message" data-pjax="true" title="Update ajax example to reflect pagination">Update ajax example to reflect pagination</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-05-13T14:34:38Z" is="time-ago">May 13, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-directory"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/tree/master/src" class="js-directory-link" id="25d902c24283ab8cfbac54dfa101ad31-0eabbc6498fb1597be7e9a3feb8feb67ea83f3c7" title="src">src</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/ac1680d81dcc60009c5d0fe0dd52e70bc065c140" class="message" data-pjax="true" title="Merge pull request #3290 from Sopamo/master
+
+Improving Foundation Zurb compatibility">Merge pull request</a> <a href="https://github.com/select2/select2/pull/3290" class="issue-link" title="Improving Foundation Zurb compatibility">#3290</a> <a href="/select2/select2/commit/ac1680d81dcc60009c5d0fe0dd52e70bc065c140" class="message" data-pjax="true" title="Merge pull request #3290 from Sopamo/master
+
+Improving Foundation Zurb compatibility">from Sopamo/master</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-05-03T14:45:29Z" is="time-ago">May 3, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-directory"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/tree/master/tests" class="js-directory-link" id="b61a6d542f9036550ba9c401c80f00ef-fde5c2cd866314cc316b8f183851be445cd47620" title="tests">tests</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/f3f1b31958fa585fadfe2eada3449826ce48224e" class="message" data-pjax="true" title="Add back *css* options through an adapter
+
+The old functionality where classes were directly copied to the
+container can be done by setting `dropdownCssClass: &#39;:all:&#39;` when
+initializing Select2.
+
+This closes https://github.com/select2/select2/issues/2879.">Add back *css* options through an adapter</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-04-06T01:58:02Z" is="time-ago">Apr 5, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-directory"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/tree/master/vendor" class="js-directory-link" id="7c3613dba5171cb6027c67835dd3b9d4-41ac3edf4c62821aef41520992930ae03d541ae4" title="vendor">vendor</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/ad94b6faba806719efbb2d85249f9f17c09e0bcd" class="message" data-pjax="true" title="Added jQuery.mousewheel support
+
+jQuery.mousewheel will allow us to prevent the dropdown from
+automatically closing when the user scrolls to the end of the list.
+It is automatically bundled in the full versions of Select2 and
+we don&#39;t require that it is included in order for Select2 to work.
+
+jQuery.mousewheel was taken directly from the source repository
+using the commit at
+
+https://github.com/jquery/jquery-mousewheel/commit/cc2c5d73ae7d4edea655d71476c1258d02297cfb">Added jQuery.mousewheel support</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-01-03T01:32:14Z" is="time-ago">Jan 2, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-text"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/blob/master/.editorconfig" class="js-directory-link" id="1e70daafb475c0ce3fef7d2728279182-54f4d3beedbc3c57d11ed735ff40dc9222d5f1ad" title=".editorconfig">.editorconfig</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/297a06f8d4d07d9c0951f2cacd42e0101d7217bc" class="message" data-pjax="true" title="Working on rendering everything">Working on rendering everything</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2014-10-22T01:43:56Z" is="time-ago">Oct 21, 2014</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-text"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/blob/master/.gitignore" class="js-directory-link" id="a084b794bc0759e7a6b77810e01874f2-163c732b803322197b9bd53412568f9b667a12a6" title=".gitignore">.gitignore</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/36431d5718e5ca197250c133338e95279093c62f" class="message" data-pjax="true" title="move ignores to user-level .gitignore file">move ignores to user-level .gitignore file</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-03-05T20:29:32Z" is="time-ago">Mar 5, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-text"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/blob/master/.jshintignore" class="js-directory-link" id="41546aea3e8547821bb47ed9a922004f-ba5a30f8c38cfb18e2dc21d39081418a6a366fb5" title=".jshintignore">.jshintignore</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/d1e8a6fdad700deba721aaf83c912e09db80eb5d" class="message" data-pjax="true" title="Overhaul of the AMD integration
+
+Now we do not have separate AMD builds, instead we use a UMD wrapper
+to support both AMD and CommonJS environments along with the browser.
+This has been tested with RequireJS and it correctly imports Select2
+and hooks into jQuery.
+
+This means that all builds will include the Almond AMD loader, but
+this isn&#39;t that much of an issue when you consider the file sizes.
+The loader is namespaced so RequireJS and other AMD builders don&#39;t
+complain about `require` and `define` existing. This is also done
+so AMD loaders don&#39;t conflict, as Select2&#39;s AMD loader should
+operate independently of others.
+
+There are now two layers of wrappers that are applied to files,
+only one of which is used for the translation files. This allows
+us to only load in the internal Select2 modules once, and in
+general makes most things cleaner. These have also been pulled out
+into individual JS files instead of being stored in JSON files,
+allowing us to add comments and make things look readable.
+
+Because we use a few hacks, these files are heavily commented as well.
+
+This closes https://github.com/select2/select2/issues/2945.
+This closes https://github.com/select2/select2/issues/2946.">Overhaul of the AMD integration</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-03-14T23:05:24Z" is="time-ago">Mar 14, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-text"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/blob/master/.jshintrc" class="js-directory-link" id="4d5aa81bf4f18104bb6ea53a8b5d1f43-60c0a3b8abcd12a66b44f6f86d99c9ac32dfd736" title=".jshintrc">.jshintrc</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/081580bcd82dce16df5a5dae5b03ef1f92420191" class="message" data-pjax="true" title="Fix undefined variables
+
+There were a few undefined variables being referenced within the
+Select2 code.  The JSHint configuration has been modified to fail
+if there are undefined variables being referenced, including any
+global variables.
+
+There is an exception that is being made for the jQuery shim, as it
+must try to find the global jQuery references.
+
+An exception is made for the test helpers, as the SauceLabs reporting
+variables are not camelCase, and would normally trigger warnings.
+
+This closes https://github.com/select2/select2/pull/3028.">Fix undefined variables</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-02-14T03:49:54Z" is="time-ago">Feb 13, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-text"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/blob/master/.travis.yml" class="js-directory-link" id="354f30a63fb0907d4ad57269548329e3-60e681f483da3719a30498c7ff6824522d77ac9b" title=".travis.yml">.travis.yml</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/a0c26e11140fa852989892a583d5d7263030e9bf" class="message" data-pjax="true" title="Hook up with SauceLabs
+
+This sets up Select2 to be able to run tests on the SauceLabs
+environment. This will allow us to run the tests on different
+browsers in the future, though at the moment we need to start
+combining test files.
+
+This required adding a snippet of code for reporting QUnit test
+results to SauceLabs within the global test helper file.
+
+The tests currently cannot be run on IE 8 because all of the tests
+are using jQuery 2.x, which is not compatible.">Hook up with SauceLabs</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-02-14T02:59:09Z" is="time-ago">Feb 13, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-text"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/blob/master/CONTRIBUTING.md" class="js-directory-link" id="6a3371457528722a734f3c51d9238c13-4fbf527c79e666839e897c8a74c9cc1c209833e5" title="CONTRIBUTING.md">CONTRIBUTING.md</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/5c71e2da5099adc9ca73bb9071fa5914de7d4661" class="message" data-pjax="true" title="Updated README and CONTRIBUTING
+
+This also updates the LICENSE year. [ci skip]">Updated README and CONTRIBUTING</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-01-10T00:26:59Z" is="time-ago">Jan 9, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-text"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/blob/master/Gruntfile.js" class="js-directory-link" id="35b4a816e0441e6a375cd925af50752c-b14a9863c9956d52a03cbdde86ad593403377137" title="Gruntfile.js">Gruntfile.js</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/f3f1b31958fa585fadfe2eada3449826ce48224e" class="message" data-pjax="true" title="Add back *css* options through an adapter
+
+The old functionality where classes were directly copied to the
+container can be done by setting `dropdownCssClass: &#39;:all:&#39;` when
+initializing Select2.
+
+This closes https://github.com/select2/select2/issues/2879.">Add back *css* options through an adapter</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-04-06T01:58:02Z" is="time-ago">Apr 6, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-text"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/blob/master/LICENSE.md" class="js-directory-link" id="37854d19817c792316d481f5beb93cc7-86c7c291a969eb8ac71263fb7c5b031322772ace" title="LICENSE.md">LICENSE.md</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/5c71e2da5099adc9ca73bb9071fa5914de7d4661" class="message" data-pjax="true" title="Updated README and CONTRIBUTING
+
+This also updates the LICENSE year. [ci skip]">Updated README and CONTRIBUTING</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-01-10T00:26:59Z" is="time-ago">Jan 10, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-text"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/blob/master/README.md" class="js-directory-link" id="04c6e90faac2675aa89e2176d2eec7d8-53581bfdcffb8a591a49ed7660a424adb471a61a" title="README.md">README.md</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/5acd96ee1e4ac529c0af0093f62948b79a900eda" class="message" data-pjax="true" title="Update README.md">Update README.md</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-03-13T10:35:19Z" is="time-ago">Mar 13, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-text"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/blob/master/bower.json" class="js-directory-link" id="0a08a7565aba4405282251491979bb6b-1a1fa99ef5f37c677ebe8a004d89d8c43e9036ae" title="bower.json">bower.json</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/695123a1d2d50936f56380953937250cc9754ef6" class="message" data-pjax="true" title="Remove jQuery from the bower and component files
+
+Users are expected to be using jQuery in their web applications
+already, it&#39;s up to them to determine how it is loaded in.
+
+This closes https://github.com/select2/select2/issues/2941.">Remove jQuery from the bower and component files</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-01-27T23:31:52Z" is="time-ago">Jan 27, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-text"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/blob/master/component.json" class="js-directory-link" id="162d38b326426c84ac91e51f931105bb-43538e914a24e37cf87fb65d9f160540b81ebcce" title="component.json">component.json</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/80eb44bec78568b152dc5547269c164cb7b5363c" class="message" data-pjax="true" title="Bump version numbers for 4.0.0 release">Bump version numbers for 4.0.0 release</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-04-26T21:02:52Z" is="time-ago">Apr 26, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-text"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/blob/master/composer.json" class="js-directory-link" id="b5d0ee8c97c7abd7e3fa29b9a27d1780-cb7f423e9600d421df3e8de750b5d57803db2652" title="composer.json">composer.json</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/695123a1d2d50936f56380953937250cc9754ef6" class="message" data-pjax="true" title="Remove jQuery from the bower and component files
+
+Users are expected to be using jQuery in their web applications
+already, it&#39;s up to them to determine how it is loaded in.
+
+This closes https://github.com/select2/select2/issues/2941.">Remove jQuery from the bower and component files</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-01-27T23:31:52Z" is="time-ago">Jan 27, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-text"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/blob/master/package.json" class="js-directory-link" id="b9cfc7f2cdf78a7f4b91a753d10865a2-78e7dbff11ed1ee492847e4555446caf1bb43d2f" title="package.json">package.json</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/80eb44bec78568b152dc5547269c164cb7b5363c" class="message" data-pjax="true" title="Bump version numbers for 4.0.0 release">Bump version numbers for 4.0.0 release</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-04-26T21:02:52Z" is="time-ago">Apr 26, 2015</time></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="icon">
+            <span class="octicon octicon-file-text"></span>
+            <img alt="" class="spinner" height="16" src="https://assets-cdn.github.com/assets/spinners/octocat-spinner-32-e513294efa576953719e4e2de888dd9cf929b7d62ed8d05f25e731d02452ab6c.gif" width="16" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a href="/select2/select2/blob/master/select2.jquery.json" class="js-directory-link" id="7c653ac35916c9a508c4902e793e56dc-8c6aaddfc317585dd9211ebcd9eb488ef2d1c0ad" title="select2.jquery.json">select2.jquery.json</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+              <a href="/select2/select2/commit/80eb44bec78568b152dc5547269c164cb7b5363c" class="message" data-pjax="true" title="Bump version numbers for 4.0.0 release">Bump version numbers for 4.0.0 release</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time datetime="2015-04-26T21:02:52Z" is="time-ago">Apr 26, 2015</time></span>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+  <div id="readme" class="boxed-group flush clearfix announce instapaper_body md">
+    <h3>
+      <span class="octicon octicon-book"></span>
+      README.md
+    </h3>
+
+    <article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
+<a id="user-content-select2" class="anchor" href="#select2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Select2</h1>
+
+<p><a href="https://travis-ci.org/select2/select2"><img src="https://camo.githubusercontent.com/26b6126a841778c987c9c6a3055311ea91f7270e/68747470733a2f2f7472617669732d63692e6f72672f73656c656374322f73656c656374322e7376673f6272616e63683d6d6173746572" alt="Build Status" data-canonical-src="https://travis-ci.org/select2/select2.svg?branch=master" style="max-width:100%;"></a></p>
+
+<p>Select2 is a jQuery-based replacement for select boxes. It supports searching,
+remote data sets, and pagination of results.</p>
+
+<p>To get started, checkout examples and documentation at
+<a href="https://select2.github.io/">https://select2.github.io/</a></p>
+
+<h2>
+<a id="user-content-use-cases" class="anchor" href="#use-cases" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use cases</h2>
+
+<ul>
+<li>Enhancing native selects with search.</li>
+<li>Enhancing native selects with a better multi-select interface.</li>
+<li>Loading data from JavaScript: easily load items via AJAX and have them
+searchable.</li>
+<li>Nesting optgroups: native selects only support one level of nesting. Select2
+does not have this restriction.</li>
+<li>Tagging: ability to add new items on the fly.</li>
+<li>Working with large, remote datasets: ability to partially load a dataset based
+on the search term.</li>
+<li>Paging of large datasets: easy support for loading more pages when the results
+are scrolled to the end.</li>
+<li>Templating: support for custom rendering of results and selections.</li>
+</ul>
+
+<h2>
+<a id="user-content-browser-compatibility" class="anchor" href="#browser-compatibility" aria-hidden="true"><span class="octicon octicon-link"></span></a>Browser compatibility</h2>
+
+<ul>
+<li>IE 8+</li>
+<li>Chrome 8+</li>
+<li>Firefox 10+</li>
+<li>Safari 3+</li>
+<li>Opera 10.6+</li>
+</ul>
+
+<h2>
+<a id="user-content-usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>You can source Select2 directly from a CDN like <a href="http://www.jsdelivr.com/#!select2">JSDliver</a> or
+<a href="http://www.cdnjs.com/libraries/select2">CDNJS</a>, <a href="https://github.com/select2/select2/releases">download it from this GitHub repo</a>, or use one of
+the integrations below.</p>
+
+<h2>
+<a id="user-content-integrations" class="anchor" href="#integrations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Integrations</h2>
+
+<ul>
+<li>
+<a href="https://github.com/ivaynberg/wicket-select2">Wicket-Select2</a> (Java / <a href="http://wicket.apache.org">Apache Wicket</a>)</li>
+<li>
+<a href="https://github.com/argerim/select2-rails">select2-rails</a> (Ruby on Rails)</li>
+<li>
+<a href="http://angular-ui.github.io/#ui-select">AngularUI</a> (<a href="https://angularjs.org/">AngularJS</a>)</li>
+<li><a href="https://github.com/applegrew/django-select2">Django</a></li>
+<li><a href="https://github.com/19Gerhard85/sfSelect2WidgetsPlugin">Symfony</a></li>
+<li><a href="https://github.com/avocode/FormExtensions">Symfony2</a></li>
+<li>
+<a href="https://github.com/t0m/select2-bootstrap-css">Bootstrap 2</a> and <a href="https://github.com/t0m/select2-bootstrap-css/tree/bootstrap3">Bootstrap 3</a>
+(CSS skins)</li>
+<li>
+<a href="https://github.com/nate-strauser/meteor-select2">Meteor</a> (<a href="https://github.com/zimme/meteor-select2-bootstrap3-css/">Bootstrap 3 skin</a>)</li>
+<li><a href="https://jquery-select2.meteor.com">Meteor</a></li>
+<li><a href="http://demos.krajee.com/widgets#select2">Yii 2.x</a></li>
+<li><a href="https://github.com/tonybolzan/yii-select2">Yii 1.x</a></li>
+<li><a href="https://atmospherejs.com/package/jquery-select2">AtmosphereJS</a></li>
+</ul>
+
+<h2>
+<a id="user-content-internationalization-i18n" class="anchor" href="#internationalization-i18n" aria-hidden="true"><span class="octicon octicon-link"></span></a>Internationalization (i18n)</h2>
+
+<p>Select2 supports multiple languages by simply including the right language JS
+file (<code>dist/js/i18n/it.js</code>, <code>dist/js/i18n/nl.js</code>, etc.) after
+<code>dist/js/select2.js</code>.</p>
+
+<p>Missing a language? Just copy <code>src/js/select2/i18n/en.js</code>, translate it, and
+make a pull request back to Select2 here on GitHub.</p>
+
+<h2>
+<a id="user-content-documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<p>The documentation for Select2 is available
+<a href="https://select2.github.io/">through GitHub Pages</a> and is located within this repository
+in the <a href="https://github.com/select2/select2/tree/master/docs"><code>docs</code> folder</a>.</p>
+
+<h2>
+<a id="user-content-community" class="anchor" href="#community" aria-hidden="true"><span class="octicon octicon-link"></span></a>Community</h2>
+
+<p>You can find out about the different ways to get in touch with the Select2
+community at the <a href="https://select2.github.io/community.html">Select2 community page</a>.</p>
+
+<h2>
+<a id="user-content-copyright-and-license" class="anchor" href="#copyright-and-license" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copyright and license</h2>
+
+<p>The license is available within the repository in the <a href="/select2/select2/blob/master/LICENSE.md">LICENSE</a> file.</p>
+</article>
+  </div>
+
+
+        </div>
+
+      </div><!-- /.repo-container -->
+      <div class="modal-backdrop"></div>
+    </div><!-- /.container -->
+  </div><!-- /.site -->
+
+
+    </div><!-- /.wrapper -->
+
+      <div class="container">
+  <div class="site-footer" role="contentinfo">
+    <ul class="site-footer-links right">
+        <li><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
+      <li><a href="https://developer.github.com" data-ga-click="Footer, go to api, text:api">API</a></li>
+      <li><a href="https://training.github.com" data-ga-click="Footer, go to training, text:training">Training</a></li>
+      <li><a href="https://shop.github.com" data-ga-click="Footer, go to shop, text:shop">Shop</a></li>
+        <li><a href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
+        <li><a href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</a></li>
+
+    </ul>
+
+    <a href="https://github.com" aria-label="Homepage">
+      <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+</a>
+    <ul class="site-footer-links">
+      <li>&copy; 2015 <span title="0.04480s from github-fe138-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
+        <li><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
+        <li><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
+        <li><a href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact</a></li>
+    </ul>
+  </div>
+</div>
+
+
+    <div class="fullscreen-overlay js-fullscreen-overlay" id="fullscreen_overlay">
+  <div class="fullscreen-container js-suggester-container">
+    <div class="textarea-wrap">
+      <textarea name="fullscreen-contents" id="fullscreen-contents" class="fullscreen-contents js-fullscreen-contents" placeholder=""></textarea>
+      <div class="suggester-container">
+        <div class="suggester fullscreen-suggester js-suggester js-navigation-container"></div>
+      </div>
+    </div>
+  </div>
+  <div class="fullscreen-sidebar">
+    <a href="#" class="exit-fullscreen js-exit-fullscreen tooltipped tooltipped-w" aria-label="Exit Zen Mode">
+      <span class="mega-octicon octicon-screen-normal"></span>
+    </a>
+    <a href="#" class="theme-switcher js-theme-switcher tooltipped tooltipped-w"
+      aria-label="Switch themes">
+      <span class="octicon octicon-color-mode"></span>
+    </a>
+  </div>
+</div>
+
+
+
+    
+
+    <div id="ajax-error-message" class="flash flash-error">
+      <span class="octicon octicon-alert"></span>
+      <a href="#" class="octicon octicon-x flash-close js-ajax-error-dismiss" aria-label="Dismiss error"></a>
+      Something went wrong with that request. Please try again.
+    </div>
+
+
+      <script crossorigin="anonymous" src="https://assets-cdn.github.com/assets/frameworks-5c08de317e4054ec200d36d3b1361ddd3cb30c05c9070a9d72862ee28ab1d7f9.js"></script>
+      <script async="async" crossorigin="anonymous" src="https://assets-cdn.github.com/assets/github/index-b79817a43c4618022b9ecd18dadd96010ccecbb12b56fcc232664db1f897e3a8.js"></script>
+      
+      
+
+  </body>
+</html>
+

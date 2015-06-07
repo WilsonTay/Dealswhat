@@ -1,0 +1,42 @@
+﻿@model ICollection<AuthenticationClientData>
+
+@if (Model.Count == 0)
+{
+    <div class="message-info">
+        <p>
+            There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=252166">this article</a>
+            for details on setting up this ASP.NET application to support logging in via external services.
+        </p>
+    </div>
+}
+else
+{
+    using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+    @Html.AntiForgeryToken()
+    <fieldset id="socialLoginList">
+        <h5>Log in using another service</h5>
+        <p>
+            @foreach (AuthenticationClientData p in Model)
+            {
+                if (p.AuthenticationClient.ProviderName.Equals("facebook"))
+                {
+                <button name="provider" type="submit" value="facebook" class="btn-bootstrap btn-block btn-social btn-facebook">
+                    <i class="fa fa-facebook"></i>
+                    Sign in with Facebook
+                </button>
+                }
+                else if (p.AuthenticationClient.ProviderName.Equals("microsoft"))
+                {
+                <button name="provider" type="submit" value="microsoft" class="btn-bootstrap btn-block btn-social btn-microsoft">
+                    <i class="fa fa-windows"></i>
+                    Sign in with Microsoft Account
+                </button>
+                }
+
+
+            }
+        </p>
+    </fieldset>
+    }
+}

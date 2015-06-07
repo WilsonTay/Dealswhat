@@ -1,0 +1,782 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>DealsWhat</title>
+    <!-- meta info -->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="keywords" content="dealswhat,deals in malaysia" />
+    <meta name="description" content="DealsWhat - Best Deals in Malaysia">
+    <meta name="author" content="Tsoy">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap styles -->
+    <link rel="stylesheet" href="~/content/css/boostrap.css">
+    <!-- Font Awesome styles (icons) -->
+    <link rel="stylesheet" href="~/content/css/font_awesome.css">
+    <!-- Bootstrap social styles (icons) -->
+    <link rel="stylesheet" href="~/content/css/bootstrap-social.css">
+    <!-- Main Template styles -->
+    <link rel="stylesheet" href="~/content/css/styles.css">
+
+    <link rel="stylesheet" href="~/content/css/schemes/blaze-orange.css">
+    <!-- IE 8 Fallback -->
+    <!--[if lt IE 9]>
+	<link rel="stylesheet" type="text/css" href="~/content/css/ie.css" />
+<![endif]-->
+
+    <!-- Your custom styles (blank file) -->
+    <link rel="stylesheet" href="~/content/css/mystyles.css">
+
+    @RenderSection("styles", required: false)
+
+    <style>
+        .btn-bootstrap {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="global-wrap">
+
+
+        <!-- //////////////////////////////////
+	//////////////MAIN HEADER///////////// 
+	////////////////////////////////////-->
+        @*<div class="top-main-area text-center">
+            <div class="container">
+                <a href="@Url.Action("Index", "Home")" class="logo mt5">
+                    <img src="~/content/img/logo-small-dark.png" alt="Image Alternative text" title="Image Title" />
+                </a>
+            </div>
+        </div>*@
+        <header class="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <!-- MAIN NAVIGATION -->
+                        <div class="flexnav-menu-button" id="flexnav-menu-button">Menu</div>
+                        <nav>
+                            <ul class="nav nav-pills flexnav" id="flexnav" data-breakpoint="800">
+                                <li><a href="@Url.Action("Index", "Home")">
+                                    <img style="width: 110px" src="~/content/img/dw-logo.png" width="90"></a>
+                                <li class="active"><a href="@Url.Action("Index", "Home")">Home</a>
+                                </li>
+                                <li><a href="@Url.Action("Index", "AboutUs")">About Us</a>
+                                </li>
+                                <li><a href="@Url.Action("Index", "Faq")">FAQ</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- END MAIN NAVIGATION -->
+                    </div>
+                    <div class="col-md-6">
+                        <!-- LOGIN REGISTER LINKS -->
+                        @Html.Partial("_LoginPartial")
+                        @*<ul class="login-register">
+                            <li class="shopping-cart"><a href="page-cart.html"><i class="fa fa-shopping-cart"></i>My Cart</a>
+                                <div class="shopping-cart-box">
+                                    <ul class="shopping-cart-items">
+                                        <li>
+                                            <a href="product-shop-sidebar.html">
+                                                <img src="~/content/img/70x70.png" alt="Image Alternative text" title="AMaze" />
+                                                <h5>New Glass Collection</h5><span class="shopping-cart-item-price">$150</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="product-shop-sidebar.html">
+                                                <img src="~/content/img/70x70.png" alt="Image Alternative text" title="Gamer Chick" />
+                                                <h5>Playstation Accessories</h5><span class="shopping-cart-item-price">$170</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-inline text-center">
+                                        <li><a href="page-cart.html"><i class="fa fa-shopping-cart"></i> View Cart</a>
+                                        </li>
+                                        <li><a href="page-checkout.html"><i class="fa fa-check-square"></i> Checkout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li><a class="popup-text" href="#login-dialog" data-effect="mfp-move-from-top"><i class="fa fa-sign-in"></i>Sign in</a>
+                            </li>
+                            <li><a class="popup-text" href="#register-dialog" data-effect="mfp-move-from-top"><i class="fa fa-edit"></i>Sign up</a>
+                            </li>
+                        </ul>*@
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+        <!-- //////////////////////////////////
+	//////////////END MAIN HEADER////////// 
+	////////////////////////////////////-->
+        @RenderSection("featured", required: false)
+
+        <!-- //////////////////////////////////
+	//////////////PAGE CONTENT///////////// 
+	////////////////////////////////////-->
+
+
+
+        <div class="container">
+            @RenderBody()
+            @*    <div id="product-quick-view-dialog" class="mfp-with-anim mfp-hide mfp-dialog mfp-dialog-big clearfix">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="fotorama" data-nav="thumbs" data-allowfullscreen="1" data-thumbheight="100" data-thumbwidth="100">
+                            <img src="~/content/img/800x600.png" alt="Image Alternative text" title="waipio valley" />
+                            <img src="~/content/img/800x600.png" alt="Image Alternative text" title="The Hidden Power of the Heart" />
+                            <img src="~/content/img/800x600.png" alt="Image Alternative text" title="cascada" />
+                            <img src="~/content/img/800x600.png" alt="Image Alternative text" title="the best mode of transport here in maldives" />
+                            <img src="~/content/img/800x600.png" alt="Image Alternative text" title="a turn" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-page-meta">
+                            <h4>Awesome Vacation Pack</h4>
+                            <p>Primis metus ut imperdiet adipiscing sit phasellus ante fringilla nostra suspendisse dictumst iaculis elit vehicula tincidunt hendrerit morbi tristique quam</p><a class="btn btn-primary btn-lg btn-block" href="#">$225 Buy Now</a>
+                            <ul class="list product-page-meta-info">
+                                <li>
+                                    <ul class="list product-page-meta-price-list">
+                                        <li><span class="product-page-meta-title">List Price</span><span class="product-page-meta-price">$1000</span>
+                                        </li>
+                                        <li><span class="product-page-meta-title">Discount</span><span class="product-page-meta-price">77.5%</span>
+                                        </li>
+                                        <li><span class="product-page-meta-title">Savings</span><span class="product-page-meta-price">$775</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><span class="product-page-meta-title">Time Left to Buy</span>
+                                    <!-- COUNTDOWN -->
+                                    <div data-countdown="Aug 25, 2013 10:45:00" class="countdown countdown-inline"></div>
+                                </li>
+                                <li><span class="product-page-meta-title">5000+ bought</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <hr/><a class="btn btn-primary" href="#">More Details</a>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <aside class="sidebar-left">
+                        <ul class="nav nav-tabs nav-stacked nav-coupon-category nav-coupon-category-left">
+                            <li class="active"><a href="#"><i class="fa fa-ticket"></i>All<span>36</span></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-cutlery"></i>Food & Drink<span>34</span></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-calendar"></i>Events<span>46</span></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-female"></i>Beauty<span>41</span></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-bolt"></i>Fitness<span>39</span></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-headphones"></i>Electronics<span>46</span></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-image"></i>Furniture<span>50</span></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-umbrella"></i>Fashion<span>50</span></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i>Shopping<span>42</span></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-home"></i>Home & Graden<span>42</span></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-plane"></i>Travel<span>48</span></a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-md-9">
+                    <div class="row row-wrap" id="masonry">
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="Green Furniture" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Green Furniture Pack</h5>
+                                    <div class="product-desciption">Pellentesque laoreet lectus facilisis pretium laoreet</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 8 days 47 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$102</span>
+                                            </li>
+                                            <li><span class="product-old-price">$188</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="Food is Pride" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Best Pasta</h5>
+                                    <div class="product-desciption">Justo habitant nascetur adipiscing dolor est vivamus</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 9 days 4 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$161</span>
+                                            </li>
+                                            <li><span class="product-old-price">$233</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="Our Coffee miss u" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Coffe Shop Discount</h5>
+                                    <div class="product-desciption">Rutrum purus posuere ipsum vulputate class</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 3 days 19 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$139</span>
+                                            </li>
+                                            <li><span class="product-old-price">$201</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="Ana 29" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Hot Summer Collection</h5>
+                                    <div class="product-desciption">Magnis primis condimentum conubia iaculis tincidunt</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 9 days 55 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$197</span>
+                                            </li>
+                                            <li><span class="product-old-price">$290</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="The Violin" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Violin Lessons</h5>
+                                    <div class="product-desciption">Eget et venenatis augue curabitur congue</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 2 days 39 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$111</span>
+                                            </li>
+                                            <li><span class="product-old-price">$171</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="the best mode of transport here in maldives" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Finshing in Maldives</h5>
+                                    <div class="product-desciption">Proin consectetur aenean ad augue mattis dictumst</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 2 days 47 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$129</span>
+                                            </li>
+                                            <li><span class="product-old-price">$235</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="AMaze" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">New Glass Collection</h5>
+                                    <div class="product-desciption">Accumsan aptent porttitor tortor sodales luctus laoreet</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i>  44 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$144</span>
+                                            </li>
+                                            <li><span class="product-old-price">$257</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="My Ice Cream and Your Ice Cream Spoons" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Lovely Ice Cream Spoons</h5>
+                                    <div class="product-desciption">Sapien tempus himenaeos suscipit suscipit ad</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 4 days 59 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$79</span>
+                                            </li>
+                                            <li><span class="product-old-price">$256</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="Urbex Esch/Lux with Laney and Laaaaag" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Best Camera</h5>
+                                    <div class="product-desciption">Vulputate facilisis elementum facilisi at potenti</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 5 days 33 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$71</span>
+                                            </li>
+                                            <li><span class="product-old-price">$221</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="Hot mixer" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Modern DJ Set</h5>
+                                    <div class="product-desciption">Integer potenti erat ullamcorper suspendisse etiam consequat</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 1 day 47 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$131</span>
+                                            </li>
+                                            <li><span class="product-old-price">$297</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="The Hidden Power of the Heart" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Beach Holidays</h5>
+                                    <div class="product-desciption">Taciti diam litora vulputate ligula ad natoque</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 9 days 32 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$58</span>
+                                            </li>
+                                            <li><span class="product-old-price">$177</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="Old No7" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Jack Daniels Huge Pack</h5>
+                                    <div class="product-desciption">Pulvinar porta dui ac ut morbi</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 4 days 25 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$75</span>
+                                            </li>
+                                            <li><span class="product-old-price">$142</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="Aspen Lounge Chair" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Aspen Lounge Chair</h5>
+                                    <div class="product-desciption">Porttitor habitasse et per nunc sociis curae</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 3 days 50 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$70</span>
+                                            </li>
+                                            <li><span class="product-old-price">$100</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="waipio valley" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Awesome Vacation</h5>
+                                    <div class="product-desciption">Dis ullamcorper dolor sollicitudin cursus</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 9 days 55 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$170</span>
+                                            </li>
+                                            <li><span class="product-old-price">$250</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="cascada" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Adventure in Woods</h5>
+                                    <div class="product-desciption">Sit venenatis tincidunt habitasse fusce fames facilisis</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i>  30 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$65</span>
+                                            </li>
+                                            <li><span class="product-old-price">$170</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="Gamer Chick" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Playstation Accessories</h5>
+                                    <div class="product-desciption">Ipsum vel tellus suscipit a dictumst</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 4 days 34 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$42</span>
+                                            </li>
+                                            <li><span class="product-old-price">$119</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="a turn" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Diving with Sharks</h5>
+                                    <div class="product-desciption">Facilisi suscipit massa cubilia a euismod</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 8 days 46 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$95</span>
+                                            </li>
+                                            <li><span class="product-old-price">$198</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="col-md-3 col-masonry popup-text" href="#product-quick-view-dialog" data-effect="mfp-move-from-top">
+                            <div class="product-thumb">
+                                <header class="product-header">
+                                    <img src="~/content/img/800x600.png" alt="Image Alternative text" title="iPhone 5 iPad mini iPad 3" />
+                                    <div class="product-quick-view"><span class="fa fa-eye"></span>
+                                    </div>
+                                </header>
+                                <div class="product-inner">
+                                    <h5 class="product-title">Electronics Big Deal</h5>
+                                    <div class="product-desciption">Habitant fusce ac vel aptent gravida semper</div>
+                                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 9 days 22 h</span>
+                                        <ul class="product-price-list">
+                                            <li><span class="product-price">$94</span>
+                                            </li>
+                                            <li><span class="product-old-price">$192</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>*@
+            <div class="gap"></div>
+        </div>
+
+
+        <!-- //////////////////////////////////
+	//////////////END PAGE CONTENT///////// 
+	////////////////////////////////////-->
+
+
+
+        <!-- //////////////////////////////////
+	//////////////MAIN FOOTER////////////// 
+	////////////////////////////////////-->
+
+        <footer class="main">
+            <div class="footer-top-area">
+                <div class="container">
+                    <div class="row row-wrap">
+                        <div class="col-md-3">
+                            <a href="index.html">
+                                <img src="~/content/img/dw-logo.png" alt="logo" title="logo" class="" width="90px">
+                            </a>
+                            <ul class="list list-social">
+                                <li>
+                                    <a class="fa fa-facebook box-icon" href="#" data-toggle="tooltip" title="Facebook"></a>
+                                </li>
+                                <li>
+                                    <a class="fa fa-twitter box-icon" href="#" data-toggle="tooltip" title="Twitter"></a>
+                                </li>
+                                <li>
+                                    <a class="fa fa-flickr box-icon" href="#" data-toggle="tooltip" title="Flickr"></a>
+                                </li>
+                                <li>
+                                    <a class="fa fa-linkedin box-icon" href="#" data-toggle="tooltip" title="LinkedIn"></a>
+                                </li>
+                                <li>
+                                    <a class="fa fa-tumblr box-icon" href="#" data-toggle="tooltip" title="Tumblr"></a>
+                                </li>
+                            </ul>
+                            <p>Posuere neque vivamus vestibulum neque commodo conubia phasellus sociosqu conubia eros feugiat at imperdiet proin id hac commodo id sed</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Sign Up to the Newsletter</h4>
+                            <div class="box">
+                                <form>
+                                    <div class="form-group mb10">
+                                        <label>E-mail</label>
+                                        <input type="text" class="form-control" />
+                                    </div>
+                                    <p class="mb10">Aenean tempor dolor tempor neque at sem</p>
+                                    <input type="submit" class="btn btn-primary" value="Sign Up" />
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Couponia on Twitter</h4>
+                            <!-- START TWITTER -->
+                            <div class="twitter-ticker" id="twitter-ticker"></div>
+                            <!-- END TWITTER -->
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Recent News</h4>
+                            <ul class="thumb-list">
+                                <li>
+                                    <a href="#">
+                                        <img src="~/content/img/70x70.png" alt="Image Alternative text" title="Urbex Esch/Lux with Laney and Laaaaag" />
+                                    </a>
+                                    <div class="thumb-list-item-caption">
+                                        <p class="thumb-list-item-meta">Jul 18, 2014</p>
+                                        <h5 class="thumb-list-item-title"><a href="#">Semper dui</a></h5>
+                                        <p class="thumb-list-item-desciption">Justo cum est felis suspendisse</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="~/content/img/70x70.png" alt="Image Alternative text" title="AMaze" />
+                                    </a>
+                                    <div class="thumb-list-item-caption">
+                                        <p class="thumb-list-item-meta">Jul 18, 2014</p>
+                                        <h5 class="thumb-list-item-title"><a href="#">Sapien eu</a></h5>
+                                        <p class="thumb-list-item-desciption">Himenaeos vitae faucibus ligula commodo</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="~/content/img/70x70.png" alt="Image Alternative text" title="The Hidden Power of the Heart" />
+                                    </a>
+                                    <div class="thumb-list-item-caption">
+                                        <p class="thumb-list-item-meta">Jul 18, 2014</p>
+                                        <h5 class="thumb-list-item-title"><a href="#">Congue diam</a></h5>
+                                        <p class="thumb-list-item-desciption">Torquent potenti consectetur gravida diam</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>Copyright © 2015, DealsWhat, All Rights Reserved</p>
+                        </div>
+                        <div class="col-md-6 col-md-offset-2">
+                            <div class="pull-right">
+                                <ul class="list-inline list-payment">
+                                    <li>
+                                        <img src="~/content/img/payment/american-express-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                    </li>
+                                    <li>
+                                        <img src="~/content/img/payment/cirrus-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                    </li>
+                                    <li>
+                                        <img src="~/content/img/payment/discover-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                    </li>
+                                    <li>
+                                        <img src="~/content/img/payment/ebay-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                    </li>
+                                    <li>
+                                        <img src="~/content/img/payment/maestro-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                    </li>
+                                    <li>
+                                        <img src="~/content/img/payment/mastercard-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                    </li>
+                                    <li>
+                                        <img src="~/content/img/payment/visa-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- //////////////////////////////////
+	//////////////END MAIN  FOOTER///////// 
+	////////////////////////////////////-->
+
+
+
+
+    </div>
+</body>
+<!-- Scripts queries -->
+<script src="~/content/js/jquery.js"></script>
+<script src="~/content/js/boostrap.min.js"></script>
+<script src="~/content/js/countdown.min.js"></script>
+<script src="~/content/js/flexnav.min.js"></script>
+<script src="~/content/js/magnific.js"></script>
+<script src="~/content/js/tweet.min.js"></script>
+@*<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>*@
+<script src="~/content/js/fitvids.min.js"></script>
+<script src="~/content/js/mail.min.js"></script>
+<script src="~/content/js/ionrangeslider.js"></script>
+<script src="~/content/js/icheck.js"></script>
+<script src="~/content/js/fotorama.js"></script>
+<script src="~/content/js/card-payment.js"></script>
+<script src="~/content/js/owl-carousel.js"></script>
+<script src="~/content/js/masonry.js"></script>
+<script src="~/content/js/imagesloaded.js"></script>
+<script src="~/content/js/nicescroll.js"></script>
+
+<!-- Custom scripts -->
+<script src="~/content/js/custom.js"></script>
+@RenderSection("scripts", required: false)
+</html>
