@@ -12,6 +12,7 @@ using System.Web.Http;
 using System.Web.Http.Routing;
 using AttributeRouting.Web.Http;
 using DealsWhat.Attributes;
+using DealsWhat.Helpers;
 using DealsWhat.Models;
 using DealsWhat.ViewModels;
 using log4net.Appender;
@@ -85,11 +86,8 @@ namespace DealsWhat.Controllers
 
             foreach (var image in deals.SelectMany(a => a.Pictures))
             {
-                //foreach (var image in deal.Pictures)
-                {
                     image.RelativeUrl =
-                       VirtualPathUtility.ToAbsolute(DealsWhat.Helpers.PathHelper.ConvertRelativeToAbsoluteDealImagePath(image.RelativeUrl));
-                }
+                       VirtualPathUtility.ToAbsolute(PathHelper.ConvertRelativeToAbsoluteDealImagePath(image.RelativeUrl));
             }
 
             // Use view model so json doesn't screw up when messing with real db models.

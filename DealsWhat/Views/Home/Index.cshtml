@@ -313,9 +313,8 @@
         }
 
         function buildDealInformation(deal) {
-            var sortedImages = deal.Pictures.sort(function (a, b) { return a.Order - b.Order });
+            var sortedImages = deal.Thumbnails.sort(function (a, b) { return a.Order - b.Order });
 
-            console.log(sortedImages);
             var coverPageUrl = '';
             if (sortedImages[0] != null) {
                 coverPageUrl = sortedImages[0].RelativeUrl;

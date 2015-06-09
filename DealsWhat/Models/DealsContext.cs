@@ -6,7 +6,7 @@ using System.Web;
 
 namespace DealsWhat.Models
 {
-    [DbConfigurationType(typeof(CachedDbConfiguration))]
+    //[DbConfigurationType(typeof(CachedDbConfiguration))]
     public class DealsContext : DbContext
     {
         public DealsContext()
