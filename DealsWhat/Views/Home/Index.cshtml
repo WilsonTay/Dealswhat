@@ -26,34 +26,6 @@
             <div>
                 <div class="bg-holder">
                     <img src="~/Content/img/banner1.png" alt="Image Alternative text" title="Bridge" />
-                    <div class="bg-mask"></div>
-                    <div class="bg-front vert-center text-white text-center">
-                        <h2 class="text-hero">Discount Weekends</h2>
-                        <div class="countdown countdown-big" data-countdown="Jul 16, 2015 5:30:00"></div>
-                        <a class="btn btn-lg btn-ghost btn-white" href="#">Save 90% Now</a>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="bg-holder">
-                    <img src="~/Content/img/backgrounds/bridge2.jpg" alt="Image Alternative text" title="4 Strokes of Fun" />
-                    <div class="bg-mask"></div>
-                    <div class="bg-front vert-center text-white text-center">
-                        <h2 class="text-hero">Black Friday</h2>
-                        <div class="countdown countdown-big" data-countdown="Jul 12, 2015 5:30:00"></div>
-                        <a class="btn btn-lg btn-ghost btn-white" href="#">Save 80% Now</a>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="bg-holder">
-                    <img src="~/Content/img/backgrounds/bridge2.jpg" alt="Image Alternative text" title="LHOTEL PORTO BAY SAO PAULO luxury suite" />
-                    <div class="bg-mask"></div>
-                    <div class="bg-front vert-center text-white text-center">
-                        <h2 class="text-hero">Premium Gadgets</h2>
-                        <div class="countdown countdown-big" data-countdown="Jul 8, 2015 5:30:00"></div>
-                        <a class="btn btn-lg btn-ghost btn-white" href="#">Save 50% Now</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -64,20 +36,12 @@
     <form class="search-area form-group search-area-dark">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 clearfix">
+                <div class="col-md-11 clearfix">
                     <label>
                         <i class="fa fa-search"></i><span>I am searching for</span>
                     </label>
                     <div class="search-area-division search-area-division-input">
                         <input id="main-search-textbox" class="form-control" type="text" placeholder="Food Deals" />
-                    </div>
-                </div>
-                <div class="col-md-3 clearfix">
-                    <label>
-                        <i class="fa fa-map-marker"></i><span>In</span>
-                    </label>
-                    <div class="search-area-division search-area-division-location">
-                        <input class="form-control" type="text" placeholder="Klang Valley" />
                     </div>
                 </div>
                 <div class="col-md-1">
@@ -225,25 +189,6 @@
                 },
                 success: function (deals) {
 
-                    //clearMasonry();
-
-                    //var masonry = $('#main-item-list').masonry({
-                    //    itemSelector: '.view-deal-link'
-                    //});
-
-                    //var elements = [];
-                    //$.each(deals, function (index, value) {
-                    //    var element = buildDealInformation(value);
-                    //    elements.push(element);
-                    //});
-
-                    //$('#main-item-list').append(elements);
-                    //$('#main-item-list').masonry('appended', elements);
-                    //$('#main-item-list').masonry();
-
-
-                    //clearMasonry();
-
                     var elements = [];
                     $.each(deals, function (index, value) {
                         var element = buildDealInformation(value);
@@ -258,46 +203,11 @@
                     $(elements).hide();
                     $('#masonry').append(elements);
 
-              
-
-                    //$('#masonry').imagesLoaded().progress(function (imgLoad, image) {
-                    //    // get item
-                    //    // image is imagesLoaded class, not <img>, <img> is image.img
-                    //    var itemSelector = $('#masonry').data('masonry').options.itemSelector;
-                    //    var $item = $(image.img).parents(itemSelector);
-                    //    // un-hide item
-                    //    $item.show();
-                    //    // masonry does its thing
-                    //    //masonry.appended($item);
-                    //    //$('#masonry').data('masonry').appended($item);
-                    //});
-
                     $('#masonry').imagesLoaded(function () {
                         var masonry = $('#masonry').masonry({
                             itemSelector: '.col-masonry'
                         });
                     });
-                    
-                    //var masonry = $('#masonry').masonry({
-                    //    itemSelector: '.col-masonry'
-                    //});
-
-                    // Masonry.data(masonry).layout();
-                    //masonry.appended(elements);
-                    //if ($(window).width() > 992) {
-                    //    $('#masonry').masonry({
-                    //        itemSelector: '.col-masonry'
-                    //    });
-                    //}
-                    //var masonry = $('#main-item-list').masonry({
-
-                    //});
-
-
-                    ////$('#main-item-list').masonry('addItems', elements);
-                    ////$('#main-item-list').append(elements);
-                    //$('#main-item-list').masonry('appended', elements);
-                    //$('#main-item-list').masonry();
                 },
                 complete: function () {
                     hideItemListLoader();

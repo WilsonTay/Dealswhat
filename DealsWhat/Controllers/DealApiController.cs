@@ -132,24 +132,6 @@ namespace DealsWhat.Controllers
             return response;
         }
 
-        //[GET("api/deal/bycategory/{dealCategoryId}")]
-        //public HttpResponseMessage GetDealByCategory(Guid dealCategoryId)
-        //{
-        //    var deals = db.Deals.Where(d => d.Category.Id == dealCategoryId).ToList();
-        //    // .Select(deal => new DealViewModel(deal));
-
-        //    var json = JsonConvert.SerializeObject(deals, Formatting.Indented, new JsonSerializerSettings
-        //              {
-        //                  ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-        //                  PreserveReferencesHandling = PreserveReferencesHandling.Objects
-        //              });
-
-        //    var response = Request.CreateResponse(HttpStatusCode.OK);
-        //    response.Content = new StringContent(json);
-
-        //    return response;
-        //}
-
         // PUT api/DealApi/5
         public HttpResponseMessage PutDeal(Guid id, Deal deal)
         {
