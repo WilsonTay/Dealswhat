@@ -1,0 +1,161 @@
+﻿@using System.Drawing
+@using DealsWhat_Admin.Models
+@model IEnumerable<DealsWhat_Admin.Models.Deal>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn green">Create New Deal</a>
+</p>
+<table id="deals-table" class="table table-hover">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShortTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShortDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegularPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpecialPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsFeatured)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DealCategory.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr data-deal-id="@item.Id" class="@(item.Status == (int)DealStatus.Published ? "" : "warning")">
+                <td>
+                    @if (item.DealImages.Any())
+                    {
+                        <img width="50px" height="50px" src="@Url.Content(DealsWhat_Admin.Helpers.PathHelper.ConvertRelativeToAbsoluteDealImagePath(item.DealImages.First().RelativeUrl))"/>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShortTitle)
+                    @Html.Raw(item.Status == (int)DealStatus.Published ? "" : "<span class='badge badge-roundless badge-danger'>Draft</span>")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShortDescription)
+                </td>
+                <td>RM @Html.DisplayFor(modelItem => item.RegularPrice)
+                </td>
+                <td>RM @Html.DisplayFor(modelItem => item.SpecialPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsFeatured)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DealCategory.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Create", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function format(dealId, row) {
+        $.ajax(
+       {
+           url: '/api/DealsApi/' + dealId,
+           type: "GET",
+           contentType: "application/json; charset=utf-8",
+           dataType: "json",
+           success: function (data, textStatus, jqXHR) {
+
+               var dealName = data.ShortTitle;
+               row.child(dealName).show();
+           },
+           error: function (jqXHR, textStatus, errorThrown) {
+
+           }
+       });
+
+        //// `d` is the original data object for the row
+        //return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+        //    '<tr>' +
+        //        '<td>Full name:</td>' +
+        //        '<td>' + d.name + '</td>' +
+        //    '</tr>' +
+        //    '<tr>' +
+        //        '<td>Extension number:</td>' +
+        //        '<td>' + d.extn + '</td>' +
+        //    '</tr>' +
+        //    '<tr>' +
+        //        '<td>Extra info:</td>' +
+        //        '<td>And any further details here (images etc)...</td>' +
+        //    '</tr>' +
+        //'</table>';
+    }
+
+    $(document).ready(function () {
+        var dealsTable = $('#deals-table');
+        var oTable = dealsTable.DataTable();
+
+        //var nCloneTh = document.createElement('th');
+        //nCloneTh.className = "table-checkbox";
+
+        //var nCloneTd = document.createElement('td');
+        //nCloneTd.innerHTML = '<span class="row-details row-details-close"></span>';
+
+        //dealsTable.find('thead tr').each(function () {
+        //    this.insertBefore(nCloneTh, this.childNodes[0]);
+        //});
+
+        //dealsTable.find('tbody tr').each(function () {
+        //    this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+        //});
+
+
+
+        //dealsTable.on('click', 'tbody td .row-details', function () {
+        //    var tr = $(this).closest('tr');
+        //    var row = oTable.row(tr);
+
+        //    if (row.child.isShown()) {
+        //        // This row is already open - close it
+        //        row.child.hide();
+        //        tr.removeClass('shown');
+        //    }
+        //    else {
+        //        // Open this row
+        //        var dealId = $(tr).attr('data-deal-id');
+        //        format(dealId,row);
+
+        //        tr.addClass('shown');
+        //    }
+        //});
+    });
+</script>

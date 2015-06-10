@@ -1,0 +1,127 @@
+﻿@model DealsWhat_Admin.Models.Deal
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Deal</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShortTitle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShortTitle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LongTitle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LongTitle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShortDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShortDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LongDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LongDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RegularPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RegularPrice)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SpecialPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SpecialPrice)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SKU)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SKU)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateAdded)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateAdded)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StartTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EndTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EndTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FinePrint)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FinePrint)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Highlight)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Highlight)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsFeatured)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsFeatured)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CanonicalUrl)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CanonicalUrl)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DealCategory.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DealCategory.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Merchant.EmailAddress)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Merchant.EmailAddress)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

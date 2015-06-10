@@ -1,0 +1,158 @@
+﻿@model DealsWhat_Admin.Models.Deal
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Deal</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ShortTitle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ShortTitle)
+            @Html.ValidationMessageFor(model => model.ShortTitle)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LongTitle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LongTitle)
+            @Html.ValidationMessageFor(model => model.LongTitle)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ShortDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ShortDescription)
+            @Html.ValidationMessageFor(model => model.ShortDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LongDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LongDescription)
+            @Html.ValidationMessageFor(model => model.LongDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RegularPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RegularPrice)
+            @Html.ValidationMessageFor(model => model.RegularPrice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SpecialPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SpecialPrice)
+            @Html.ValidationMessageFor(model => model.SpecialPrice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SKU)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SKU)
+            @Html.ValidationMessageFor(model => model.SKU)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateAdded)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateAdded)
+            @Html.ValidationMessageFor(model => model.DateAdded)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StartTime)
+            @Html.ValidationMessageFor(model => model.StartTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EndTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EndTime)
+            @Html.ValidationMessageFor(model => model.EndTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FinePrint)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FinePrint)
+            @Html.ValidationMessageFor(model => model.FinePrint)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Highlight)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Highlight)
+            @Html.ValidationMessageFor(model => model.Highlight)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsFeatured)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsFeatured)
+            @Html.ValidationMessageFor(model => model.IsFeatured)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CanonicalUrl)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CanonicalUrl)
+            @Html.ValidationMessageFor(model => model.CanonicalUrl)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Category_Id, "DealCategory")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Category_Id", String.Empty)
+            @Html.ValidationMessageFor(model => model.Category_Id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Merchant_Id, "Merchant")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Merchant_Id", String.Empty)
+            @Html.ValidationMessageFor(model => model.Merchant_Id)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

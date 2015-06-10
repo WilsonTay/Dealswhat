@@ -1,0 +1,365 @@
+﻿@using System.Security.Claims
+@using System.Threading
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>DealsWhat - Admin Dashboard</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/global/plugins/font-awesome/css/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/global/plugins/simple-line-icons/simple-line-icons.min.css")"  rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/global/plugins/bootstrap/css/bootstrap.min.css")"  rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/global/plugins/uniform/css/uniform.default.css")"  rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css")"  rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+    <link href="@Url.Content("~/Assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/global/plugins/fullcalendar/fullcalendar.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/global/plugins/jqvmap/jqvmap/jqvmap.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/global/plugins/select2/select2.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/global/plugins/bootstrap-datepicker/css/datepicker.css")" />
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/global/plugins/bootstrap-toastr/toastr.min.css")" />
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/global/plugins/bootstrap-select/bootstrap-select.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/global/plugins/select2/select2.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/global/plugins/jquery-multi-select/css/multi-select.css")" />
+
+    <!-- END PAGE LEVEL PLUGIN STYLES -->
+    <!-- BEGIN PAGE STYLES -->
+    <link href="@Url.Content("~/Assets/admin/pages/css/todo.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/admin/pages/css/tasks.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/admin/pages/css/profile.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/admin/pages/css/profile-old.css")" rel="stylesheet" type="text/css" />
+
+    <!-- END PAGE STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
+    <link href="@Url.Content("~/Assets/global/css/components.css")" id="style_components" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/global/css/plugins.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/admin/layout/css/layout.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/admin/layout/css/themes/darkblue.css")" rel="stylesheet" type="text/css" id="style_color" />
+
+    <link href="@Url.Content("~/Assets/admin/layout/css/custom.css")" rel="stylesheet" type="text/css"/>
+
+    <link href="@Url.Content("~/Assets/global/plugins/dropzone/css/dropzone.css")" rel="stylesheet"/>
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/global/plugins/bootstrap-summernote/summernote.css")">
+
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <!--[if lt IE 9]>
+    <script src="@Url.Content("~/Assets/global/plugins/respond.min.js")"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/excanvas.min.js")"></script>
+    <![endif]-->
+    <script src="@Url.Content("~/Assets/global/plugins/jquery.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/jquery-migrate.min.js")" type="text/javascript"></script>
+    <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+
+    <script src="@Url.Content("~/Assets/global/plugins/jquery-ui/jquery-ui.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/bootstrap/js/bootstrap.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/jquery.blockui.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/jquery.cokie.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/uniform/jquery.uniform.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js")" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="@Url.Content("~/Assets/global/plugins/flot/jquery.flot.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/flot/jquery.flot.resize.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/flot/jquery.flot.categories.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/jquery.pulsate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/bootstrap-daterangepicker/moment.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/bootstrap-toastr/toastr.min.js")"></script>
+    <script src="@Url.Content("~/Assets/admin/pages/scripts/ui-toastr.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/bootstrap-select/bootstrap-select.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/select2/select2.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js")"></script>
+
+
+    <!-- IMPORTANT! fullcalendar depends on jquery-ui-1.10.3.custom.min.js for drag & drop support -->
+    <script src="@Url.Content("~/Assets/global/plugins/fullcalendar/fullcalendar.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/jquery.sparkline.min.js")" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="@Url.Content("~/Assets/global/scripts/jquery.ajax-cross-origin.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/scripts/metronic.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/admin/layout/scripts/layout.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/admin/layout/scripts/quick-sidebar.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/admin/layout/scripts/demo.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/admin/pages/scripts/index.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/admin/pages/scripts/tasks.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/plugins/bootbox/bootbox.min.js")" type="text/javascript"></script>
+
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/select2/select2.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/datatables/media/js/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/scripts/jquery.dataTables.columnFilter.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/jquery-validation/js/jquery.validate.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/jquery-validation/js/additional-methods.min.js")"></script>
+
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+    <script src="@Url.Content("~/Assets/admin/layout2/scripts/layout.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/admin/layout2/scripts/demo.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Assets/global/scripts/datatable.js")"></script>
+    <script src="@Url.Content("~/Assets/admin/pages/scripts/table-ajax.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/select2/select2.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/datatables/media/js/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/datatables/extensions/Scroller/js/dataTables.scroller.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js")"></script>
+    <script src="@Url.Content("~/Assets/admin/pages/scripts/table-advanced.js")"></script>
+    <script src="@Url.Content("~/Assets/admin/pages/scripts/profile.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Assets/global/plugins/dropzone/dropzone.js")"></script>
+
+    <script src="@Url.Content("~/Assets/global/plugins/pace/pace.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Assets/global/plugins/pace/themes/pace-theme-flash.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Assets/global/plugins/nouislider/jquery.nouislider.css")" rel="stylesheet" type="text/css" />
+
+    <script src="@Url.Content("~/Assets/global/plugins/nouislider/jquery.nouislider.min.js")"></script>
+
+    <script src="@Url.Content("~/Assets/global/plugins/bootstrap-summernote/summernote.min.js")" type="text/javascript"></script>
+
+
+    <style>
+        .input-validation-error {
+            background: pink;
+            border: 1px solid red;
+        }
+
+        .field-validation-error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+    <!-- END PAGE LEVEL SCRIPTS -->
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<!-- DOC: Apply "page-header-fixed-mobile" and "page-footer-fixed-mobile" class to body element to force fixed header or footer in mobile devices -->
+<!-- DOC: Apply "page-sidebar-closed" class to the body and "page-sidebar-menu-closed" class to the sidebar menu element to hide the sidebar by default -->
+<!-- DOC: Apply "page-sidebar-hide" class to the body to make the sidebar completely hidden on toggle -->
+<!-- DOC: Apply "page-sidebar-closed-hide-logo" class to the body element to make the logo hidden on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-hide" class to body element to completely hide the sidebar on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-fixed" class to have fixed sidebar -->
+<!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
+<!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
+<!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
+<body class="page-header-fixed page-quick-sidebar-over-content-transparent page-style-square">
+    <div class="page-header -i navbar navbar-fixed-top">
+        <!-- BEGIN HEADER INNER -->
+        <div class="page-header-inner">
+            <!-- BEGIN LOGO -->
+            <div class="page-logo">
+                <a href="/">
+                    <img src="@Url.Content("~/Assets/admin/layout/img/dw-logo.png")" width="90px" alt="logo" class="logo-default">
+                </a>
+                <div class="menu-toggler sidebar-toggler hide">
+                    <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+                </div>
+            </div>
+            <!-- END LOGO -->
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+
+                    <li class="dropdown dropdown-language">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <img alt="" src="@Url.Content("~/Assets/global/img/flags/us.png")">
+                            <span class="langname">US
+                            </span>
+
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                        </ul>
+                    </li>
+                    <li class="dropdown dropdown-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <img alt="" class="img-circle" src="@Url.Content("~/Assets/admin/layout/img/avatar3_small.jpg")">
+                            <span class="username username-hide-on-mobile">@HttpContext.Current.User.Identity.Name
+                            </span>
+
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                        </ul>
+                    </li>
+                    <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                    <li class="dropdown dropdown-quick-sidebar-toggler">
+                        <a href="javascript:;" class="dropdown-toggle">
+                            <i class="icon-bar-chart"></i>
+                        </a>
+                    </li>
+                    <!-- END QUICK SIDEBAR TOGGLER -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+        <!-- END HEADER INNER -->
+    </div>
+
+    <div class="clearfix">
+    </div>
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar-wrapper">
+            <div class="page-sidebar navbar-collapse collapse">
+                <!-- BEGIN SIDEBAR MENU -->
+                <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+                <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+                <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+                <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                    <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                    <li class="sidebar-toggler-wrapper">
+                        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                        <div class="sidebar-toggler">
+                        </div>
+                        <!-- END SIDEBAR TOGGLER BUTTON -->
+                    </li>
+                    <li class="heading">
+                        <h3 class="uppercase">General</h3>
+                    </li>
+                    <li class="start active open">
+                        <a href="@Url.Action("Index", "Home")">
+                            <i class="icon-home"></i>
+                            <span class="title">Home</span>
+                            <span class="selected"></span>
+                            <span class="arrow open"></span>
+                        </a>
+
+                    </li>
+                    <li class="heading">
+                        <h3 class="uppercase">Manage</h3>
+                    </li>
+                    <li class="start">
+                        <a href="@Url.Action("Index", "Deal")">
+                            <i class="icon-list"></i>
+                            <span class="title">Deals</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li class="start">
+                        <a href="@Url.Action("Index", "Deal")">
+                            <i class="icon-basket-loaded"></i>
+                            <span class="title">Orders</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li class="start">
+                        <a href="@Url.Action("Index", "Merchant")">
+                            <i class="icon-basket-loaded"></i>
+                            <span class="title">Merchants</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li class="start">
+                        <a href="@Url.Action("Index", "DealCategory")">
+                            <i class="icon-basket-loaded"></i>
+                            <span class="title">Deal Categories</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- END SIDEBAR MENU -->
+            </div>
+        </div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- END CONTENT -->
+        <!-- BEGIN QUICK SIDEBAR -->
+        <a href="javascript:;" class="page-quick-sidebar-toggler"><i class="icon-bar-chart"></i></a>
+        <div class="page-quick-sidebar-wrapper">
+            <div class="page-quick-sidebar">
+                <div class="nav-justified">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active">
+                            <a href="#quick_sidebar_tab_1" data-toggle="tab">Services
+                            </a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active page-quick-sidebar-chat" id="quick_sidebar_tab_1">
+                            <div id="service-activity-sidebar-list" class="page-quick-sidebar-chat-users" data-rail-color="#ddd" data-wrapper-class="page-quick-sidebar-list">
+                                <ul id="service-activity-sidebar-list-submitter" class="media-list list-items"></ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END QUICK SIDEBAR -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer">
+        <div class="page-footer-inner">
+            2015 &copy; DealsWhat.
+        </div>
+        <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+        </div>
+    </div>
+    <!-- END FOOTER -->
+
+    @RenderSection("scripts", false);
+    @RenderSection("styles", false);
+
+    <script>
+        $(document).ready(function () {
+            Metronic.init(); // init metronic core componets
+            Layout.init(); // init layout
+            QuickSidebar.init(); // init quick sidebar
+            Index.init();
+            UIToastr.init();
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

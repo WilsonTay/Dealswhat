@@ -1,0 +1,889 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Carts" EntityType="Model.Store.Carts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DealAttributes" EntityType="Model.Store.DealAttributes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DealCategories" EntityType="Model.Store.DealCategories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DealComments" EntityType="Model.Store.DealComments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DealImages" EntityType="Model.Store.DealImages" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DealOptions" EntityType="Model.Store.DealOptions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Deals" EntityType="Model.Store.Deals" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Merchants" EntityType="Model.Store.Merchants" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfile" EntityType="Model.Store.UserProfile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="Model.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_Membership" EntityType="Model.Store.webpages_Membership" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Model.Store.webpages_OAuthMembership" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_Roles" EntityType="Model.Store.webpages_Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="Model.Store.webpages_UsersInRoles" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="Cart_Deal" Association="Model.Store.Cart_Deal">
+            <End Role="Deals" EntitySet="Deals" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="Cart_User" Association="Model.Store.Cart_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="DealAttribute_DealOption" Association="Model.Store.DealAttribute_DealOption">
+            <End Role="DealOptions" EntitySet="DealOptions" />
+            <End Role="DealAttributes" EntitySet="DealAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="DealCategory_Deals" Association="Model.Store.DealCategory_Deals">
+            <End Role="DealCategories" EntitySet="DealCategories" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="DealComment_Deal" Association="Model.Store.DealComment_Deal">
+            <End Role="Deals" EntitySet="Deals" />
+            <End Role="DealComments" EntitySet="DealComments" />
+          </AssociationSet>
+          <AssociationSet Name="DealComment_Poster" Association="Model.Store.DealComment_Poster">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="DealComments" EntitySet="DealComments" />
+          </AssociationSet>
+          <AssociationSet Name="DealImages_Deal" Association="Model.Store.DealImages_Deal">
+            <End Role="Deals" EntitySet="Deals" />
+            <End Role="DealImages" EntitySet="DealImages" />
+          </AssociationSet>
+          <AssociationSet Name="DealOption_Deal" Association="Model.Store.DealOption_Deal">
+            <End Role="Deals" EntitySet="Deals" />
+            <End Role="DealOptions" EntitySet="DealOptions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RoleId" Association="Model.Store.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserId" Association="Model.Store.fk_UserId">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="Merchant_Deals" Association="Model.Store.Merchant_Deals">
+            <End Role="Merchants" EntitySet="Merchants" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Carts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="User_UserId" Type="int" />
+          <Property Name="Deal_Id" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="DealAttributes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="DealOption_Id" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="DealCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Icon" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DealComments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DatePosted" Type="datetime" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="Poster_UserId" Type="int" />
+          <Property Name="Deal_Id" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="DealImages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RelativeUrl" Type="nvarchar(max)" />
+          <Property Name="Order" Type="int" Nullable="false" />
+          <Property Name="Deal_Id" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="DealOptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ShortTitle" Type="nvarchar(max)" />
+          <Property Name="RegularPrice" Type="float" Nullable="false" />
+          <Property Name="SpecialPrice" Type="float" Nullable="false" />
+          <Property Name="Deal_Id" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Deals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ShortTitle" Type="nvarchar(max)" />
+          <Property Name="LongTitle" Type="nvarchar(max)" />
+          <Property Name="ShortDescription" Type="nvarchar(max)" />
+          <Property Name="LongDescription" Type="nvarchar(max)" />
+          <Property Name="RegularPrice" Type="float" Nullable="false" />
+          <Property Name="SpecialPrice" Type="float" Nullable="false" />
+          <Property Name="SKU" Type="nvarchar(max)" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="FinePrint" Type="nvarchar(max)" />
+          <Property Name="Highlight" Type="nvarchar(max)" />
+          <Property Name="IsFeatured" Type="bit" Nullable="false" />
+          <Property Name="CanonicalUrl" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Category_Id" Type="uniqueidentifier" />
+          <Property Name="Merchant_Id" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Merchants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="Website" Type="nvarchar(max)" />
+          <Property Name="BusinessRegNumber" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="About" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="AddressLat" Type="float" />
+          <Property Name="AddressLng" Type="float" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EmailAddress" Type="nvarchar(max)" />
+          <Property Name="Username" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="AddressLine1" Type="nvarchar(max)" />
+          <Property Name="Street" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="State" Type="nvarchar(max)" />
+          <Property Name="ZipCode" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="ProviderUserId" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="Cart_Deal">
+          <End Role="Deals" Type="Model.Store.Deals" Multiplicity="0..1" />
+          <End Role="Carts" Type="Model.Store.Carts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="Deal_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Cart_User">
+          <End Role="Users" Type="Model.Store.Users" Multiplicity="0..1" />
+          <End Role="Carts" Type="Model.Store.Carts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="User_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DealAttribute_DealOption">
+          <End Role="DealOptions" Type="Model.Store.DealOptions" Multiplicity="0..1" />
+          <End Role="DealAttributes" Type="Model.Store.DealAttributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealOptions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealAttributes">
+              <PropertyRef Name="DealOption_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DealCategory_Deals">
+          <End Role="DealCategories" Type="Model.Store.DealCategories" Multiplicity="0..1" />
+          <End Role="Deals" Type="Model.Store.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DealComment_Deal">
+          <End Role="Deals" Type="Model.Store.Deals" Multiplicity="0..1" />
+          <End Role="DealComments" Type="Model.Store.DealComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealComments">
+              <PropertyRef Name="Deal_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DealComment_Poster">
+          <End Role="Users" Type="Model.Store.Users" Multiplicity="0..1" />
+          <End Role="DealComments" Type="Model.Store.DealComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DealComments">
+              <PropertyRef Name="Poster_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DealImages_Deal">
+          <End Role="Deals" Type="Model.Store.Deals" Multiplicity="0..1" />
+          <End Role="DealImages" Type="Model.Store.DealImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealImages">
+              <PropertyRef Name="Deal_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DealOption_Deal">
+          <End Role="Deals" Type="Model.Store.Deals" Multiplicity="0..1" />
+          <End Role="DealOptions" Type="Model.Store.DealOptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealOptions">
+              <PropertyRef Name="Deal_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="Model.Store.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Model.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserId">
+          <End Role="UserProfile" Type="Model.Store.UserProfile" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Model.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Merchant_Deals">
+          <End Role="Merchants" Type="Model.Store.Merchants" Multiplicity="0..1" />
+          <End Role="Deals" Type="Model.Store.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merchants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="Merchant_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Carts" EntityType="Model.Cart" />
+          <EntitySet Name="DealAttributes" EntityType="Model.DealAttribute" />
+          <EntitySet Name="DealCategories" EntityType="Model.DealCategory" />
+          <EntitySet Name="DealComments" EntityType="Model.DealComment" />
+          <EntitySet Name="DealImages" EntityType="Model.DealImage" />
+          <EntitySet Name="DealOptions" EntityType="Model.DealOption" />
+          <EntitySet Name="Deals" EntityType="Model.Deal" />
+          <EntitySet Name="Merchants" EntityType="Model.Merchant" />
+          <EntitySet Name="UserProfiles" EntityType="Model.UserProfile" />
+          <EntitySet Name="Users" EntityType="Model.User" />
+          <EntitySet Name="webpages_Membership" EntityType="Model.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Model.webpages_OAuthMembership" />
+          <EntitySet Name="webpages_Roles" EntityType="Model.webpages_Roles" />
+          <AssociationSet Name="Cart_Deal" Association="Model.Cart_Deal">
+            <End Role="Deals" EntitySet="Deals" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="Cart_User" Association="Model.Cart_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="DealAttribute_DealOption" Association="Model.DealAttribute_DealOption">
+            <End Role="DealOptions" EntitySet="DealOptions" />
+            <End Role="DealAttributes" EntitySet="DealAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="DealCategory_Deals" Association="Model.DealCategory_Deals">
+            <End Role="DealCategories" EntitySet="DealCategories" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="DealComment_Deal" Association="Model.DealComment_Deal">
+            <End Role="Deals" EntitySet="Deals" />
+            <End Role="DealComments" EntitySet="DealComments" />
+          </AssociationSet>
+          <AssociationSet Name="DealComment_Poster" Association="Model.DealComment_Poster">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="DealComments" EntitySet="DealComments" />
+          </AssociationSet>
+          <AssociationSet Name="DealImages_Deal" Association="Model.DealImages_Deal">
+            <End Role="Deals" EntitySet="Deals" />
+            <End Role="DealImages" EntitySet="DealImages" />
+          </AssociationSet>
+          <AssociationSet Name="DealOption_Deal" Association="Model.DealOption_Deal">
+            <End Role="Deals" EntitySet="Deals" />
+            <End Role="DealOptions" EntitySet="DealOptions" />
+          </AssociationSet>
+          <AssociationSet Name="Merchant_Deals" Association="Model.Merchant_Deals">
+            <End Role="Merchants" EntitySet="Merchants" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="Model.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="User_UserId" Type="Int32" />
+          <Property Name="Deal_Id" Type="Guid" />
+          <NavigationProperty Name="Deal" Relationship="Model.Cart_Deal" FromRole="Carts" ToRole="Deals" />
+          <NavigationProperty Name="User" Relationship="Model.Cart_User" FromRole="Carts" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="DealAttribute">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DealOption_Id" Type="Guid" />
+          <NavigationProperty Name="DealOption" Relationship="Model.DealAttribute_DealOption" FromRole="DealAttributes" ToRole="DealOptions" />
+        </EntityType>
+        <EntityType Name="DealCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Icon" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Deals" Relationship="Model.DealCategory_Deals" FromRole="DealCategories" ToRole="Deals" />
+        </EntityType>
+        <EntityType Name="DealComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DatePosted" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Message" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Poster_UserId" Type="Int32" />
+          <Property Name="Deal_Id" Type="Guid" />
+          <NavigationProperty Name="Deal" Relationship="Model.DealComment_Deal" FromRole="DealComments" ToRole="Deals" />
+          <NavigationProperty Name="User" Relationship="Model.DealComment_Poster" FromRole="DealComments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="DealImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RelativeUrl" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Order" Type="Int32" Nullable="false" />
+          <Property Name="Deal_Id" Type="Guid" />
+          <NavigationProperty Name="Deal" Relationship="Model.DealImages_Deal" FromRole="DealImages" ToRole="Deals" />
+        </EntityType>
+        <EntityType Name="DealOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ShortTitle" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RegularPrice" Type="Double" Nullable="false" />
+          <Property Name="SpecialPrice" Type="Double" Nullable="false" />
+          <Property Name="Deal_Id" Type="Guid" />
+          <NavigationProperty Name="DealAttributes" Relationship="Model.DealAttribute_DealOption" FromRole="DealOptions" ToRole="DealAttributes" />
+          <NavigationProperty Name="Deal" Relationship="Model.DealOption_Deal" FromRole="DealOptions" ToRole="Deals" />
+        </EntityType>
+        <EntityType Name="Deal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ShortTitle" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="LongTitle" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ShortDescription" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="LongDescription" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RegularPrice" Type="Double" Nullable="false" />
+          <Property Name="SpecialPrice" Type="Double" Nullable="false" />
+          <Property Name="SKU" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FinePrint" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Highlight" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IsFeatured" Type="Boolean" Nullable="false" />
+          <Property Name="CanonicalUrl" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Category_Id" Type="Guid" />
+          <Property Name="Merchant_Id" Type="Guid" />
+          <NavigationProperty Name="Carts" Relationship="Model.Cart_Deal" FromRole="Deals" ToRole="Carts" />
+          <NavigationProperty Name="DealCategory" Relationship="Model.DealCategory_Deals" FromRole="Deals" ToRole="DealCategories" />
+          <NavigationProperty Name="DealComments" Relationship="Model.DealComment_Deal" FromRole="Deals" ToRole="DealComments" />
+          <NavigationProperty Name="DealImages" Relationship="Model.DealImages_Deal" FromRole="Deals" ToRole="DealImages" />
+          <NavigationProperty Name="DealOptions" Relationship="Model.DealOption_Deal" FromRole="Deals" ToRole="DealOptions" />
+          <NavigationProperty Name="Merchant" Relationship="Model.Merchant_Deals" FromRole="Deals" ToRole="Merchants" />
+        </EntityType>
+        <EntityType Name="Merchant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Website" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BusinessRegNumber" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="About" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AddressLat" Type="Double" />
+          <Property Name="AddressLng" Type="Double" />
+          <NavigationProperty Name="Deals" Relationship="Model.Merchant_Deals" FromRole="Merchants" ToRole="Deals" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="webpages_Roles" Relationship="Model.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailAddress" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Username" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AddressLine1" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Street" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Carts" Relationship="Model.Cart_User" FromRole="Users" ToRole="Carts" />
+          <NavigationProperty Name="DealComments" Relationship="Model.DealComment_Poster" FromRole="Users" ToRole="DealComments" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="UserProfiles" Relationship="Model.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
+        </EntityType>
+        <Association Name="Cart_Deal">
+          <End Role="Deals" Type="Model.Deal" Multiplicity="0..1" />
+          <End Role="Carts" Type="Model.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="Deal_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Cart_User">
+          <End Role="Users" Type="Model.User" Multiplicity="0..1" />
+          <End Role="Carts" Type="Model.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="User_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DealAttribute_DealOption">
+          <End Role="DealOptions" Type="Model.DealOption" Multiplicity="0..1" />
+          <End Role="DealAttributes" Type="Model.DealAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealOptions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealAttributes">
+              <PropertyRef Name="DealOption_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DealCategory_Deals">
+          <End Role="DealCategories" Type="Model.DealCategory" Multiplicity="0..1" />
+          <End Role="Deals" Type="Model.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DealComment_Deal">
+          <End Role="Deals" Type="Model.Deal" Multiplicity="0..1" />
+          <End Role="DealComments" Type="Model.DealComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealComments">
+              <PropertyRef Name="Deal_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DealComment_Poster">
+          <End Role="Users" Type="Model.User" Multiplicity="0..1" />
+          <End Role="DealComments" Type="Model.DealComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DealComments">
+              <PropertyRef Name="Poster_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DealImages_Deal">
+          <End Role="Deals" Type="Model.Deal" Multiplicity="0..1" />
+          <End Role="DealImages" Type="Model.DealImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealImages">
+              <PropertyRef Name="Deal_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DealOption_Deal">
+          <End Role="Deals" Type="Model.Deal" Multiplicity="0..1" />
+          <End Role="DealOptions" Type="Model.DealOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealOptions">
+              <PropertyRef Name="Deal_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Merchant_Deals">
+          <End Role="Merchants" Type="Model.Merchant" Multiplicity="0..1" />
+          <End Role="Deals" Type="Model.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merchants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="Merchant_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="webpages_UsersInRoles">
+          <End Role="webpages_Roles" Type="Model.webpages_Roles" Multiplicity="*" />
+          <End Role="UserProfile" Type="Model.UserProfile" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="Model.Cart">
+              <MappingFragment StoreEntitySet="Carts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="User_UserId" ColumnName="User_UserId" />
+                <ScalarProperty Name="Deal_Id" ColumnName="Deal_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealAttributes">
+            <EntityTypeMapping TypeName="Model.DealAttribute">
+              <MappingFragment StoreEntitySet="DealAttributes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="DealOption_Id" ColumnName="DealOption_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealCategories">
+            <EntityTypeMapping TypeName="Model.DealCategory">
+              <MappingFragment StoreEntitySet="DealCategories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealComments">
+            <EntityTypeMapping TypeName="Model.DealComment">
+              <MappingFragment StoreEntitySet="DealComments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Poster_UserId" ColumnName="Poster_UserId" />
+                <ScalarProperty Name="Deal_Id" ColumnName="Deal_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealImages">
+            <EntityTypeMapping TypeName="Model.DealImage">
+              <MappingFragment StoreEntitySet="DealImages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RelativeUrl" ColumnName="RelativeUrl" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Deal_Id" ColumnName="Deal_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealOptions">
+            <EntityTypeMapping TypeName="Model.DealOption">
+              <MappingFragment StoreEntitySet="DealOptions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ShortTitle" ColumnName="ShortTitle" />
+                <ScalarProperty Name="RegularPrice" ColumnName="RegularPrice" />
+                <ScalarProperty Name="SpecialPrice" ColumnName="SpecialPrice" />
+                <ScalarProperty Name="Deal_Id" ColumnName="Deal_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Deals">
+            <EntityTypeMapping TypeName="Model.Deal">
+              <MappingFragment StoreEntitySet="Deals">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ShortTitle" ColumnName="ShortTitle" />
+                <ScalarProperty Name="LongTitle" ColumnName="LongTitle" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
+                <ScalarProperty Name="RegularPrice" ColumnName="RegularPrice" />
+                <ScalarProperty Name="SpecialPrice" ColumnName="SpecialPrice" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="FinePrint" ColumnName="FinePrint" />
+                <ScalarProperty Name="Highlight" ColumnName="Highlight" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+                <ScalarProperty Name="CanonicalUrl" ColumnName="CanonicalUrl" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Merchant_Id" ColumnName="Merchant_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Merchants">
+            <EntityTypeMapping TypeName="Model.Merchant">
+              <MappingFragment StoreEntitySet="Merchants">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="BusinessRegNumber" ColumnName="BusinessRegNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="About" ColumnName="About" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="AddressLat" ColumnName="AddressLat" />
+                <ScalarProperty Name="AddressLng" ColumnName="AddressLng" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="Model.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Membership">
+            <EntityTypeMapping TypeName="Model.webpages_Membership">
+              <MappingFragment StoreEntitySet="webpages_Membership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_OAuthMembership">
+            <EntityTypeMapping TypeName="Model.webpages_OAuthMembership">
+              <MappingFragment StoreEntitySet="webpages_OAuthMembership">
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="Model.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="Model.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

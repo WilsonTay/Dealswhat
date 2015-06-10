@@ -1,0 +1,215 @@
+﻿@model DealsWhat_Admin.Models.Merchant
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Merchant", FormMethod.Post, new { id = "merchant-form" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Merchant</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EmailAddress)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control input-lg" })
+            @Html.ValidationMessageFor(model => model.EmailAddress)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PhoneNumber)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control input-lg" })
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Website)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Website, new { @class = "form-control input-lg" })
+            @Html.ValidationMessageFor(model => model.Website)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BusinessRegNumber)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.BusinessRegNumber, new { @class = "form-control input-lg" })
+            @Html.ValidationMessageFor(model => model.BusinessRegNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control input-lg" })
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.About)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.About, new { @class = "form-control input-lg" })
+            @Html.ValidationMessageFor(model => model.About)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Address, new { @class = "form-control input-lg" })
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <div class="editor-label">
+            <label>Google Locations</label>
+        </div>
+        <div class="editor-field">
+            <select id="google-locations">
+                <option>Please key in the address</option>
+            </select>
+        </div>
+
+        <div class="panel panel-default">
+            <div id="map-canvas" class="well" style="width: 100%; height: 500px;"></div>
+        </div>
+        <p>
+            <input class="btn green" id="create-merchant-submit-btn" type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYaq2aZgiq0kOG8Fz5--d91Z321qzcNW4"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $('#google-locations').select2({
+            }).addClass("input-lg form-control");
+
+
+        });
+
+        var mapOptions;
+        $('#google-locations').change(function (value) {
+            updateGoogleMap();
+
+        });
+
+        $('#create-merchant-submit-btn').click(function (e) {
+
+            var emailAddress = $('#EmailAddress').val();
+            var phoneNumber = $('#PhoneNumber').val();
+            var website = $('#Website').val();
+            var businessRegNumber = $('#BusinessRegNumber').val();
+            var name = $('#Name').val();
+            var about = $('#About').val();
+            var address = $('#Address').val();
+
+            var selected = $('#google-locations option:selected');
+            var lat = selected.attr('data-lat');
+            var lng = selected.attr('data-lng');
+
+            var merchant = {};
+            merchant.EmailAddress = emailAddress;
+            merchant.PhoneNumber = phoneNumber;
+            merchant.Website = website;
+            merchant.BusinessRegNumber = businessRegNumber;
+            merchant.Name = name;
+            merchant.About = about;
+            merchant.Address = address;
+            merchant.AddressLat = lat;
+            merchant.AddressLng = lng;
+            //merchant. = emailAddress;
+
+            var data = JSON.stringify(merchant);
+
+            $.ajax(
+            {
+                url: '/Merchant/Create',
+                type: "POST",
+                data: data,
+                contentType: "application/json; charset=utf-8",
+                success: function (data, textStatus, xhr) {
+
+                    if (xhr.status == 200) {
+                        window.location = "@Url.Action("Index")";
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                }
+            });
+
+            e.preventDefault();
+        });
+
+        function updateGoogleMap() {
+            var selected = $('#google-locations option:selected');
+            var lat = selected.attr('data-lat');
+            var lng = selected.attr('data-lng');
+
+            mapOptions = {
+                zoom: 14,
+                center: new google.maps.LatLng(lat, lng)
+            };
+            var map = new google.maps.Map(document.getElementById('map-canvas'),
+                mapOptions);
+
+            var latlng = new google.maps.LatLng(lat, lng);
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map
+            });
+            marker.setMap(map);
+        }
+
+        $('#Address').blur(function () {
+
+            var inputAddress = $(this).val();
+            var encodedUri = encodeURI(inputAddress);
+
+            translateGeolocationToLat(encodedUri);
+        });
+
+        function translateGeolocationToLat(address) {
+            $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyAYaq2aZgiq0kOG8Fz5--d91Z321qzcNW4', function (data) {
+
+                $('#google-locations').empty();
+
+                if (data.results.length) {
+                    $.each(data.results, function (index, value) {
+
+                        var address = value.formatted_address;
+                        var location = value.geometry.location;
+                        var element = $('<option></option>');
+                        element.text(address);
+                        element.attr('data-lat', location.lat);
+                        element.attr('data-lng', location.lng);
+                        $('#google-locations').append(element);
+                    });
+                } else {
+                    $('#google-locations').append('<option>No address found</option>');
+                }
+
+                $('#google-locations').select2();
+                updateGoogleMap();
+            });
+
+        }
+    </script>
+}
