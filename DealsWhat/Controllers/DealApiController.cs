@@ -111,7 +111,7 @@ namespace DealsWhat.Controllers
             return false;
         }
 
-        // GET api/DealApi/5
+        // GET api/DealApi/6
         [GET("api/deal/{id}")]
         public HttpResponseMessage GetDeal(Guid id)
         {
