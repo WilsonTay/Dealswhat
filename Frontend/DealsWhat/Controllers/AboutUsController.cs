@@ -9,8 +9,7 @@ namespace DealsWhat.Controllers
     public class AboutUsController : Controller
     {
         //
-        // GET: /AboutUs/a
-
+        // GET: /AboutUs/
         public ActionResult Index()
         {
             return View();

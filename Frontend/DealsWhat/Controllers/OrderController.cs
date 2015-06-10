@@ -10,9 +10,6 @@ namespace DealsWhat.Controllers
 {
     public class OrderController : Controller
     {
-        //
-        // GET: /Order/
-
         public ActionResult CheckOut()
         {
             using (var context = new DealsContext())

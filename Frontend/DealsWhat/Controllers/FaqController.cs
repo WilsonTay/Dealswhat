@@ -10,7 +10,6 @@ namespace DealsWhat.Controllers
     {
         //
         // GET: /Faq/
-
         public ActionResult Index()
         {
             return View();

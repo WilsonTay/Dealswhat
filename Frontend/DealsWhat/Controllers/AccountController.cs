@@ -19,7 +19,6 @@ namespace DealsWhat.Controllers
     {
         //
         // GET: /Account/Logina
-
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -29,7 +28,6 @@ namespace DealsWhat.Controllers
 
         //
         // POST: /Account/Login
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -47,7 +45,6 @@ namespace DealsWhat.Controllers
 
         //
         // POST: /Account/LogOff
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -59,7 +56,6 @@ namespace DealsWhat.Controllers
 
         //
         // GET: /Account/Register
-
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -68,7 +64,6 @@ namespace DealsWhat.Controllers
 
         //
         // POST: /Account/Register
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
