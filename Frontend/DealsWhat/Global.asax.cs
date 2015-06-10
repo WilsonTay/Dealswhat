@@ -1,16 +1,15 @@
-﻿using DealsWhat.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using DealsWhat.Controllers;
+using DealsWhat.Models;
 using log4net;
+using log4net.Config;
 using WebMatrix.WebData;
 
 namespace DealsWhat
@@ -18,12 +17,12 @@ namespace DealsWhat
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
 
         public MvcApplication()
         {
-            log4net.Config.XmlConfigurator.Configure();
+            XmlConfigurator.Configure();
         }
 
         protected void Application_Error(object sender, EventArgs e)

@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
 namespace DealsWhat_Admin.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Merchant
     {
         public Merchant()
@@ -19,7 +19,7 @@ namespace DealsWhat_Admin.Models
             this.Deals = new HashSet<Deal>();
         }
     
-        public System.Guid Id { get; set; }
+        public Guid Id { get; set; }
         public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }
         public string Website { get; set; }

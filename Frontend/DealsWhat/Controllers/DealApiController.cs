@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Security.Policy;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.Routing;
 using AttributeRouting.Web.Http;
-using DealsWhat.Attributes;
 using DealsWhat.Helpers;
 using DealsWhat.Models;
 using DealsWhat.ViewModels;
-using log4net.Appender;
 using Newtonsoft.Json;
 
 namespace DealsWhat.Controllers

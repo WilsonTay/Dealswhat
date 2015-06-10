@@ -7,18 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+
 namespace DealsWhat_Admin.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class DealComment
     {
-        public System.Guid Id { get; set; }
-        public System.DateTime DatePosted { get; set; }
+        public Guid Id { get; set; }
+        public DateTime DatePosted { get; set; }
         public string Message { get; set; }
         public Nullable<int> Poster_UserId { get; set; }
-        public Nullable<System.Guid> Deal_Id { get; set; }
+        public Nullable<Guid> Deal_Id { get; set; }
     
         public virtual Deal Deal { get; set; }
         public virtual User User { get; set; }

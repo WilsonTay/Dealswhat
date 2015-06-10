@@ -1,12 +1,8 @@
-﻿using System.Web.Http;
-using DealsWhat.Models;
-using DealsWhat.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using DealsWhat.Controllers.Aggregator;
+using DealsWhat.Models;
+using DealsWhat.ViewModels;
 
 namespace DealsWhat.Controllers
 {

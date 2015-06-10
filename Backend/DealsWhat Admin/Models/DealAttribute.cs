@@ -7,17 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+
 namespace DealsWhat_Admin.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class DealAttribute
     {
-        public System.Guid Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Value { get; set; }
-        public Nullable<System.Guid> DealOption_Id { get; set; }
+        public Nullable<Guid> DealOption_Id { get; set; }
     
         public virtual DealOption DealOption { get; set; }
     }

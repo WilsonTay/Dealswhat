@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
 namespace DealsWhat_Admin.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class DealOption
     {
         public DealOption()
@@ -19,11 +19,11 @@ namespace DealsWhat_Admin.Models
             this.DealAttributes = new HashSet<DealAttribute>();
         }
     
-        public System.Guid Id { get; set; }
+        public Guid Id { get; set; }
         public string ShortTitle { get; set; }
         public double RegularPrice { get; set; }
         public double SpecialPrice { get; set; }
-        public Nullable<System.Guid> Deal_Id { get; set; }
+        public Nullable<Guid> Deal_Id { get; set; }
     
         public virtual ICollection<DealAttribute> DealAttributes { get; set; }
         public virtual Deal Deal { get; set; }

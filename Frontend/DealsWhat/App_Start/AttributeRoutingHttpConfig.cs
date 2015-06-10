@@ -1,7 +1,9 @@
 using System.Web.Http;
 using AttributeRouting.Web.Http.WebHost;
+using DealsWhat;
+using WebActivator;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof(DealsWhat.AttributeRoutingHttpConfig), "Start")]
+[assembly: PreApplicationStartMethod(typeof(AttributeRoutingHttpConfig), "Start")]
 
 namespace DealsWhat 
 {

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Web;
 
 namespace DealsWhat_Admin.Helpers
@@ -19,7 +16,7 @@ namespace DealsWhat_Admin.Helpers
 
         public static string GetUploadedImagePath(string fileName)
         {
-            string pathString = PathHelper.GetDefaultDealImagePath();
+            string pathString = GetDefaultDealImagePath();
             var path = string.Format("{0}\\{1}", pathString, fileName);
 
             return path;

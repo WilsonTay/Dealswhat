@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+using System.Web;
 using System.Web.Mvc;
-using Newtonsoft.Json.Linq;
 using DealsWhat_Admin.Helpers;
 using DealsWhat_Admin.Models;
 using ImageResizer;
+using Newtonsoft.Json.Linq;
 
 namespace DealsWhat_Admin.Controllers
 {
@@ -27,7 +24,7 @@ namespace DealsWhat_Admin.Controllers
                     {
                         uuid = image.Id,
                         name = image.RelativeUrl,
-                        thumbnailUrl = System.Web.VirtualPathUtility.ToAbsolute(PathHelper.ConvertRelativeToAbsoluteDealImagePath(image.RelativeUrl))
+                        thumbnailUrl = VirtualPathUtility.ToAbsolute(PathHelper.ConvertRelativeToAbsoluteDealImagePath(image.RelativeUrl))
                     });
 
                 var result = new JsonResult();

@@ -1,4 +1,4 @@
-﻿@using System.Drawing
+﻿@using DealsWhat_Admin.Helpers
 @using DealsWhat_Admin.Models
 @model IEnumerable<DealsWhat_Admin.Models.Deal>
 
@@ -49,7 +49,7 @@
                 <td>
                     @if (item.DealImages.Any())
                     {
-                        <img width="50px" height="50px" src="@Url.Content(DealsWhat_Admin.Helpers.PathHelper.ConvertRelativeToAbsoluteDealImagePath(item.DealImages.First().RelativeUrl))"/>
+                        <img width="50px" height="50px" src="@Url.Content(PathHelper.ConvertRelativeToAbsoluteDealImagePath(item.DealImages.First().RelativeUrl))"/>
                     }
                 </td>
                 <td>

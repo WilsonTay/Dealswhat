@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
 namespace DealsWhat_Admin.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Deal
     {
         public Deal()
@@ -22,7 +22,7 @@ namespace DealsWhat_Admin.Models
             this.DealOptions = new HashSet<DealOption>();
         }
     
-        public System.Guid Id { get; set; }
+        public Guid Id { get; set; }
         public string ShortTitle { get; set; }
         public string LongTitle { get; set; }
         public string ShortDescription { get; set; }
@@ -30,16 +30,16 @@ namespace DealsWhat_Admin.Models
         public double RegularPrice { get; set; }
         public double SpecialPrice { get; set; }
         public string SKU { get; set; }
-        public System.DateTime DateAdded { get; set; }
-        public System.DateTime StartTime { get; set; }
-        public System.DateTime EndTime { get; set; }
+        public DateTime DateAdded { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
         public string FinePrint { get; set; }
         public string Highlight { get; set; }
         public bool IsFeatured { get; set; }
         public string CanonicalUrl { get; set; }
         public int Status { get; set; }
-        public Nullable<System.Guid> Category_Id { get; set; }
-        public Nullable<System.Guid> Merchant_Id { get; set; }
+        public Nullable<Guid> Category_Id { get; set; }
+        public Nullable<Guid> Merchant_Id { get; set; }
     
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual DealCategory DealCategory { get; set; }

@@ -9,9 +9,6 @@
 
 namespace DealsWhat_Admin.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class webpages_OAuthMembership
     {
         public string Provider { get; set; }

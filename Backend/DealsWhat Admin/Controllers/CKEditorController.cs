@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 using DealsWhat_Admin.Helpers;
-using Newtonsoft.Json;
 
 namespace DealsWhat_Admin.Controllers
 {
@@ -29,7 +22,7 @@ namespace DealsWhat_Admin.Controllers
 
                     file.SaveAs(pathString);
 
-                    string absolutePath = System.Web.VirtualPathUtility.ToAbsolute(PathHelper.ConvertRelativeToAbsoluteDealImagePath(localFileName));
+                    string absolutePath = VirtualPathUtility.ToAbsolute(PathHelper.ConvertRelativeToAbsoluteDealImagePath(localFileName));
 
                     return Content("<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction(" + funcNum + ", '" + absolutePath + "', '');</script>");
                 }

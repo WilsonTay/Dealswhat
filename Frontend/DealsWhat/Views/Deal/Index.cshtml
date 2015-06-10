@@ -1,4 +1,4 @@
-﻿@using System.Web.UI.WebControls
+﻿@using DealsWhat.Helpers
 @model DealsWhat.ViewModels.DealSpecificProductViewModel
 
 <div class="gap-medium"></div>
@@ -67,7 +67,7 @@
         <div class="fotorama" data-nav="thumbs" data-allowfullscreen="1" data-width="100%" data-thumbheight="100" data-thumbwidth="100">
             @foreach (var url in Model.ImageUrls)
             {
-                <img src="@Url.Content(DealsWhat.Helpers.PathHelper.ConvertRelativeToAbsoluteDealImagePath(url))" />
+                <img src="@Url.Content(PathHelper.ConvertRelativeToAbsoluteDealImagePath(url))" />
             }
         </div>
         <div class="gap gap-small"></div>
