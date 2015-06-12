@@ -4,6 +4,11 @@ var TWITTER_USERNAME = 'envato',
     GOOGLE_MAP_LAT = 40.7564971,
     GOOGLE_MAP_LNG = -73.9743277;
 
+function setMenuActive(id) {
+    $('#navigations li').removeClass('active');
+    $(id).addClass('active');
+}
+
 
 // Countdown
 $(function() {
@@ -85,7 +90,7 @@ $("#price-slider").ionRangeSlider({
 });
 
 // Responsive navigation
-$('#flexnav').flexNav();
+$('#navigations').flexNav();
 
 
 
