@@ -79,14 +79,14 @@
                         <!-- MAIN NAVIGATION -->
                         <div class="flexnav-menu-button" id="flexnav-menu-button">Menu</div>
                         <nav>
-                            <ul class="nav nav-pills flexnav" id="flexnav" data-breakpoint="800">
+                            <ul class="nav nav-pills flexnav" id="navigations" data-breakpoint="800">
                                 <li><a href="@Url.Action("Index", "Home")">
                                     <img style="width: 110px" src="~/content/img/dw-logo.png" width="90"></a>
-                                <li class="active"><a href="@Url.Action("Index", "Home")">Home</a>
+                                <li id="nav-home"><a href="@Url.Action("Index", "Home")">Home</a>
                                 </li>
-                                <li><a href="@Url.Action("Index", "AboutUs")">About Us</a>
+                                <li id="nav-aboutus"><a href="@Url.Action("Index", "AboutUs")">About Us</a>
                                 </li>
-                                <li><a href="@Url.Action("Index", "Faq")">FAQ</a>
+                                <li id="nav-faq"><a href="@Url.Action("Index", "Faq")">FAQ</a>
                                 </li>
                             </ul>
                         </nav>
