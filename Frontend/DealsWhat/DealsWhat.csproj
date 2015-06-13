@@ -250,6 +250,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\OrdersApiController.cs" />
+    <Compile Include="Controllers\PrivacyPolicyController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -663,6 +664,7 @@
     <Content Include="Views\AboutUs\Index.cshtml" />
     <Content Include="Views\Faq\Index.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Views\PrivacyPolicy\Index.cshtml" />
     <None Include="Web.Production.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

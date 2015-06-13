@@ -134,10 +134,11 @@
                 <div class="container">
                     <div class="row row-wrap">
                         <div class="col-md-3">
-                            <a href="index.html">
+                            <a href="@Url.Action("Index", "Home")">
                                 <img src="~/content/img/dw-logo.png" alt="logo" title="logo" class="" width="90px">
                             </a>
-                            <ul class="list list-social">
+                            <p>&nbsp;</p>
+                            @*                            <ul class="list list-social">
                                 <li>
                                     <a class="fa fa-facebook box-icon" href="#" data-toggle="tooltip" title="Facebook"></a>
                                 </li>
@@ -153,8 +154,8 @@
                                 <li>
                                     <a class="fa fa-tumblr box-icon" href="#" data-toggle="tooltip" title="Tumblr"></a>
                                 </li>
-                            </ul>
-                            <p>Posuere neque vivamus vestibulum neque commodo conubia phasellus sociosqu conubia eros feugiat at imperdiet proin id hac commodo id sed</p>
+                            </ul>*@
+                            <p>Discover easy and pleasing shopping experience with DealsWhat. With our great mix of big name stores and offerings, you'll be spoilt for choice.</p>
                         </div>
                         <div class="col-md-3">
                             <h4>Sign Up To Our Newsletters</h4>
@@ -164,7 +165,7 @@
                                         <label>E-mail</label>
                                         <input type="text" class="form-control" />
                                     </div>
-                                    <p class="mb10">Aenean tempor dolor tempor neque at sem</p>
+                                    <p class="mb10">We promise to keep your email address secure and private and will not use it for other purposes. Please review our <a href="@Url.Action("Index", "PrivacyPolicy")">Privacy Policy</a> for more details.</p>
                                     <input type="submit" class="btn btn-primary" value="Sign Up" />
                                 </form>
                             </div>
@@ -182,7 +183,7 @@
                             <a class="footer-links" href="@Url.Action("Index", "Home")">Home</a><br />
                             <a class="footer-links" href="@Url.Action("Index", "AboutUs")">About Us</a><br />
                             <a class="footer-links" href="@Url.Action("Index", "Faq")">FAQ</a><br />
-
+                            <a class="footer-links" href="@Url.Action("Index", "PrivacyPolicy")">Privacy Policy</a><br />
                         </div>
                     </div>
                 </div>
