@@ -2,6 +2,10 @@
   cursor:default;
 }
 
+.footer-links {
+    color: #999 !important;
+}
+
 .loader {
   font-size: 90px;
   text-indent: -9999em;

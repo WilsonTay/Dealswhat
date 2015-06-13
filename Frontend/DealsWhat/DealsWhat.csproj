@@ -518,6 +518,7 @@
     <Content Include="Content\js\countdown.js" />
     <Content Include="Content\js\countdown.min.js" />
     <Content Include="Content\js\custom.js" />
+    <Content Include="Content\js\facebook.js" />
     <Content Include="Content\js\fitvids.js" />
     <Content Include="Content\js\fitvids.min.js" />
     <Content Include="Content\js\flexnav.js" />
