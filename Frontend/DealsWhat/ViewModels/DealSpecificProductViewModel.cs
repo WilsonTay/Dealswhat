@@ -49,7 +49,7 @@ namespace DealsWhat.ViewModels
             DealOptions = model.DealOptions.Select(d => new DealOptionViewModel(d)).ToList();
             Comments = model.Comments.Select(c => new DealSpecificProductCommentViewModel(c)).ToList();
             Merchant = new DealSpecificProductMerchantViewModel(model.Merchant);
-            //PopularDeals = new PopularDealsViewModel(popularDeals);
+            PopularDeals = new PopularDealsViewModel(popularDeals);
 
 
             Id = model.Id.ToString();

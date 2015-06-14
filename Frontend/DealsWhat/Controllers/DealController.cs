@@ -15,7 +15,7 @@ namespace DealsWhat.Controllers
             using (var context = new DealsContext())
             {
                 var deal = context.Deals.First(d => d.CanonicalUrl == id);
-                var popularDeals = DealsAggregator.SuggestPopularDeals(Request.RequestContext.HttpContext, context, 10);
+                var popularDeals = DealsAggregator.SuggestPopularDeals(Request.RequestContext.HttpContext, context, 10).ToList();
                 var viewModel = new DealSpecificProductViewModel(deal, popularDeals);
 
                 return View(viewModel);
