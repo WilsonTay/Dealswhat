@@ -25,7 +25,7 @@
         <div class="owl-carousel owl-slider" id="owl-carousel-slider" data-inner-pagination="true" data-white-pagination="true" data-nav="false">
             <div>
                 <div class="bg-holder">
-                    <img src="~/Content/img/banner1.png" alt="Image Alternative text" title="Bridge" />
+                    <img src="~/Content/img/banner1.jpg" alt="Image Alternative text" title="Bridge" />
                 </div>
             </div>
         </div>
@@ -54,43 +54,6 @@
 }
 <div class="gap"></div>
 
-<div id="product-quick-view-dialog" class="mfp-with-anim mfp-hide mfp-dialog mfp-dialog-big clearfix">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="fotorama" id="product-quick-view-image-list" data-nav="thumbs" data-allowfullscreen="1" data-thumbheight="100" data-thumbwidth="100">
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="product-page-meta">
-                <h4 id="product-quick-view-title">Awesome Vacation Pack</h4>
-                <span id="product-quick-view-short-description">
-                    <p>Primis metus ut imperdiet adipiscing sit phasellus ante fringilla nostra suspendisse dictumst iaculis elit vehicula tincidunt hendrerit morbi tristique quam</p>
-                </span>
-                <a class="btn btn-primary btn-lg btn-block" href="#"><span id="product-quick-view-discounted-price">$225</span> Buy Now</a>
-                <ul class="list product-page-meta-info">
-                    <li>
-                        <ul class="list product-page-meta-price-list">
-                            <li><span class="product-page-meta-title">List Price</span><span class="product-page-meta-price" id="product-quick-view-original-price">$1000</span>
-                            </li>
-                            <li><span class="product-page-meta-title">Discount</span><span class="product-page-meta-price" id="product-quick-view-discount-percentage">77.5%</span>
-                            </li>
-                            <li><span class="product-page-meta-title">Savings</span><span class="product-page-meta-price" id="product-quick-view-total-savings">$775</span>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><span class="product-page-meta-title">Time Left to Buy</span>
-                        <!-- COUNTDOWN -->
-                        <div data-countdown="Aug 25, 2013 10:45:00" class="countdown countdown-inline"></div>
-                    </li>
-                    <li><span class="product-page-meta-title">0 bought</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <hr />
-    <a class="btn btn-primary" id="product-quick-view-more-details" href="#">More Details</a>
-</div>
 <div class="row">
     <div class="col-md-3">
         <aside class="sidebar-left">
@@ -230,7 +193,7 @@
             if (sortedImages[0] != null) {
                 coverPageUrl = sortedImages[0].RelativeUrl;
             }
-  
+
             var dom = '<a class="col-md-4 col-masonry popup-text view-deal-link" href="' + baseUrl + 'deal/index/' + deal.CanonicalUrl + '" data-deal-id="' + deal.Id + '" data-effect="mfp-move-from-top">' +
                 '<div class="product-thumb"><header class="product-header"><img height="197" src="' + coverPageUrl + '?width=190&height=126" />' +
                 '<div class="product-quick-view"><span class="fa fa-eye"></span></div></header>' +

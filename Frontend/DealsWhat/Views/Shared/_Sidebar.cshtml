@@ -43,7 +43,7 @@
                 <div class="row product-thumb">
                     <div class="col-md-4">
                         <a href="@deal.CanonicalUrl">
-                            <img src="@deal.Thumbnails.First()" alt="Image Alternative text"/>
+                            <img width="100%" src="@deal.Thumbnails.FirstOrDefault().RelativeUrl" alt="Image Alternative text"/>
                         </a>
                     </div>
                     <div class="col-md-8">
