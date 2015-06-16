@@ -1645,7 +1645,7 @@ label {
   display: block;
 }
 .post .post-inner {
-  border-top: 2px solid #2a8fbd;
+  /*border-top: 2px solid #2a8fbd;*/
   padding: 15px 20px;
 }
 .post .post-title {

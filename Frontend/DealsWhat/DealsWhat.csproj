@@ -244,6 +244,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Aggregator\DealsAggregator.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ContactUsController.cs" />
     <Compile Include="Controllers\DealApiController.cs" />
     <Compile Include="Controllers\DealController.cs" />
     <Compile Include="Controllers\FaqController.cs" />
@@ -667,6 +668,7 @@
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\PrivacyPolicy\Index.cshtml" />
     <Content Include="Views\ReturnPolicy\Index.cshtml" />
+    <Content Include="Views\ContactUs\Index.cshtml" />
     <None Include="Web.Production.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
