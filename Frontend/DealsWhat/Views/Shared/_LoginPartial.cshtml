@@ -64,6 +64,16 @@ else
         </li>
         <li><a class="popup-text" href="#register-dialog" data-effect="mfp-move-from-top"><i class="fa fa-edit"></i>Sign up</a>
         </li>
+        <li>
+            @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+            {
+                @Html.AntiForgeryToken()
+                <button name="provider" type="submit" value="facebook" class="btn-bootstrap btn-block btn-social btn-facebook" style="width: 200px">
+                    <i class="fa fa-facebook"></i>
+                    <div align="right">Sign in with Facebook</div>
+                </button>
+            }
+        </li>
     </ul>
 }
 
@@ -103,12 +113,12 @@ else
     <p>
         &nbsp;
     </p>
-    <section class="social" id="socialLoginForm">
+    @*    <section class="social" id="socialLoginForm">
 
         @Html.Action("ExternalLoginsList", "Account", new { ReturnUrl = ViewBag.ReturnUrl })
-    </section>
+    </section>*@
 
-   <p>
+    <p>
         &nbsp;
     </p>
 </div>
