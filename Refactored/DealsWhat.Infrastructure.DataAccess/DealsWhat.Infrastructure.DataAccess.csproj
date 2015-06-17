@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{580B0DB6-0DAF-45CA-8955-C0E0F55EC7C2}</ProjectGuid>
+    <ProjectGuid>{264FBE55-E089-4874-818A-A00852FDE553}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DealsWhat.Domain.Interfaces</RootNamespace>
-    <AssemblyName>DealsWhat.Domain.Interfaces</AssemblyName>
+    <RootNamespace>DealsWhat.Infrastructure.DataAccess</RootNamespace>
+    <AssemblyName>DealsWhat.Infrastructure.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,16 +51,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="IRepositoryFactory.cs" />
+    <Compile Include="EFDealRepository.cs" />
+    <Compile Include="EFRepositoryFactory.cs" />
+    <Compile Include="Model1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DealsWhat.Domain.Interfaces\DealsWhat.Domain.Interfaces.csproj">
+      <Project>{580b0db6-0daf-45ca-8955-c0e0f55ec7c2}</Project>
+      <Name>DealsWhat.Domain.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DealsWhat.Domain.Model\DealsWhat.Domain.Models.csproj">
       <Project>{29e2570c-a982-496f-b4b1-097751465ed1}</Project>
       <Name>DealsWhat.Domain.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
