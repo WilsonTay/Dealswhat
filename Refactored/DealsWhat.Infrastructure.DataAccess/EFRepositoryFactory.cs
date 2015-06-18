@@ -15,6 +15,22 @@ namespace DealsWhat.Infrastructure.DataAccess
         public EFRepositoryFactory(Model1 dbContext)
         {
             this.dbContext = dbContext;
+
+            AutoMapper.Mapper.CreateMap<Models.Deal, DealsWhat.Domain.Model.Deal>()
+                .ForMember(dest => dest.ShortTitle, opt => opt.MapFrom(src => src.ShortTitle))
+                .ForMember(dest => dest.ShortDescription, opt => opt.MapFrom(src => src.ShortDescription))
+                .ForMember(dest => dest.LongTitle, opt => opt.MapFrom(src => src.LongTitle))
+                .ForMember(dest => dest.LongDescription, opt => opt.MapFrom(src => src.LongDescription))
+                .ForMember(dest => dest.Highlight, opt => opt.MapFrom(src => src.Highlight))
+                .ForMember(dest => dest.FinePrint, opt => opt.MapFrom(src => src.FinePrint))
+                .ForMember(dest => dest.IsFeatured, opt => opt.MapFrom(src => src.IsFeatured))
+                .ForMember(dest => dest.RegularPrice, opt => opt.MapFrom(src => src.RegularPrice))
+                .ForMember(dest => dest.SpecialPrice, opt => opt.MapFrom(src => src.SpecialPrice))
+                .ForMember(dest => dest.SKU, opt => opt.MapFrom(src => src.SKU))
+                .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => src.StartTime))
+                .ForMember(dest => dest.EndTime, opt => opt.MapFrom(src => src.EndTime))
+                .ForMember(dest => dest.DateAdded, opt => opt.MapFrom(src => src.DateAdded))
+                .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()));
         }
 
         public IRepository<Deal> CreateDealRepository()

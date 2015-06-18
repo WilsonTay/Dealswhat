@@ -10,8 +10,6 @@ namespace DealsWhat.Domain.Interfaces
     public interface IRepository<T>
         where T : class
     {
-        IEnumerable<T> Get(Expression<Func<T, bool>> query);
-
         IEnumerable<T> GetAll();
     }
 }

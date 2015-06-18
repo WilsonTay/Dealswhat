@@ -8,22 +8,46 @@ namespace DealsWhat.Domain.Model
 {
     public class Deal : IEntity
     {
-        public string ShortTitle { get; set; }
-        public string LongTitle { get; set; }
-        public string ShortDescription { get; set; }
-        public string LongDescription { get; set; }
-        public double RegularPrice { get; set; }
-        public double SpecialPrice { get; set; }
-        public string SKU { get; set; }
-        public DateTime DateAdded { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public string FinePrint { get; set; }
-        public string Highlight { get; set; }
-        public bool IsFeatured { get; set; }
-        public string CanonicalUrl { get; set; }
-        public DealStatus Status { get; set; }
+        public string ShortTitle { get; private set; }
+        public string LongTitle { get; private set; }
+        public string ShortDescription { get; private set; }
+        public string LongDescription { get; private set; }
+        public double RegularPrice { get; private set; }
+        public double SpecialPrice { get; private set; }
+        public string SKU { get; private set; }
+        public DateTime DateAdded { get; private set; }
+        public DateTime StartTime { get; private set; }
+        public DateTime EndTime { get; private set; }
+        public string FinePrint { get; private set; }
+        public string Highlight { get; private set; }
+        public bool IsFeatured { get; private set; }
+        public DealStatus Status { get; private set; }
 
-        public object Key { get; }
+        public object Key { get; private set; }
+
+        public static Deal Create(
+            string shortTitle,
+            string shortDescription,
+            string longTitle,
+            string longDescription,
+            string finePrint,
+            string highlight)
+        {
+            return new Deal
+            {
+                ShortTitle = shortTitle,
+                ShortDescription = shortDescription,
+                LongTitle = longTitle,
+                LongDescription = longDescription,
+                FinePrint = finePrint,
+                Highlight = highlight,
+                DateAdded = DateTime.Now,
+                StartTime = DateTime.Now,
+                EndTime = DateTime.Now.AddDays(7),
+                IsFeatured = false,
+                RegularPrice = 0,
+                SpecialPrice = 0
+            };
+        }
     }
 }

@@ -1,4 +1,4 @@
-using DealsWhat.Domain.Model;
+using DealsWhat.Models;
 
 namespace DealsWhat.Infrastructure.DataAccess
 {
@@ -22,7 +22,15 @@ namespace DealsWhat.Infrastructure.DataAccess
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
-         public virtual DbSet<Deal> Deals { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Deal> Deals { get; set; }
+        public DbSet<DealCategory> DealCategories { get; set; }
+        public DbSet<Merchant> Merchants { get; set; }
+        public DbSet<DealImages> DealImages { get; set; }
+        public DbSet<DealComment> DealComments { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<DealOption> DealOptions { get; set; }
+        public DbSet<DealAttribute> DealAttributes { get; set; }
     }
 
     //public class MyEntity
