@@ -37,8 +37,10 @@ namespace DealsWhat.Domain.Services.Tests
         [TestMethod]
         public void Query_BySearchTerm_ShouldFindShortTitle()
         {
-            var deals = fixture.CreateMany<Deal>(10).ToList();
-            deals[0].ShortTitle = "Alienware computer";
+            var deals = Enumerable.Range(0, 10).Select(a => CreateDeal()).ToList();
+            var validDeal = CreateDeal(shortTitle: "Alienware computer");
+
+            deals.Add(validDeal);
 
             var fakeRepository = new FakeDealRepository(deals);
             fixture.Register<IRepository<Deal>>(() => fakeRepository);
@@ -69,8 +71,10 @@ namespace DealsWhat.Domain.Services.Tests
         [TestMethod]
         public void Query_BySearchTerm_ShouldFindShortDescription()
         {
-            var deals = fixture.CreateMany<Deal>(10).ToList();
-            deals[0].ShortDescription = "This is Alienware computer description";
+            var deals = Enumerable.Range(0, 10).Select(a => CreateDeal()).ToList();
+            var validDeal = CreateDeal(shortDescription: "This is Alienware computer description");
+
+            deals.Add(validDeal);
 
             var fakeRepository = new FakeDealRepository(deals);
             fixture.Register<IRepository<Deal>>(() => fakeRepository);
@@ -96,8 +100,10 @@ namespace DealsWhat.Domain.Services.Tests
         [TestMethod]
         public void Query_BySearchTerm_ShouldFindLongTitle()
         {
-            var deals = fixture.CreateMany<Deal>(10).ToList();
-            deals[0].LongTitle = "Korean BBQ in Puchong";
+            var deals = Enumerable.Range(0, 10).Select(a => CreateDeal()).ToList();
+            var validDeal = CreateDeal(longTitle: "Korean BBQ in Puchong");
+
+            deals.Add(validDeal);
 
             var fakeRepository = new FakeDealRepository(deals);
             fixture.Register<IRepository<Deal>>(() => fakeRepository);
@@ -123,8 +129,10 @@ namespace DealsWhat.Domain.Services.Tests
         [TestMethod]
         public void Query_BySearchTerm_ShouldFindLongDescription()
         {
-            var deals = fixture.CreateMany<Deal>(10).ToList();
-            deals[0].LongDescription = "Description of Korean BBQ in Puchong";
+            var deals = Enumerable.Range(0, 10).Select(a => CreateDeal()).ToList();
+            var validDeal = CreateDeal(longDescription: "Description of Korean BBQ in Puchong");
+
+            deals.Add(validDeal);
 
             var fakeRepository = new FakeDealRepository(deals);
             fixture.Register<IRepository<Deal>>(() => fakeRepository);
@@ -147,16 +155,16 @@ namespace DealsWhat.Domain.Services.Tests
             }
         }
 
-        private IList<Deal> GetFakeDeals()
+
+        private static Deal CreateDeal(
+            string shortTitle = "short title",
+            string shortDescription = "short description",
+            string longTitle = "long title",
+            string longDescription = "long description",
+            string finePrint = "fineprint",
+            string highlight = "highlight")
         {
-            var deals = fixture.CreateMany<Deal>(10).ToList();
-
-            deals[0].ShortTitle = "Alienware computer";
-            deals[1].ShortDescription = "This is alienware computer";
-            deals[2].LongTitle = "Korean BBQ";
-            deals[3].LongDescription = "This is description for korean BBQ";
-
-            return deals;
+            return Deal.Create(shortTitle, shortDescription, longTitle, longDescription, finePrint, highlight);
         }
     }
 }

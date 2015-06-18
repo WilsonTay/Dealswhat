@@ -41,13 +41,20 @@ namespace DealsWhat.Domain.Model
                 LongDescription = longDescription,
                 FinePrint = finePrint,
                 Highlight = highlight,
-                DateAdded = DateTime.Now,
-                StartTime = DateTime.Now,
-                EndTime = DateTime.Now.AddDays(7),
+                DateAdded = DateTime.UtcNow,
+                StartTime = DateTime.UtcNow,
+                EndTime = DateTime.UtcNow.AddDays(7),
                 IsFeatured = false,
                 RegularPrice = 0,
-                SpecialPrice = 0
+                SpecialPrice = 0,
+                Status = DealStatus.Draft
             };
+        }
+
+        public void SetPrice(double regularPrice, double specialPrice)
+        {
+            RegularPrice = regularPrice;
+            SpecialPrice = specialPrice;
         }
     }
 }

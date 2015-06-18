@@ -3,12 +3,14 @@ using DealsWhat.Domain.Model;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
+using Ploeh.AutoFixture.AutoMoq;
 
 namespace DealsWhat.Domain.Models.Tests
 {
     [TestClass]
     public class DealTests
     {
+        private IFixture fixture;
         private string shortTitle = "short title";
         private string longTitle = "long title";
         private string shortDescription = "short description";
@@ -25,6 +27,8 @@ namespace DealsWhat.Domain.Models.Tests
         {
             startTime = DateTime.Now;
             endTime = DateTime.Now.AddDays(7);
+
+            fixture = new Fixture().Customize(new AutoMoqCustomization());
         }
 
         [TestMethod]
@@ -48,11 +52,23 @@ namespace DealsWhat.Domain.Models.Tests
             deal.RegularPrice.Should().Be(0.0);
             deal.SpecialPrice.Should().Be(0.0);
 
-            deal.DateAdded.Should().BeCloseTo(DateTime.Now, 20);
-            deal.StartTime.Should().BeCloseTo(DateTime.Now, 20);
-            deal.EndTime.Should().BeCloseTo(DateTime.Now.AddDays(7), 20);
+            deal.DateAdded.Should().BeCloseTo(DateTime.UtcNow, 20);
+            deal.StartTime.Should().BeCloseTo(DateTime.UtcNow, 20);
+            deal.EndTime.Should().BeCloseTo(DateTime.UtcNow.AddDays(7), 20);
 
             deal.IsFeatured.Should().BeFalse();
+            deal.Status.ShouldBeEquivalentTo(DealStatus.Draft);
+        }
+
+        [TestMethod]
+        public void SetPrice_PriceSetCorrectly()
+        {
+            var deal = fixture.Create<Deal>();
+
+            deal.SetPrice(20, 15);
+
+            deal.RegularPrice.ShouldBeEquivalentTo(20);
+            deal.SpecialPrice.ShouldBeEquivalentTo(15);
         }
     }
 }
