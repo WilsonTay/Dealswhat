@@ -66,7 +66,7 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void CreateDeal_SKU_ShouldNotContainSpecialCharacter()
         {
-            var deal = CreateDeal(shortTitle: "BBQ in Puchong & Sunway");
+            var deal = DealTestHelper.CreateDeal(shortTitle: "BBQ in Puchong & Sunway");
 
             deal.SKU.Should().NotContain("&");
         }
@@ -74,7 +74,7 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void CreateDeal_CanonicalUrl_ShouldNotContainSpecialCharacter2()
         {
-            var deal = CreateDeal(shortTitle: "BBQ in Puchong & Sunway !@#$%^&*()");
+            var deal = DealTestHelper.CreateDeal(shortTitle: "BBQ in Puchong & Sunway !@#$%^&*()");
 
             "!@#$%^&* ()".ToList().ForEach(a =>
             {
@@ -85,13 +85,18 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void CreateDeal_CanonicalUrl_SpaceShouldBeConvertedToDash()
         {
-            var deal = CreateDeal(shortTitle: "this is a deal");
+            var shorTitle = "this is a deal";
+            var shortTitleWithDash = shorTitle.Replace(" ", "-");
+
+            var deal = DealTestHelper.CreateDeal(shortTitle: shorTitle);
+
+            deal.CanonicalUrl.Should().Contain(shortTitleWithDash);
         }
 
         [TestMethod]
         public void CreateDeal_CanonicalUrl_ShouldNotContainSpecialCharacter()
         {
-            var deal = CreateDeal(shortTitle: "BBQ in Puchong & Sunway");
+            var deal = DealTestHelper.CreateDeal(shortTitle: "BBQ in Puchong & Sunway");
 
             deal.CanonicalUrl.Should().NotContain("&");
         }
@@ -99,7 +104,7 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void CreateDeal_SKU_ShouldNotContainSpecialCharacter2()
         {
-            var deal = CreateDeal(shortTitle: "BBQ in Puchong & Sunway !@#$%^&* ()");
+            var deal = DealTestHelper.CreateDeal(shortTitle: "BBQ in Puchong & Sunway !@#$%^&* ()");
 
             "!@#$%^&* ()".ToList().ForEach(a =>
             {
@@ -116,26 +121,6 @@ namespace DealsWhat.Domain.Models.Tests
 
             deal.RegularPrice.ShouldBeEquivalentTo(20);
             deal.SpecialPrice.ShouldBeEquivalentTo(15);
-        }
-
-        private static Deal CreateDeal(
-         string shortTitle = "short title",
-         string shortDescription = "short description",
-         string longTitle = "long title",
-         string longDescription = "long description",
-         string finePrint = "fineprint",
-         string highlight = "highlight",
-         string canonicalUrl = "url",
-         object id = null)
-        {
-            var deal = Deal.Create(shortTitle, shortDescription, longTitle, longDescription, finePrint, highlight);
-
-            if (id != null)
-            {
-                deal.Key = id;
-            }
-
-            return deal;
         }
     }
 }

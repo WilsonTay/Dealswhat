@@ -72,6 +72,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DealCategoryTests.cs" />
+    <Compile Include="DealTestHelper.cs" />
     <Compile Include="DealTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

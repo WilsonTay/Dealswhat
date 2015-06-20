@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DealsWhat.Domain.Services
 {
+    /// <summary>
+    /// All queries are exact match.
+    /// </summary>
     public sealed class SingleDealSearchQuery
     {
         public string Id { get; set; }

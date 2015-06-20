@@ -28,7 +28,6 @@ namespace DealsWhat.Infrastructure.DataAccess
             }
         }
 
-
         private DealsWhat.Domain.Model.Deal Convert(Models.Deal source)
         {
             var mappedDeal = Mapper.Map<Models.Deal, DealsWhat.Domain.Model.Deal>(source);

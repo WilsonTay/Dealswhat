@@ -53,6 +53,11 @@ namespace DealsWhat.Domain.Services
                 return this.dealRepository.GetAll().FirstOrDefault(d => d.Key.ToString().Equals(query.Id));
             }
 
+            if (!string.IsNullOrEmpty(query.CanonicalUrl))
+            {
+                return this.dealRepository.GetAll().FirstOrDefault(d => d.CanonicalUrl.Equals(query.CanonicalUrl));
+            }
+
             return null;
         }
     }

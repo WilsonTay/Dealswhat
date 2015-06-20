@@ -23,7 +23,7 @@ namespace DealsWhat.Domain.Model
         public bool IsFeatured { get; private set; }
         public DealStatus Status { get; private set; }
 
-        public string CanonicalUrl { get; private set; }
+        public string CanonicalUrl { get; internal set; }
 
         public object Key { get; internal set; }
 
@@ -90,6 +90,42 @@ namespace DealsWhat.Domain.Model
                 }
             }
             return sb.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Deal) obj);
+        }
+
+        private bool Equals(Deal other)
+        {
+            return string.Equals(ShortTitle, other.ShortTitle) && string.Equals(LongTitle, other.LongTitle) && string.Equals(ShortDescription, other.ShortDescription) && string.Equals(LongDescription, other.LongDescription) && RegularPrice.Equals(other.RegularPrice) && SpecialPrice.Equals(other.SpecialPrice) && string.Equals(SKU, other.SKU) && DateAdded.Equals(other.DateAdded) && StartTime.Equals(other.StartTime) && EndTime.Equals(other.EndTime) && string.Equals(FinePrint, other.FinePrint) && string.Equals(Highlight, other.Highlight) && IsFeatured.Equals(other.IsFeatured) && Status == other.Status && string.Equals(CanonicalUrl, other.CanonicalUrl) && Equals(Key, other.Key);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (ShortTitle != null ? ShortTitle.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (LongTitle != null ? LongTitle.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ShortDescription != null ? ShortDescription.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (LongDescription != null ? LongDescription.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ RegularPrice.GetHashCode();
+                hashCode = (hashCode * 397) ^ SpecialPrice.GetHashCode();
+                hashCode = (hashCode * 397) ^ (SKU != null ? SKU.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ DateAdded.GetHashCode();
+                hashCode = (hashCode * 397) ^ StartTime.GetHashCode();
+                hashCode = (hashCode * 397) ^ EndTime.GetHashCode();
+                hashCode = (hashCode * 397) ^ (FinePrint != null ? FinePrint.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Highlight != null ? Highlight.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ IsFeatured.GetHashCode();
+                hashCode = (hashCode * 397) ^ (int)Status;
+                hashCode = (hashCode * 397) ^ (CanonicalUrl != null ? CanonicalUrl.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Key != null ? Key.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 }

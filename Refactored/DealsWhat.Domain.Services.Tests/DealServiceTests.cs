@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security;
 using DealsWhat.Domain.Interfaces;
 using DealsWhat.Domain.Model;
 using FluentAssertions;
@@ -156,6 +157,11 @@ namespace DealsWhat.Domain.Services.Tests
         }
 
         [TestMethod]
+        public void Query_ByCategoryId_ShouldReturnProperDeals()
+        {      
+        }
+
+        [TestMethod]
         public void Query_ByDealId_ShouldReturnProperDeal()
         {
             var guid = Guid.NewGuid();
@@ -205,6 +211,24 @@ namespace DealsWhat.Domain.Services.Tests
             var result = dealService.SearchSingleDeal(query);
 
             result.Should().NotBe(null);
+            result.Should().Be(validDeal);
+        }
+
+        [TestMethod]
+        public void Query_ByCanonicalUrl_ShouldOnlyReturnExactMatch()
+        {
+            var url = "puchong-bbq";
+            var query = new SingleDealSearchQuery
+            {
+                CanonicalUrl = url
+            };
+
+            var validDeal = CreateDeal(canonicalUrl: url + "-more-url-here");
+
+            var dealService = GenerateDealsAndCreateDealService(validDeal);
+            var result = dealService.SearchSingleDeal(query);
+
+            result.Should().Be(null);
         }
 
 
@@ -236,6 +260,11 @@ namespace DealsWhat.Domain.Services.Tests
             if (id != null)
             {
                 deal.Key = id;
+            }
+
+            if (!string.IsNullOrEmpty(canonicalUrl))
+            {
+                deal.CanonicalUrl = canonicalUrl;
             }
 
             return deal;

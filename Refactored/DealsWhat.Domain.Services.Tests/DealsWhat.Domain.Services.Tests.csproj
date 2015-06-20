@@ -47,32 +47,12 @@
       <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.core.interfaces, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoFixture.NUnit2.3.19.2\lib\net40\nunit.core.interfaces.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Ploeh.AutoFixture, Version=3.19.2.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoFixture.3.19.2\lib\net40\Ploeh.AutoFixture.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ploeh.AutoFixture.AutoMoq, Version=3.19.2.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoFixture.AutoMoq.3.19.2\lib\net40\Ploeh.AutoFixture.AutoMoq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Ploeh.AutoFixture.NUnit2, Version=3.19.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoFixture.NUnit2.3.19.2\lib\net40\Ploeh.AutoFixture.NUnit2.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Ploeh.AutoFixture.NUnit2.Addins, Version=3.19.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoFixture.NUnit2.3.19.2\lib\net40\Ploeh.AutoFixture.NUnit2.Addins.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Struik.AutoFixture.AutoMoq.AutoSetup, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoFixture.AutoMoq.AutoSetup.1.3.0.0\Lib\net40\Struik.AutoFixture.AutoMoq.AutoSetup.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -94,7 +74,6 @@
   <ItemGroup>
     <Compile Include="DealServiceTests.cs" />
     <Compile Include="FakeDealRepository.cs" />
-    <Compile Include="LocalAddin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
