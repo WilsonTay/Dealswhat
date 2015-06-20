@@ -155,6 +155,71 @@ namespace DealsWhat.Domain.Services.Tests
             }
         }
 
+        [TestMethod]
+        public void Query_ByDealId_ShouldReturnProperDeal()
+        {
+            var guid = Guid.NewGuid();
+            var query = new SingleDealSearchQuery
+            {
+                Id = guid.ToString()
+            };
+
+            var validDeal = CreateDeal(id: guid);
+
+            var dealService = GenerateDealsAndCreateDealService(validDeal);
+            var result = dealService.SearchSingleDeal(query);
+
+            result.Should().NotBe(null);
+            result.Should().Be(validDeal);
+        }
+
+        [TestMethod]
+        public void Query_ByDealId_InvalidIdShouldReturnNoDeal()
+        {
+            var guid = Guid.NewGuid();
+            var query = new SingleDealSearchQuery
+            {
+                Id = Guid.NewGuid().ToString()
+            };
+
+            var validDeal = CreateDeal(id: guid);
+
+            var dealService = GenerateDealsAndCreateDealService(validDeal);
+            var result = dealService.SearchSingleDeal(query);
+
+            result.Should().Be(null);
+        }
+
+        [TestMethod]
+        public void Query_ByCanonicalUrl_ShouldReturnProperDeal()
+        {
+            var url = "puchong-bbq";
+            var query = new SingleDealSearchQuery
+            {
+                CanonicalUrl = url
+            };
+
+            var validDeal = CreateDeal(canonicalUrl: url);
+
+            var dealService = GenerateDealsAndCreateDealService(validDeal);
+            var result = dealService.SearchSingleDeal(query);
+
+            result.Should().NotBe(null);
+        }
+
+
+        private DealService GenerateDealsAndCreateDealService(Deal validDeal)
+        {
+            var deals = Enumerable.Range(0, 10).Select(a => CreateDeal()).ToList();
+            deals.Add(validDeal);
+
+            var fakeRepository = new FakeDealRepository(deals);
+            fixture.Register<IRepository<Deal>>(() => fakeRepository);
+
+            var dealService = fixture.Create<DealService>();
+            return dealService;
+        }
+
 
         private static Deal CreateDeal(
             string shortTitle = "short title",
@@ -162,9 +227,18 @@ namespace DealsWhat.Domain.Services.Tests
             string longTitle = "long title",
             string longDescription = "long description",
             string finePrint = "fineprint",
-            string highlight = "highlight")
+            string highlight = "highlight",
+            string canonicalUrl = "url",
+            object id = null)
         {
-            return Deal.Create(shortTitle, shortDescription, longTitle, longDescription, finePrint, highlight);
+            var deal = Deal.Create(shortTitle, shortDescription, longTitle, longDescription, finePrint, highlight);
+
+            if (id != null)
+            {
+                deal.Key = id;
+            }
+
+            return deal;
         }
     }
 }

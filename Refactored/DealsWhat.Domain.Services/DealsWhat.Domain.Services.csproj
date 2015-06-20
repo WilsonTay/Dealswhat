@@ -44,6 +44,7 @@
     <Compile Include="DealService.cs" />
     <Compile Include="IDealService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SingleDealSearchQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DealsWhat.Domain.Interfaces\DealsWhat.Domain.Interfaces.csproj">

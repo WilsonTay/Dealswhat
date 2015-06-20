@@ -39,5 +39,21 @@ namespace DealsWhat.Domain.Services
         {
             return compared.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) > -1;
         }
+
+        /// <summary>
+        /// We could actually make single and multiple deals grouped under the same method but
+        /// due to performance considerations it's wiser to split them into two.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public Deal SearchSingleDeal(SingleDealSearchQuery query)
+        {
+            if (!string.IsNullOrEmpty(query.Id))
+            {
+                return this.dealRepository.GetAll().FirstOrDefault(d => d.Key.ToString().Equals(query.Id));
+            }
+
+            return null;
+        }
     }
 }

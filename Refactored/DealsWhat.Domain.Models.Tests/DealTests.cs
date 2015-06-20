@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DealsWhat.Domain.Model;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -58,6 +59,52 @@ namespace DealsWhat.Domain.Models.Tests
 
             deal.IsFeatured.Should().BeFalse();
             deal.Status.ShouldBeEquivalentTo(DealStatus.Draft);
+            deal.Key.Should().BeOfType<Guid>();
+            deal.SKU.Should().NotBeEmpty();
+        }
+
+        [TestMethod]
+        public void CreateDeal_SKU_ShouldNotContainSpecialCharacter()
+        {
+            var deal = CreateDeal(shortTitle: "BBQ in Puchong & Sunway");
+
+            deal.SKU.Should().NotContain("&");
+        }
+
+        [TestMethod]
+        public void CreateDeal_CanonicalUrl_ShouldNotContainSpecialCharacter2()
+        {
+            var deal = CreateDeal(shortTitle: "BBQ in Puchong & Sunway !@#$%^&*()");
+
+            "!@#$%^&* ()".ToList().ForEach(a =>
+            {
+                deal.CanonicalUrl.Should().NotContain(a.ToString());
+            });
+        }
+
+        [TestMethod]
+        public void CreateDeal_CanonicalUrl_SpaceShouldBeConvertedToDash()
+        {
+            var deal = CreateDeal(shortTitle: "this is a deal");
+        }
+
+        [TestMethod]
+        public void CreateDeal_CanonicalUrl_ShouldNotContainSpecialCharacter()
+        {
+            var deal = CreateDeal(shortTitle: "BBQ in Puchong & Sunway");
+
+            deal.CanonicalUrl.Should().NotContain("&");
+        }
+
+        [TestMethod]
+        public void CreateDeal_SKU_ShouldNotContainSpecialCharacter2()
+        {
+            var deal = CreateDeal(shortTitle: "BBQ in Puchong & Sunway !@#$%^&* ()");
+
+            "!@#$%^&* ()".ToList().ForEach(a =>
+            {
+                deal.SKU.Should().NotContain(a.ToString());
+            });
         }
 
         [TestMethod]
@@ -69,6 +116,26 @@ namespace DealsWhat.Domain.Models.Tests
 
             deal.RegularPrice.ShouldBeEquivalentTo(20);
             deal.SpecialPrice.ShouldBeEquivalentTo(15);
+        }
+
+        private static Deal CreateDeal(
+         string shortTitle = "short title",
+         string shortDescription = "short description",
+         string longTitle = "long title",
+         string longDescription = "long description",
+         string finePrint = "fineprint",
+         string highlight = "highlight",
+         string canonicalUrl = "url",
+         object id = null)
+        {
+            var deal = Deal.Create(shortTitle, shortDescription, longTitle, longDescription, finePrint, highlight);
+
+            if (id != null)
+            {
+                deal.Key = id;
+            }
+
+            return deal;
         }
     }
 }
