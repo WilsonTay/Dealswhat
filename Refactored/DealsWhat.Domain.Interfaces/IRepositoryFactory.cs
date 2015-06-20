@@ -10,5 +10,6 @@ namespace DealsWhat.Domain.Interfaces
     public interface IRepositoryFactory
     {
         IRepository<Deal> CreateDealRepository();
+        IRepository<DealCategory> CreateDealCategoryRepository();
     }
 }

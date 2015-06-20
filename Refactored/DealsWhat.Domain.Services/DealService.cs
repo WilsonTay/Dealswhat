@@ -11,19 +11,40 @@ namespace DealsWhat.Domain.Services
 {
     public class DealService : IDealService
     {
-        private IRepository<Deal> dealRepository;
+        private readonly IRepositoryFactory repositoryFactory;
 
-        public DealService(IRepository<Deal> dealRepository)
+        public DealService(IRepositoryFactory repositoryFactory)
         {
-            this.dealRepository = dealRepository;
+
+            this.repositoryFactory = repositoryFactory;
         }
 
         public IEnumerable<Deal> SearchDeals(DealSearchQuery query)
         {
-            var deals = this.dealRepository.GetAll().ToList();
+            IEnumerable<Deal> deals;
+
+            if (query.CategoryId != null)
+            {
+                var category =
+                    this.repositoryFactory.CreateDealCategoryRepository()
+                        .GetAll()
+                        .FirstOrDefault(c => c.Key.Equals(query.CategoryId));
+
+                if (category == null)
+                {
+                    return new List<Deal>();
+                }
+
+                deals = category.Deals;
+            }
+            else
+            {
+                deals = this.repositoryFactory.CreateDealRepository().GetAll();
+            }
 
             if (!string.IsNullOrEmpty(query.SearchTerm))
             {
+
                 deals = deals.Where(d =>
                             ContainsIgnoreCase(d.ShortTitle, query.SearchTerm) ||
                             ContainsIgnoreCase(d.ShortDescription, query.SearchTerm) ||
@@ -48,14 +69,16 @@ namespace DealsWhat.Domain.Services
         /// <returns></returns>
         public Deal SearchSingleDeal(SingleDealSearchQuery query)
         {
+            var repository = this.repositoryFactory.CreateDealRepository();
+
             if (!string.IsNullOrEmpty(query.Id))
             {
-                return this.dealRepository.GetAll().FirstOrDefault(d => d.Key.ToString().Equals(query.Id));
+                return repository.GetAll().FirstOrDefault(d => d.Key.ToString().Equals(query.Id));
             }
 
             if (!string.IsNullOrEmpty(query.CanonicalUrl))
             {
-                return this.dealRepository.GetAll().FirstOrDefault(d => d.CanonicalUrl.Equals(query.CanonicalUrl));
+                return repository.GetAll().FirstOrDefault(d => d.CanonicalUrl.Equals(query.CanonicalUrl));
             }
 
             return null;

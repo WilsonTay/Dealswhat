@@ -73,7 +73,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DealCategoryTests.cs" />
-    <Compile Include="DealTestHelper.cs" />
     <Compile Include="DealTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -84,6 +83,10 @@
     <ProjectReference Include="..\DealsWhat.Domain.Model\DealsWhat.Domain.Models.csproj">
       <Project>{29e2570c-a982-496f-b4b1-097751465ed1}</Project>
       <Name>DealsWhat.Domain.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DealsWhat.Domain.Test.Common\DealsWhat.Domain.Test.Common.csproj">
+      <Project>{1a5533d9-ad62-4648-bb0a-0fc97a1f756f}</Project>
+      <Name>DealsWhat.Domain.Test.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

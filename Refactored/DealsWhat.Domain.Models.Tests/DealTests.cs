@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DealsWhat.Domain.Model;
+using DealsWhat.Domain.Test.Common;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
@@ -66,7 +67,7 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void CreateDeal_SKU_ShouldNotContainSpecialCharacter()
         {
-            var deal = DealTestHelper.CreateDeal(shortTitle: "BBQ in Puchong & Sunway");
+            var deal = DealTestFactory.CreateDeal(shortTitle: "BBQ in Puchong & Sunway");
 
             deal.SKU.Should().NotContain("&");
         }
@@ -74,7 +75,7 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void CreateDeal_CanonicalUrl_ShouldNotContainSpecialCharacter2()
         {
-            var deal = DealTestHelper.CreateDeal(shortTitle: "BBQ in Puchong & Sunway !@#$%^&*()");
+            var deal = DealTestFactory.CreateDeal(shortTitle: "BBQ in Puchong & Sunway !@#$%^&*()");
 
             "!@#$%^&* ()".ToList().ForEach(a =>
             {
@@ -88,7 +89,7 @@ namespace DealsWhat.Domain.Models.Tests
             var shorTitle = "this is a deal";
             var shortTitleWithDash = shorTitle.Replace(" ", "-");
 
-            var deal = DealTestHelper.CreateDeal(shortTitle: shorTitle);
+            var deal = DealTestFactory.CreateDeal(shortTitle: shorTitle);
 
             deal.CanonicalUrl.Should().Contain(shortTitleWithDash);
         }
@@ -96,7 +97,7 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void CreateDeal_CanonicalUrl_ShouldNotContainSpecialCharacter()
         {
-            var deal = DealTestHelper.CreateDeal(shortTitle: "BBQ in Puchong & Sunway");
+            var deal = DealTestFactory.CreateDeal(shortTitle: "BBQ in Puchong & Sunway");
 
             deal.CanonicalUrl.Should().NotContain("&");
         }
@@ -104,7 +105,7 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void CreateDeal_SKU_ShouldNotContainSpecialCharacter2()
         {
-            var deal = DealTestHelper.CreateDeal(shortTitle: "BBQ in Puchong & Sunway !@#$%^&* ()");
+            var deal = DealTestFactory.CreateDeal(shortTitle: "BBQ in Puchong & Sunway !@#$%^&* ()");
 
             "!@#$%^&* ()".ToList().ForEach(a =>
             {

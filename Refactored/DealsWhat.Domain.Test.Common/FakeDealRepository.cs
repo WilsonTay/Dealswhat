@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using DealsWhat.Domain.Interfaces;
 using DealsWhat.Domain.Model;
 
-namespace DealsWhat.Domain.Services.Tests
+namespace DealsWhat.Domain.Test.Common
 {
-    internal sealed class FakeDealRepository : IRepository<Deal>
+    public sealed class FakeDealRepository : IRepository<Deal>
     {
         private IList<Deal> deals;
          

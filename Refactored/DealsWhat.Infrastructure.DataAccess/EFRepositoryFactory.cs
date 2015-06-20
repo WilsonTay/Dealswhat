@@ -31,11 +31,18 @@ namespace DealsWhat.Infrastructure.DataAccess
                 .ForMember(dest => dest.EndTime, opt => opt.MapFrom(src => src.EndTime))
                 .ForMember(dest => dest.DateAdded, opt => opt.MapFrom(src => src.DateAdded))
                 .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()));
+
+            AutoMapper.Mapper.CreateMap<Models.DealCategory, DealsWhat.Domain.Model.DealCategory>();
         }
 
         public IRepository<Deal> CreateDealRepository()
         {
             return new EFDealRepository(this.dbContext);
+        }
+
+        public IRepository<DealCategory> CreateDealCategoryRepository()
+        {
+            return new EFDealCategoryRepository(this.dbContext);
         }
     }
 }

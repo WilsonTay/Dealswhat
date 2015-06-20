@@ -73,7 +73,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DealServiceTests.cs" />
-    <Compile Include="FakeDealRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +91,10 @@
     <ProjectReference Include="..\DealsWhat.Domain.Services\DealsWhat.Domain.Services.csproj">
       <Project>{84a789a0-45f7-47be-8e5a-908218e495a4}</Project>
       <Name>DealsWhat.Domain.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DealsWhat.Domain.Test.Common\DealsWhat.Domain.Test.Common.csproj">
+      <Project>{1a5533d9-ad62-4648-bb0a-0fc97a1f756f}</Project>
+      <Name>DealsWhat.Domain.Test.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

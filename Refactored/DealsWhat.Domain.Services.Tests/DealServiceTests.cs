@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Security;
 using DealsWhat.Domain.Interfaces;
 using DealsWhat.Domain.Model;
+using DealsWhat.Domain.Test.Common;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -22,15 +23,22 @@ namespace DealsWhat.Domain.Services.Tests
         public void Initialize()
         {
             fixture = new Fixture().Customize(new AutoMoqCustomization());
+
+            fixture.Register<IRepositoryFactory>(() => fixture.Create<FakeRepositoryFactory>());
         }
 
         [TestMethod]
-        public void ShouldCallToRepository()
+        public void CategoryIdNotNull_ShouldCallToCategoryRepository()
         {
-            var mockedRepository = Mock.Get(fixture.Freeze<IRepository<Deal>>());
+            var query = new DealSearchQuery
+            {
+                CategoryId = "a"
+            };
+
+            var mockedRepository = Mock.Get(fixture.Freeze<IRepository<DealCategory>>());
             var dealService = fixture.Create<DealService>();
 
-            dealService.SearchDeals(fixture.Create<DealSearchQuery>());
+            dealService.SearchDeals(query);
 
             mockedRepository.Verify(m => m.GetAll(), Times.Once);
         }
@@ -157,8 +165,82 @@ namespace DealsWhat.Domain.Services.Tests
         }
 
         [TestMethod]
+        public void Query_BySearchTerm_NotFoundShouldReturnEmptyList()
+        {
+            var service = fixture.Create<DealService>();
+            var result = service.SearchDeals(new DealSearchQuery
+            {
+                SearchTerm = "a"
+            });
+
+            result.Should().NotBeNull();
+            result.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void Query_ByCategoryId_NotFoundShouldReturnEmptyList()
+        {
+            var dealCategories = new List<DealCategory>();
+
+            var mockedCategoryRepository = Mock.Get(fixture.Freeze<IRepository<DealCategory>>());
+            mockedCategoryRepository.Setup(m => m.GetAll()).Returns(dealCategories);
+
+            var service = fixture.Create<DealService>();
+            var result = service.SearchDeals(new DealSearchQuery
+            {
+                CategoryId = "a"
+            });
+
+            result.Should().NotBeNull();
+            result.Should().BeEmpty();
+        }
+
+        [TestMethod]
         public void Query_ByCategoryId_ShouldReturnProperDeals()
-        {      
+        {
+            var dealCategories = new List<DealCategory>();
+            var dealService = GenerateDealCategoryAndCreateService(dealCategories);
+
+            var categoryId = Guid.NewGuid();
+            var validDeal = DealTestFactory.CreateDeal(shortTitle: "valid deal");
+            var dealCategory = DealTestFactory.CreateDealCategory(name: "category", key: categoryId);
+
+            dealCategory.AddDeal(validDeal);
+
+            dealCategories.Add(dealCategory);
+
+            var query = new DealSearchQuery
+            {
+                CategoryId = categoryId
+            };
+
+            var deals = dealService.SearchDeals(query).ToList();
+
+            deals.Count().ShouldBeEquivalentTo(1);
+            deals[0].ShouldBeEquivalentTo(validDeal);
+        }
+
+        private DealService GenerateDealCategoryAndCreateService(List<DealCategory> dealCategories)
+        {
+            var deals = Enumerable.Range(0, 10).Select(a => CreateDeal()).ToList();
+            var otherDealCategory = DealTestFactory.CreateDealCategory("other category");
+
+            foreach (var deal in deals)
+            {
+                otherDealCategory.AddDeal(deal);
+            }
+
+            dealCategories.Add(otherDealCategory);
+
+            var fakeRepository = new FakeDealCategoryRepository(dealCategories);
+            fixture.Register<IRepository<DealCategory>>(() => fakeRepository);
+
+            var fakeRepositoryFactory = fixture.Create<FakeRepositoryFactory>();
+            fixture.Register<IRepositoryFactory>(() => fakeRepositoryFactory);
+
+            var dealService = fixture.Create<DealService>();
+
+            return dealService;
         }
 
         [TestMethod]
@@ -239,6 +321,9 @@ namespace DealsWhat.Domain.Services.Tests
 
             var fakeRepository = new FakeDealRepository(deals);
             fixture.Register<IRepository<Deal>>(() => fakeRepository);
+
+            var fakeRepositoryFactory = fixture.Create<FakeRepositoryFactory>();
+            fixture.Register<IRepositoryFactory>(() => fakeRepositoryFactory);
 
             var dealService = fixture.Create<DealService>();
             return dealService;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DealsWhat.Domain.Model;
+using DealsWhat.Domain.Test.Common;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
@@ -27,7 +28,7 @@ namespace DealsWhat.Domain.Models.Tests
         {
             var categoryName = "Food & Drinks";
 
-            var category = DealTestHelper.CreateDealCategory(name: categoryName);
+            var category = DealTestFactory.CreateDealCategory(name: categoryName);
 
             category.Name.ShouldBeEquivalentTo(categoryName);
         }
@@ -36,9 +37,9 @@ namespace DealsWhat.Domain.Models.Tests
         public void AddDeal_DealAddedShouldBeRetrievable()
         {
             var categoryName = "Food & Drinks";
-            var deals = Enumerable.Range(0, 10).ToList().Select(a => DealTestHelper.CreateDeal()).ToList();
+            var deals = Enumerable.Range(0, 10).ToList().Select(a => DealTestFactory.CreateDeal()).ToList();
 
-            var category = DealTestHelper.CreateDealCategory(name: categoryName);
+            var category = DealTestFactory.CreateDealCategory(name: categoryName);
 
             foreach (var deal in deals)
             {
@@ -55,8 +56,8 @@ namespace DealsWhat.Domain.Models.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void AddDeal_DuplicateDeal_ExceptionExpected()
         {
-            var deal = DealTestHelper.CreateDeal();
-            var category = DealTestHelper.CreateDealCategory();
+            var deal = DealTestFactory.CreateDeal();
+            var category = DealTestFactory.CreateDealCategory();
 
             category.AddDeal(deal);
             category.AddDeal(deal);
