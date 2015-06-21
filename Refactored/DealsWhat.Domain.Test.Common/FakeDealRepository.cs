@@ -7,21 +7,21 @@ using DealsWhat.Domain.Model;
 
 namespace DealsWhat.Domain.Test.Common
 {
-    public sealed class FakeDealRepository : IRepository<Deal>
+    public sealed class FakeDealRepository : IRepository<DealModel>
     {
-        private IList<Deal> deals;
+        private IList<DealModel> deals;
          
-        public FakeDealRepository(IList<Deal> deals)
+        public FakeDealRepository(IList<DealModel> deals)
         {
             this.deals = deals;
         }
 
-        public IEnumerable<Deal> Get(Expression<Func<Deal, bool>> query)
+        public IEnumerable<DealModel> Get(Expression<Func<DealModel, bool>> query)
         {
             return deals.Where(query.Compile());
         }
 
-        public IEnumerable<Deal> GetAll()
+        public IEnumerable<DealModel> GetAll()
         {
             return deals;
         }

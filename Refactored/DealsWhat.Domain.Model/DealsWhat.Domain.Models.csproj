@@ -44,8 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Deal.cs" />
-    <Compile Include="DealCategory.cs" />
+    <Compile Include="DealModel.cs" />
+    <Compile Include="DealCategoryModel.cs" />
     <Compile Include="DealStatus.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

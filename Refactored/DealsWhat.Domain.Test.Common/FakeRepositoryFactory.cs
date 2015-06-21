@@ -10,22 +10,22 @@ namespace DealsWhat.Domain.Test.Common
 {
     public class FakeRepositoryFactory : IRepositoryFactory
     {
-        private readonly IRepository<Deal> dealRepository;
-        private readonly IRepository<DealCategory> dealCategoryRepository; 
+        private readonly IRepository<DealModel> dealRepository;
+        private readonly IRepository<DealCategoryModel> dealCategoryRepository; 
          
-        public FakeRepositoryFactory(IRepository<Deal> dealRepository,
-            IRepository<DealCategory> dealCategoryRepository)
+        public FakeRepositoryFactory(IRepository<DealModel> dealRepository,
+            IRepository<DealCategoryModel> dealCategoryRepository)
         {
             this.dealRepository = dealRepository;
             this.dealCategoryRepository = dealCategoryRepository;
         }
 
-        public IRepository<Deal> CreateDealRepository()
+        public IRepository<DealModel> CreateDealRepository()
         {
             return dealRepository;
         }
 
-        public IRepository<DealCategory> CreateDealCategoryRepository()
+        public IRepository<DealCategoryModel> CreateDealCategoryRepository()
         {
             return dealCategoryRepository;
         }

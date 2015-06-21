@@ -16,7 +16,7 @@ namespace DealsWhat.Infrastructure.DataAccess
         {
             this.dbContext = dbContext;
 
-            AutoMapper.Mapper.CreateMap<Models.Deal, DealsWhat.Domain.Model.Deal>()
+            AutoMapper.Mapper.CreateMap<Models.Deal, DealsWhat.Domain.Model.DealModel>()
                 .ForMember(dest => dest.ShortTitle, opt => opt.MapFrom(src => src.ShortTitle))
                 .ForMember(dest => dest.ShortDescription, opt => opt.MapFrom(src => src.ShortDescription))
                 .ForMember(dest => dest.LongTitle, opt => opt.MapFrom(src => src.LongTitle))
@@ -32,15 +32,15 @@ namespace DealsWhat.Infrastructure.DataAccess
                 .ForMember(dest => dest.DateAdded, opt => opt.MapFrom(src => src.DateAdded))
                 .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()));
 
-            AutoMapper.Mapper.CreateMap<Models.DealCategory, DealsWhat.Domain.Model.DealCategory>();
+            AutoMapper.Mapper.CreateMap<Models.DealCategory, DealsWhat.Domain.Model.DealCategoryModel>();
         }
 
-        public IRepository<Deal> CreateDealRepository()
+        public IRepository<DealModel> CreateDealRepository()
         {
             return new EFDealRepository(this.dbContext);
         }
 
-        public IRepository<DealCategory> CreateDealCategoryRepository()
+        public IRepository<DealCategoryModel> CreateDealCategoryRepository()
         {
             return new EFDealCategoryRepository(this.dbContext);
         }

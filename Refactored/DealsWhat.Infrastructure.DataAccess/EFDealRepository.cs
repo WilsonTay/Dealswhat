@@ -10,7 +10,7 @@ using DealsWhat.Domain.Model;
 
 namespace DealsWhat.Infrastructure.DataAccess
 {
-    public class EFDealRepository : IRepository<Deal>
+    public class EFDealRepository : IRepository<DealModel>
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -20,7 +20,7 @@ namespace DealsWhat.Infrastructure.DataAccess
         }
 
 
-        public IEnumerable<Deal> GetAll()
+        public IEnumerable<DealModel> GetAll()
         {
             foreach (var deal in this.unitOfWork.Set<Models.Deal>())
             {
@@ -28,9 +28,9 @@ namespace DealsWhat.Infrastructure.DataAccess
             }
         }
 
-        private DealsWhat.Domain.Model.Deal Convert(Models.Deal source)
+        private DealsWhat.Domain.Model.DealModel Convert(Models.Deal source)
         {
-            var mappedDeal = Mapper.Map<Models.Deal, DealsWhat.Domain.Model.Deal>(source);
+            var mappedDeal = Mapper.Map<Models.Deal, DealsWhat.Domain.Model.DealModel>(source);
 
              return mappedDeal;
         }

@@ -19,7 +19,7 @@ namespace DealsWhat.Application.WebApi
         {
             var builder = new ContainerBuilder();
             builder.RegisterInstance<IRepositoryFactory>(new EFRepositoryFactory(new DealsWhatUnitOfWork()));
-            builder.RegisterApiControllers(typeof(DealsController).Assembly);
+            builder.RegisterApiControllers(typeof(FrontEndDealsController).Assembly);
 
             var container = builder.Build();
 

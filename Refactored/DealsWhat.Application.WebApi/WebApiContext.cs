@@ -7,6 +7,7 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using DealsWhat.Application.WebApi.Controllers;
 using DealsWhat.Domain.Interfaces;
+using DealsWhat.Domain.Services;
 using DealsWhat.Infrastructure.DataAccess;
 
 namespace DealsWhat.Application.WebApi
@@ -34,7 +35,9 @@ namespace DealsWhat.Application.WebApi
         {
             var builder = new ContainerBuilder();
             builder.RegisterInstance<IRepositoryFactory>(new EFRepositoryFactory(new DealsWhatUnitOfWork()));
-            builder.RegisterApiControllers(typeof(DealsController).Assembly);
+            builder.RegisterApiControllers(typeof(FrontEndDealsController).Assembly);
+
+            builder.RegisterType<DealService>().As<IDealService>();
 
             var container = builder.Build();
 

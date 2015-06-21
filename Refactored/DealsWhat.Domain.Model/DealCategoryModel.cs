@@ -6,29 +6,29 @@ using System.Threading.Tasks;
 
 namespace DealsWhat.Domain.Model
 {
-    public sealed class DealCategory : IEntity
+    public sealed class DealCategoryModel : IEntity
     {
         public object Key { get; internal set; }
 
         public string Name { get; private set; }
 
-        public IList<Deal> Deals { get; }
+        public IList<DealModel> Deals { get; }
 
-        private DealCategory()
+        private DealCategoryModel()
         {
-            Deals = new List<Deal>();
+            Deals = new List<DealModel>();
         }
 
-        public static DealCategory Create(string categoryName)
+        public static DealCategoryModel Create(string categoryName)
         {
-            return new DealCategory
+            return new DealCategoryModel
             {
                 Key = Guid.NewGuid(),
                 Name = categoryName
             };
         }
 
-        public void AddDeal(Deal deal)
+        public void AddDeal(DealModel deal)
         {
             if (Deals.Contains(deal))
             {

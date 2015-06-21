@@ -6,8 +6,10 @@ using System.Net.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using DealsWhat.Application.WebApi.Controllers;
+using DealsWhat.Application.WebApi.Models;
 using DealsWhat.Domain.Interfaces;
 using DealsWhat.Domain.Model;
+using DealsWhat.Domain.Services;
 using DealsWhat.Domain.Test.Common;
 using FluentAssertions;
 using Microsoft.Owin.Hosting;
@@ -25,15 +27,16 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
 
         private static IDisposable webApp;
 
-        private static IList<Deal> sampleDeals;
+        private static IList<DealModel> sampleDeals;
 
-        private static IList<DealCategory> sampleDealCategories;
+        private static IList<DealCategoryModel> sampleDealCategories;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
             fixture = new Fixture().Customize(new AutoMoqCustomization());
 
+            // TODO: Make this immutable so tests cannot modify it.
             sampleDeals = GetSampleDeals();
             sampleDealCategories = GetSampleDealCategories();
 
@@ -43,7 +46,9 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
             var dealCategoryRepository = new FakeDealCategoryRepository(sampleDealCategories);
 
             builder.RegisterInstance<IRepositoryFactory>(new FakeRepositoryFactory(dealRepository, dealCategoryRepository));
-            builder.RegisterApiControllers(typeof(DealsController).Assembly);
+            builder.RegisterApiControllers(typeof(FrontEndDealsController).Assembly);
+
+            builder.RegisterType<DealService>().As<IDealService>();
 
             var container = builder.Build();
 
@@ -56,28 +61,35 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
         }
 
         [ClassCleanup]
-        public static void AssemblyCleanup()
+        public static void ClassCleanup()
         {
             webApp.Dispose();
         }
 
-        private static IList<Deal> GetSampleDeals()
+        private static IList<DealModel> GetSampleDeals()
         {
-            var deals = new List<Deal>();
+            var deals = new List<DealModel>();
 
-            var mockedDeals = fixture.CreateMany<Deal>(100);
-            mockedDeals.ToList().ForEach(d =>
+            for (int i = 0; i < 1; i++)
             {
-                deals.Add(d);
-            });
+                var deal = DealModel.Create(
+                    fixture.Create<string>(),
+                    fixture.Create<string>(),
+                    fixture.Create<string>(),
+                    fixture.Create<string>(),
+                    fixture.Create<string>(),
+                    fixture.Create<string>());
+
+                deals.Add(deal);
+            }
 
             return deals;
         }
 
 
-        private static IList<DealCategory> GetSampleDealCategories()
+        private static IList<DealCategoryModel> GetSampleDealCategories()
         {
-            var dealCategories = new List<DealCategory>();
+            var dealCategories = new List<DealCategoryModel>();
 
             return dealCategories;
         }
@@ -88,22 +100,34 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
         {
             HttpClient client = new HttpClient();
 
-            var result = client.GetAsync("http://localhost:9000/api/deals/").Result;
+            var result = client.GetAsync("http://localhost:9000/api/frontenddeals/").Result;
 
             using (var reader = new StreamReader(result.Content.ReadAsStreamAsync().Result))
             {
                 var response = reader.ReadToEnd();
-                var deals = JsonConvert.DeserializeObject<IList<Deal>>(response);
 
-                var actual = GetSampleDeals();
+                // To View Model
+                var deals = JsonConvert.DeserializeObject<IEnumerable<FrontEndDeal>>(response).ToList();
 
-                deals.Count.ShouldBeEquivalentTo(actual.Count);
+                var expected = sampleDeals;
 
-                foreach (var sampleDeal in sampleDeals)
+                deals.Count.ShouldBeEquivalentTo(expected.Count);
+
+                foreach (var deal in deals)
                 {
-                    deals.Should().Contain(sampleDeal);
+                    var matchingDeal = expected.First(d => d.Key.ToString().Equals(deal.Id));
+                    AssertDealEquality(deal, matchingDeal);
                 }
             }
+        }
+
+        private static void AssertDealEquality(FrontEndDeal deal, DealModel matchingDeal)
+        {
+            deal.ShortTitle.Should().BeEquivalentTo(matchingDeal.ShortTitle);
+            deal.ShortDescription.Should().BeEquivalentTo(matchingDeal.ShortDescription);
+            deal.RegularPrice.Should().BeEquivalentTo(matchingDeal.RegularPrice.ToString());
+            deal.SpecialPrice.Should().BeEquivalentTo(matchingDeal.SpecialPrice.ToString());
+            deal.CanonicalUrl.Should().BeEquivalentTo(matchingDeal.CanonicalUrl);
         }
     }
 }

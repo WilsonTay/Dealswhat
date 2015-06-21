@@ -9,21 +9,21 @@ using DealsWhat.Domain.Model;
 
 namespace DealsWhat.Domain.Test.Common
 {
-    public sealed class FakeDealCategoryRepository : IRepository<DealCategory>
+    public sealed class FakeDealCategoryRepository : IRepository<DealCategoryModel>
     {
-        private readonly IList<DealCategory> dealCategories;
+        private readonly IList<DealCategoryModel> dealCategories;
 
-        public FakeDealCategoryRepository(IList<DealCategory> dealCategories)
+        public FakeDealCategoryRepository(IList<DealCategoryModel> dealCategories)
         {
             this.dealCategories = dealCategories;
         }
 
-        public IEnumerable<DealCategory> Get(Expression<Func<DealCategory, bool>> query)
+        public IEnumerable<DealCategoryModel> Get(Expression<Func<DealCategoryModel, bool>> query)
         {
             return dealCategories.Where(query.Compile());
         }
 
-        public IEnumerable<DealCategory> GetAll()
+        public IEnumerable<DealCategoryModel> GetAll()
         {
             return dealCategories;
         }

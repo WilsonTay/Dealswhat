@@ -9,7 +9,7 @@ namespace DealsWhat.Domain.Test.Common
 {
     public static class DealTestFactory
     {
-        public static Deal CreateDeal(
+        public static DealModel CreateDeal(
             string shortTitle = "short title",
             string shortDescription = "short description",
             string longTitle = "long title",
@@ -19,7 +19,7 @@ namespace DealsWhat.Domain.Test.Common
             string canonicalUrl = "url",
             object id = null)
         {
-            var deal = Deal.Create(shortTitle, shortDescription, longTitle, longDescription, finePrint, highlight);
+            var deal = DealModel.Create(shortTitle, shortDescription, longTitle, longDescription, finePrint, highlight);
 
             if (id != null)
             {
@@ -29,9 +29,9 @@ namespace DealsWhat.Domain.Test.Common
             return deal;
         }
 
-        public static DealCategory CreateDealCategory(object key = null, string name = "category1")
+        public static DealCategoryModel CreateDealCategory(object key = null, string name = "category1")
         {
-            var category = DealCategory.Create(name);
+            var category = DealCategoryModel.Create(name);
 
             if (key != null)
             {

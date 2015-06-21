@@ -9,7 +9,7 @@ using DealsWhat.Domain.Model;
 
 namespace DealsWhat.Infrastructure.DataAccess
 {
-    public class EFDealCategoryRepository : IRepository<DealCategory>
+    public class EFDealCategoryRepository : IRepository<DealCategoryModel>
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -18,7 +18,7 @@ namespace DealsWhat.Infrastructure.DataAccess
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<DealCategory> GetAll()
+        public IEnumerable<DealCategoryModel> GetAll()
         {
             foreach (var category in this.unitOfWork.Set<Models.DealCategory>())
             {
@@ -26,9 +26,9 @@ namespace DealsWhat.Infrastructure.DataAccess
             }
         }
 
-        private DealsWhat.Domain.Model.DealCategory Convert(Models.DealCategory source)
+        private DealsWhat.Domain.Model.DealCategoryModel Convert(Models.DealCategory source)
         {
-            var mappedDeal = Mapper.Map<Models.DealCategory, DealsWhat.Domain.Model.DealCategory>(source);
+            var mappedDeal = Mapper.Map<Models.DealCategory, DealsWhat.Domain.Model.DealCategoryModel>(source);
 
             return mappedDeal;
         }

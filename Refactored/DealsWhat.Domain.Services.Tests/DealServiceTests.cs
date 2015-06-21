@@ -35,7 +35,7 @@ namespace DealsWhat.Domain.Services.Tests
                 CategoryId = "a"
             };
 
-            var mockedRepository = Mock.Get(fixture.Freeze<IRepository<DealCategory>>());
+            var mockedRepository = Mock.Get(fixture.Freeze<IRepository<DealCategoryModel>>());
             var dealService = fixture.Create<DealService>();
 
             dealService.SearchDeals(query);
@@ -52,7 +52,7 @@ namespace DealsWhat.Domain.Services.Tests
             deals.Add(validDeal);
 
             var fakeRepository = new FakeDealRepository(deals);
-            fixture.Register<IRepository<Deal>>(() => fakeRepository);
+            fixture.Register<IRepository<DealModel>>(() => fakeRepository);
 
             var dealService = fixture.Create<DealService>();
             var searchTerm = "alienware";
@@ -86,7 +86,7 @@ namespace DealsWhat.Domain.Services.Tests
             deals.Add(validDeal);
 
             var fakeRepository = new FakeDealRepository(deals);
-            fixture.Register<IRepository<Deal>>(() => fakeRepository);
+            fixture.Register<IRepository<DealModel>>(() => fakeRepository);
 
             var dealService = fixture.Create<DealService>();
             var searchTerm = "alienware";
@@ -115,7 +115,7 @@ namespace DealsWhat.Domain.Services.Tests
             deals.Add(validDeal);
 
             var fakeRepository = new FakeDealRepository(deals);
-            fixture.Register<IRepository<Deal>>(() => fakeRepository);
+            fixture.Register<IRepository<DealModel>>(() => fakeRepository);
 
             var dealService = fixture.Create<DealService>();
             var searchTerm = "puchong";
@@ -144,7 +144,7 @@ namespace DealsWhat.Domain.Services.Tests
             deals.Add(validDeal);
 
             var fakeRepository = new FakeDealRepository(deals);
-            fixture.Register<IRepository<Deal>>(() => fakeRepository);
+            fixture.Register<IRepository<DealModel>>(() => fakeRepository);
 
             var dealService = fixture.Create<DealService>();
             var searchTerm = "kOrean bbq";
@@ -180,9 +180,9 @@ namespace DealsWhat.Domain.Services.Tests
         [TestMethod]
         public void Query_ByCategoryId_NotFoundShouldReturnEmptyList()
         {
-            var dealCategories = new List<DealCategory>();
+            var dealCategories = new List<DealCategoryModel>();
 
-            var mockedCategoryRepository = Mock.Get(fixture.Freeze<IRepository<DealCategory>>());
+            var mockedCategoryRepository = Mock.Get(fixture.Freeze<IRepository<DealCategoryModel>>());
             mockedCategoryRepository.Setup(m => m.GetAll()).Returns(dealCategories);
 
             var service = fixture.Create<DealService>();
@@ -198,7 +198,7 @@ namespace DealsWhat.Domain.Services.Tests
         [TestMethod]
         public void Query_ByCategoryId_ShouldReturnProperDeals()
         {
-            var dealCategories = new List<DealCategory>();
+            var dealCategories = new List<DealCategoryModel>();
             var dealService = GenerateDealCategoryAndCreateService(dealCategories);
 
             var categoryId = Guid.NewGuid();
@@ -220,7 +220,7 @@ namespace DealsWhat.Domain.Services.Tests
             deals[0].ShouldBeEquivalentTo(validDeal);
         }
 
-        private DealService GenerateDealCategoryAndCreateService(List<DealCategory> dealCategories)
+        private DealService GenerateDealCategoryAndCreateService(List<DealCategoryModel> dealCategories)
         {
             var deals = Enumerable.Range(0, 10).Select(a => CreateDeal()).ToList();
             var otherDealCategory = DealTestFactory.CreateDealCategory("other category");
@@ -233,7 +233,7 @@ namespace DealsWhat.Domain.Services.Tests
             dealCategories.Add(otherDealCategory);
 
             var fakeRepository = new FakeDealCategoryRepository(dealCategories);
-            fixture.Register<IRepository<DealCategory>>(() => fakeRepository);
+            fixture.Register<IRepository<DealCategoryModel>>(() => fakeRepository);
 
             var fakeRepositoryFactory = fixture.Create<FakeRepositoryFactory>();
             fixture.Register<IRepositoryFactory>(() => fakeRepositoryFactory);
@@ -314,13 +314,13 @@ namespace DealsWhat.Domain.Services.Tests
         }
 
 
-        private DealService GenerateDealsAndCreateDealService(Deal validDeal)
+        private DealService GenerateDealsAndCreateDealService(DealModel validDeal)
         {
             var deals = Enumerable.Range(0, 10).Select(a => CreateDeal()).ToList();
             deals.Add(validDeal);
 
             var fakeRepository = new FakeDealRepository(deals);
-            fixture.Register<IRepository<Deal>>(() => fakeRepository);
+            fixture.Register<IRepository<DealModel>>(() => fakeRepository);
 
             var fakeRepositoryFactory = fixture.Create<FakeRepositoryFactory>();
             fixture.Register<IRepositoryFactory>(() => fakeRepositoryFactory);
@@ -330,7 +330,7 @@ namespace DealsWhat.Domain.Services.Tests
         }
 
 
-        private static Deal CreateDeal(
+        private static DealModel CreateDeal(
             string shortTitle = "short title",
             string shortDescription = "short description",
             string longTitle = "long title",
@@ -340,7 +340,7 @@ namespace DealsWhat.Domain.Services.Tests
             string canonicalUrl = "url",
             object id = null)
         {
-            var deal = Deal.Create(shortTitle, shortDescription, longTitle, longDescription, finePrint, highlight);
+            var deal = DealModel.Create(shortTitle, shortDescription, longTitle, longDescription, finePrint, highlight);
 
             if (id != null)
             {

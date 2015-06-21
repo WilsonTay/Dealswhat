@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DealsWhat.Domain.Model
 {
-    public class Deal : IEntity
+    public class DealModel : IEntity
     {
         public string ShortTitle { get; private set; }
         public string LongTitle { get; private set; }
@@ -27,7 +27,11 @@ namespace DealsWhat.Domain.Model
 
         public object Key { get; internal set; }
 
-        public static Deal Create(
+        private DealModel()
+        {           
+        }
+
+        public static DealModel Create(
             string shortTitle,
             string shortDescription,
             string longTitle,
@@ -36,7 +40,7 @@ namespace DealsWhat.Domain.Model
             string highlight)
         {
             // SKU and canonical url.
-            var deal = new Deal
+            var deal = new DealModel
             {
                 ShortTitle = shortTitle,
                 ShortDescription = shortDescription,
@@ -66,12 +70,12 @@ namespace DealsWhat.Domain.Model
             SpecialPrice = specialPrice;
         }
 
-        private static string GenerateSKU(Deal deal)
+        private static string GenerateSKU(DealModel deal)
         {
             return RemoveSpecialCharacters(string.Concat(deal.ShortTitle, Guid.NewGuid().ToString()));
         }
 
-        private static string GenerateCanonicalUrl(Deal deal)
+        private static string GenerateCanonicalUrl(DealModel deal)
         {
             var shortTitleWithPlaceholder = deal.ShortTitle.Replace(" ", "spaceplaceholder1");
             shortTitleWithPlaceholder += Guid.NewGuid().ToString();
@@ -96,10 +100,10 @@ namespace DealsWhat.Domain.Model
         {
             if (obj == null) return false;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((Deal) obj);
+            return Equals((DealModel) obj);
         }
 
-        private bool Equals(Deal other)
+        private bool Equals(DealModel other)
         {
             return string.Equals(ShortTitle, other.ShortTitle) && string.Equals(LongTitle, other.LongTitle) && string.Equals(ShortDescription, other.ShortDescription) && string.Equals(LongDescription, other.LongDescription) && RegularPrice.Equals(other.RegularPrice) && SpecialPrice.Equals(other.SpecialPrice) && string.Equals(SKU, other.SKU) && DateAdded.Equals(other.DateAdded) && StartTime.Equals(other.StartTime) && EndTime.Equals(other.EndTime) && string.Equals(FinePrint, other.FinePrint) && string.Equals(Highlight, other.Highlight) && IsFeatured.Equals(other.IsFeatured) && Status == other.Status && string.Equals(CanonicalUrl, other.CanonicalUrl) && Equals(Key, other.Key);
         }

@@ -9,6 +9,6 @@ namespace DealsWhat.Domain.Services
 {
     public interface IDealService
     {
-        IEnumerable<Deal> SearchDeals(DealSearchQuery query);
+        IEnumerable<DealModel> SearchDeals(DealSearchQuery query);
     }
 }

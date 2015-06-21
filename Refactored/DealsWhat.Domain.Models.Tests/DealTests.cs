@@ -36,7 +36,7 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void CreateDeal_AllAttributesSet()
         {
-            var deal = Deal.Create(
+            var deal = DealModel.Create(
                 shortTitle,
                 shortDescription,
                 longTitle,
@@ -116,7 +116,7 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void SetPrice_PriceSetCorrectly()
         {
-            var deal = fixture.Create<Deal>();
+            var deal = fixture.Create<DealModel>();
 
             deal.SetPrice(20, 15);
 

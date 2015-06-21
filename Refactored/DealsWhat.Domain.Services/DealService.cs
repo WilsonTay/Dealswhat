@@ -19,9 +19,9 @@ namespace DealsWhat.Domain.Services
             this.repositoryFactory = repositoryFactory;
         }
 
-        public IEnumerable<Deal> SearchDeals(DealSearchQuery query)
+        public IEnumerable<DealModel> SearchDeals(DealSearchQuery query)
         {
-            IEnumerable<Deal> deals;
+            IEnumerable<DealModel> deals;
 
             if (query.CategoryId != null)
             {
@@ -32,7 +32,7 @@ namespace DealsWhat.Domain.Services
 
                 if (category == null)
                 {
-                    return new List<Deal>();
+                    return new List<DealModel>();
                 }
 
                 deals = category.Deals;
@@ -67,7 +67,7 @@ namespace DealsWhat.Domain.Services
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public Deal SearchSingleDeal(SingleDealSearchQuery query)
+        public DealModel SearchSingleDeal(SingleDealSearchQuery query)
         {
             var repository = this.repositoryFactory.CreateDealRepository();
 
