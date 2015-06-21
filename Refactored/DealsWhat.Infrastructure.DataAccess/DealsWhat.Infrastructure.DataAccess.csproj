@@ -62,7 +62,8 @@
     <Compile Include="EFDealCategoryRepository.cs" />
     <Compile Include="EFDealRepository.cs" />
     <Compile Include="EFRepositoryFactory.cs" />
-    <Compile Include="Model1.cs" />
+    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="DealsWhatUnitOfWork.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Deal.cs" />
     <Compile Include="Models\DealAttribute.cs" />

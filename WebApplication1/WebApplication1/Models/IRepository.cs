@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DealsWhat.Domain.Interfaces
+namespace WebApplication1.Models
 {
-    public class Class1
+    public interface IRepository
     {
     }
 }

@@ -10,9 +10,9 @@ namespace DealsWhat.Infrastructure.DataAccess
 {
     public class EFRepositoryFactory : IRepositoryFactory
     {
-        private readonly Model1 dbContext;
+        private readonly DealsWhatUnitOfWork dbContext;
 
-        public EFRepositoryFactory(Model1 dbContext)
+        public EFRepositoryFactory(DealsWhatUnitOfWork dbContext)
         {
             this.dbContext = dbContext;
 

@@ -12,17 +12,17 @@ namespace DealsWhat.Infrastructure.DataAccess
 {
     public class EFDealRepository : IRepository<Deal>
     {
-        private readonly Model1 dbContext;
+        private readonly IUnitOfWork unitOfWork;
 
-        public EFDealRepository(Model1 dbContext)
+        public EFDealRepository(IUnitOfWork unitOfWork)
         {
-            this.dbContext = dbContext;
+            this.unitOfWork = unitOfWork;
         }
 
 
         public IEnumerable<Deal> GetAll()
         {
-            foreach (var deal in this.dbContext.Deals)
+            foreach (var deal in this.unitOfWork.Set<Models.Deal>())
             {
                 yield return Convert(deal);
             }

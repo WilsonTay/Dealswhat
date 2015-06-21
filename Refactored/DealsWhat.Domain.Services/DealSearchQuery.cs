@@ -11,6 +11,5 @@ namespace DealsWhat.Domain.Services
     {
         public string SearchTerm { get; set; }
         public object CategoryId { get; set; }
-        public object DealId { get; set; }
     }
 }

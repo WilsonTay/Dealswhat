@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
-using DealsWhat.Application.WebApi.Infrastructure;
+using Autofac;
+using Autofac.Integration.WebApi;
+using DealsWhat.Application.WebApi.Controllers;
 using DealsWhat.Domain.Interfaces;
 using DealsWhat.Infrastructure.DataAccess;
 using Microsoft.Owin.Security.OAuth;
-using Microsoft.Practices.Unity;
-using Newtonsoft.Json.Serialization;
+
 
 namespace DealsWhat.Application.WebApi
 {
@@ -16,10 +17,13 @@ namespace DealsWhat.Application.WebApi
     {
         public static void Register(HttpConfiguration config)
         {
-            var container = new UnityContainer();
-            container.RegisterType<IRepositoryFactory, EFRepositoryFactory>(new HierarchicalLifetimeManager());
+            var builder = new ContainerBuilder();
+            builder.RegisterInstance<IRepositoryFactory>(new EFRepositoryFactory(new DealsWhatUnitOfWork()));
+            builder.RegisterApiControllers(typeof(DealsController).Assembly);
 
-            config.DependencyResolver = new UnityResolver(container);
+            var container = builder.Build();
+
+            var resolver = new AutofacWebApiDependencyResolver(container);
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
