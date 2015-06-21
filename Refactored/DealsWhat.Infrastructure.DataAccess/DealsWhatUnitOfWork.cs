@@ -32,6 +32,11 @@ namespace DealsWhat.Infrastructure.DataAccess
         public DbSet<DealOption> DealOptions { get; set; }
         public DbSet<DealAttribute> DealAttributes { get; set; }
 
+        public IDbSet<TEntity> Set<TEntity>() where TEntity : class
+        {
+            return this.Set<TEntity>();
+        }
+
         public void Commit()
         {
              this.SaveChanges();

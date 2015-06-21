@@ -23,34 +23,8 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
     [TestClass]
     public class TestBase
     {
-        private static IDisposable webApp;
+       
 
-        [AssemblyInitialize]
-        public static void AssemblyInitialize(TestContext context)
-        {
-            var builder = new ContainerBuilder();
-
-            var dealRepository = new FakeDealRepository(new List<Deal>());
-            var dealCategoryRepository = new FakeDealCategoryRepository(new List<DealCategory>());
-
-            builder.RegisterInstance<IRepositoryFactory>(new FakeRepositoryFactory(dealRepository, dealCategoryRepository));
-            builder.RegisterApiControllers(typeof(DealsController).Assembly);
-
-            var container = builder.Build();
-
-            var resolver = new AutofacWebApiDependencyResolver(container);
-            WebApiContext.DefaultResolver = resolver;
-
-            var baseAddress = "http://localhost:9000/";
-
-            webApp = WebApp.Start<Startup>(url: baseAddress);
-
-        }
-
-        [AssemblyCleanup]
-        public static void AssemblyCleanup()
-        {
-            webApp.Dispose();
-        }
+       
     }
 }

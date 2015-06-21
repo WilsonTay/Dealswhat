@@ -22,11 +22,6 @@ namespace DealsWhat.Application.WebApi
     {
         public void Configuration(IAppBuilder app)
         {
-            //GlobalConfiguration.Configure((config) =>
-            //{
-               
-             
-            //});
             HttpConfiguration config = new HttpConfiguration();
 
             config.DependencyResolver = WebApiContext.DefaultResolver;
