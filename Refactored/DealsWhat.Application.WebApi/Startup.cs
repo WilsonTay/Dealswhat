@@ -25,7 +25,7 @@ namespace DealsWhat.Application.WebApi
             HttpConfiguration config = new HttpConfiguration();
 
             config.DependencyResolver = WebApiContext.DefaultResolver;
-
+            config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
                           name: "DefaultApi",
                           routeTemplate: "api/{controller}/{id}",

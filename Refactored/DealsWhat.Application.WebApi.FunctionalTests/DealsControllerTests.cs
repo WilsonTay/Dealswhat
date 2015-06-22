@@ -33,7 +33,6 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
             fixture = new Fixture().Customize(new AutoMoqCustomization());
         }
 
-
         private IList<DealModel> CreateSampleDeals()
         {
             var deals = new List<DealModel>();
@@ -55,9 +54,61 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
         }
 
         [TestMethod]
-        public void GetDealByCategory_CaseInsensitive()
+        public void GetSingleDealById_AllFieldMatches()
         {
+            var deals = CreateSampleDeals();
+            var matchingDeal = DealModel.Create("a", "b", "c", "d", "e", "f");
+            deals.Add(matchingDeal);
 
+            var baseEndpoints = new List<string>();
+            baseEndpoints.Add("http://localhost:9000/api/deal?id=");
+            baseEndpoints.Add("http://localhost:9000/Api/dEal?iD=");
+            baseEndpoints.Add("http://Localhost:9000/api/DEAL?Id=");
+            baseEndpoints.Add("http://LOCALHOST:9000/API/DEAL/?ID=");
+            baseEndpoints.Add("http://LOCALHOST:9000/API/deal/?ID=");
+
+            foreach (var baseEndpoint in baseEndpoints)
+            {
+                var endpoint = baseEndpoint + matchingDeal.Key.ToString();
+
+                var response = CreateWebApiServiceAndGetResponse(
+                    deals,
+                    new List<DealCategoryModel>(),
+                    endpoint);
+
+                var actualDeal = JsonConvert.DeserializeObject<FrontEndSpecificDeal>(response);
+
+                AssertFrontEndSpecificDealEquality(actualDeal, matchingDeal);
+            }
+        }
+
+        [TestMethod]
+        public void GetSingleDealByCanonicalUrl_AllFieldMatches()
+        {
+            var deals = CreateSampleDeals();
+            var matchingDeal = DealModel.Create("a", "b", "c", "d", "e", "f");
+            deals.Add(matchingDeal);
+
+            var baseEndpoints = new List<string>();
+            baseEndpoints.Add("http://localhost:9000/api/deal?url=");
+            baseEndpoints.Add("http://localhost:9000/Api/dEal?url=");
+            baseEndpoints.Add("http://Localhost:9000/api/DEAL?urL=");
+            baseEndpoints.Add("http://LOCALHOST:9000/API/DEAL?URL=");
+            baseEndpoints.Add("http://localhost:9000/Api/dEal/?url=");
+
+            foreach (var baseEndpoint in baseEndpoints)
+            {
+                var endpoint = baseEndpoint + matchingDeal.CanonicalUrl;
+
+                var response = CreateWebApiServiceAndGetResponse(
+                    deals,
+                    new List<DealCategoryModel>(),
+                    endpoint);
+
+                var actualDeal = JsonConvert.DeserializeObject<FrontEndSpecificDeal>(response);
+
+                AssertFrontEndSpecificDealEquality(actualDeal, matchingDeal);
+            }
         }
 
         [TestMethod]
@@ -87,11 +138,11 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
 
             var response = "";
             var baseEndpoints = new List<string>();
-            baseEndpoints.Add("http://localhost:9000/api/frontenddeals?categoryid=");
-            baseEndpoints.Add("http://localhost:9000/aPi/frontenddeals?caTegoryid=");
-            baseEndpoints.Add("http://localhost:9000/api/FrontendDeals?categoryId=");
-            baseEndpoints.Add("http://localhost:9000/api/FRONTENDDEALS?CATEGORYID=");
-            baseEndpoints.Add("http://localhost:9000/API/FRONTENDDEALS?CATEGORYID=");
+            baseEndpoints.Add("http://localhost:9000/api/deals?categoryid=");
+            baseEndpoints.Add("http://localhost:9000/aPi/Deals?caTegoryid=");
+            baseEndpoints.Add("http://localhost:9000/api/Deals?categoryId=");
+            baseEndpoints.Add("http://localhost:9000/api/DEALS?CATEGORYID=");
+            baseEndpoints.Add("http://localhost:9000/API/DEALS?CATEGORYID=");
 
             // Loop thru each endpoint with different casing and
             // both categories to ensure deals are returned correctly.
@@ -116,7 +167,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
                      foreach (var deal in deals)
                      {
                          var matchingDeal = expected.First(d => d.Key.ToString().Equals(deal.Id));
-                         AssertDealEquality(deal, matchingDeal);
+                         AssertFrontEndDealEquality(deal, matchingDeal);
                      }
                  };
 
@@ -134,11 +185,11 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
 
             var response = "";
             var baseEndpoints = new List<string>();
-            baseEndpoints.Add("http://localhost:9000/api/frontenddeals");
-            baseEndpoints.Add("http://localhost:9000/aPi/frontenddeals/");
-            baseEndpoints.Add("http://localhost:9000/api/FrontendDeals");
-            baseEndpoints.Add("http://localhost:9000/api/FRONTENDDEALS/");
-            baseEndpoints.Add("http://localhost:9000/API/FRONTENDDEALS");
+            baseEndpoints.Add("http://localhost:9000/api/deals");
+            baseEndpoints.Add("http://localhost:9000/aPi/deals/");
+            baseEndpoints.Add("http://localhost:9000/api/Deals");
+            baseEndpoints.Add("http://localhost:9000/api/DEALS/");
+            baseEndpoints.Add("http://localhost:9000/API/DEALS");
 
             foreach (var endpoint in baseEndpoints)
             {
@@ -157,7 +208,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
                 foreach (var deal in deals)
                 {
                     var matchingDeal = expected.First(d => d.Key.ToString().Equals(deal.Id));
-                    AssertDealEquality(deal, matchingDeal);
+                    AssertFrontEndDealEquality(deal, matchingDeal);
                 }
             }
         }
@@ -182,11 +233,11 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
 
             var response = "";
             var baseEndpoints = new List<string>();
-            baseEndpoints.Add("http://localhost:9000/api/frontenddeals?search=");
-            baseEndpoints.Add("http://localhost:9000/aPi/frontenddeals?SeArch=");
-            baseEndpoints.Add("http://localhost:9000/api/FrontendDeals?Search=");
-            baseEndpoints.Add("http://localhost:9000/api/FRONTENDDEALS?SEARCH=");
-            baseEndpoints.Add("http://localhost:9000/API/FRONTENDDEALS?SEARCH=");
+            baseEndpoints.Add("http://localhost:9000/api/deals?search=");
+            baseEndpoints.Add("http://localhost:9000/aPi/deals?SeArch=");
+            baseEndpoints.Add("http://localhost:9000/api/Deals?Search=");
+            baseEndpoints.Add("http://localhost:9000/api/DEALS?SEARCH=");
+            baseEndpoints.Add("http://localhost:9000/API/DEALS?SEARCH=");
 
             foreach (var baseEndpoint in baseEndpoints)
             {
@@ -194,7 +245,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
 
                 response = CreateWebApiServiceAndGetResponse(
                     sampleDeals,
-                    new List<DealCategoryModel>(), 
+                    new List<DealCategoryModel>(),
                     endpoint);
 
                 // To View Model
@@ -207,7 +258,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
                 foreach (var deal in deals)
                 {
                     var matchingDeal = expected.First(d => d.Key.ToString().Equals(deal.Id));
-                    AssertDealEquality(deal, matchingDeal);
+                    AssertFrontEndDealEquality(deal, matchingDeal);
                 }
             }
         }
@@ -258,13 +309,30 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
             return response;
         }
 
-        private static void AssertDealEquality(FrontEndDeal deal, DealModel matchingDeal)
+        private static void AssertFrontEndDealEquality(FrontEndDeal deal, DealModel matchingDeal)
         {
             deal.ShortTitle.Should().BeEquivalentTo(matchingDeal.ShortTitle);
             deal.ShortDescription.Should().BeEquivalentTo(matchingDeal.ShortDescription);
             deal.RegularPrice.Should().BeEquivalentTo(matchingDeal.RegularPrice.ToString());
             deal.SpecialPrice.Should().BeEquivalentTo(matchingDeal.SpecialPrice.ToString());
             deal.CanonicalUrl.Should().BeEquivalentTo(matchingDeal.CanonicalUrl);
+        }
+
+        private static void AssertFrontEndSpecificDealEquality(FrontEndSpecificDeal deal, DealModel matchingDeal)
+        {
+            deal.Id.Should().BeEquivalentTo(matchingDeal.Key.ToString());
+            deal.Fineprint.Should().BeEquivalentTo(matchingDeal.FinePrint);
+            deal.Highlight.Should().BeEquivalentTo(matchingDeal.Highlight);
+
+            deal.ShortTitle.Should().BeEquivalentTo(matchingDeal.ShortTitle);
+            deal.ShortDescription.Should().BeEquivalentTo(matchingDeal.ShortDescription);
+            deal.LongTitle.Should().BeEquivalentTo(matchingDeal.LongTitle);
+            deal.LongDescription.Should().BeEquivalentTo(matchingDeal.LongDescription);
+
+            deal.RegularPrice.Should().Be(matchingDeal.RegularPrice);
+            deal.SpecialPrice.Should().Be(matchingDeal.SpecialPrice);
+            deal.StartTime.Should().Be(matchingDeal.StartTime);
+            deal.EndTime.Should().Be(matchingDeal.EndTime);
         }
     }
 }

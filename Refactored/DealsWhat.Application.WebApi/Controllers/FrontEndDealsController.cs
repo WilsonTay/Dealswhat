@@ -22,9 +22,14 @@ namespace DealsWhat.Application.WebApi.Controllers
 
             AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealModel, FrontEndDeal>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()));
+
+            AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealModel, FrontEndSpecificDeal>()
+               .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()));
         }
 
         // GET api/values
+        [HttpGet]
+        [Route("api/deals/")]
         public IEnumerable<FrontEndDeal> Get()
         {
             var query = Request.GetQueryNameValuePairs().ToList();
@@ -48,6 +53,32 @@ namespace DealsWhat.Application.WebApi.Controllers
 
             return this.dealService.SearchDeals(searchQuery)
                 .Select(d => AutoMapper.Mapper.Map<FrontEndDeal>(d));
+        }
+
+        [HttpGet]
+        [Route("api/deal/")]
+        public FrontEndSpecificDeal GetSingle()
+        {
+            var query = Request.GetQueryNameValuePairs().ToList();
+            var searchQuery = new SingleDealSearchQuery();
+
+            var dealId = query.FirstOrDefault(k => k.Key.Equals("id", StringComparison.OrdinalIgnoreCase));
+            var url = query.FirstOrDefault(k => k.Key.Equals("url", StringComparison.OrdinalIgnoreCase));
+
+            if (KeyHasValue(dealId))
+            {
+                searchQuery.Id = dealId.Value;
+            }
+
+            if (KeyHasValue(url))
+            {
+                searchQuery.CanonicalUrl = url.Value;
+            }
+
+            var searchResult = this.dealService.SearchSingleDeal(searchQuery);
+            var convertedSearchResult = AutoMapper.Mapper.Map<DealModel, FrontEndSpecificDeal>(searchResult);
+
+            return convertedSearchResult;
         }
 
         private static bool KeyHasValue(KeyValuePair<string, string> kvp)
