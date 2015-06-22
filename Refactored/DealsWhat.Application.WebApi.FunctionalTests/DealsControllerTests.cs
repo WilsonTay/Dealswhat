@@ -162,6 +162,56 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
             }
         }
 
+        [TestMethod]
+        public void GetDealsBySearchTerm_AllFieldMatches()
+        {
+            var query = "PuChOng BbQ";
+            var sampleDeals = CreateSampleDeals().ToList();
+            var validDeals = new List<DealModel>();
+            var matchingDeal1 = DealModel.Create("10% discount for puchong bbq", "description", "a", "b", "c", "d");
+            var matchingDeal2 = DealModel.Create("a", "10% discount for puchong bbq", "a", "b", "c", "d");
+            var matchingDeal3 = DealModel.Create("a", "description", "a", "10% discount for puchong bbq", "c", "d");
+            var matchingDeal4 = DealModel.Create("a", "c", "a", "10% discount for puchong bbq", "c", "d");
+
+            validDeals.Add(matchingDeal1);
+            validDeals.Add(matchingDeal2);
+            validDeals.Add(matchingDeal3);
+            validDeals.Add(matchingDeal4);
+
+            sampleDeals.AddRange(validDeals);
+
+            var response = "";
+            var baseEndpoints = new List<string>();
+            baseEndpoints.Add("http://localhost:9000/api/frontenddeals?search=");
+            baseEndpoints.Add("http://localhost:9000/aPi/frontenddeals?SeArch=");
+            baseEndpoints.Add("http://localhost:9000/api/FrontendDeals?Search=");
+            baseEndpoints.Add("http://localhost:9000/api/FRONTENDDEALS?SEARCH=");
+            baseEndpoints.Add("http://localhost:9000/API/FRONTENDDEALS?SEARCH=");
+
+            foreach (var baseEndpoint in baseEndpoints)
+            {
+                var endpoint = baseEndpoint + query;
+
+                response = CreateWebApiServiceAndGetResponse(
+                    sampleDeals,
+                    new List<DealCategoryModel>(), 
+                    endpoint);
+
+                // To View Model
+                var deals = JsonConvert.DeserializeObject<IEnumerable<FrontEndDeal>>(response).ToList();
+
+                var expected = validDeals;
+
+                deals.Count.ShouldBeEquivalentTo(expected.Count);
+
+                foreach (var deal in deals)
+                {
+                    var matchingDeal = expected.First(d => d.Key.ToString().Equals(deal.Id));
+                    AssertDealEquality(deal, matchingDeal);
+                }
+            }
+        }
+
         private static IDisposable CreateWebApiService(
            IList<DealModel> deals,
            IList<DealCategoryModel> dealCategories)

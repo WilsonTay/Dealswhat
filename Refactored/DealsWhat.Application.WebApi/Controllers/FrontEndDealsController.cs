@@ -36,11 +36,15 @@ namespace DealsWhat.Application.WebApi.Controllers
             // Category id, search term, sorted by, all
             if (KeyHasValue(categoryId))
             {
-                searchQuery = new DealSearchQuery
-                {
-                    CategoryId = categoryId.Value
-                };
+                searchQuery.CategoryId = categoryId.Value;
             }
+
+            if (KeyHasValue(searchTerm))
+            {
+                searchQuery.SearchTerm = searchTerm.Value;
+            }
+
+            //TODO: Combine search term and category.
 
             return this.dealService.SearchDeals(searchQuery)
                 .Select(d => AutoMapper.Mapper.Map<FrontEndDeal>(d));
