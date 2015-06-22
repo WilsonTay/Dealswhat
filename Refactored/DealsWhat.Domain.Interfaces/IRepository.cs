@@ -4,11 +4,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using DealsWhat.Domain.Model;
 
 namespace DealsWhat.Domain.Interfaces
 {
     public interface IRepository<T>
-        where T : class
+        where T : IAggregateRoot
     {
         IEnumerable<T> GetAll();
     }

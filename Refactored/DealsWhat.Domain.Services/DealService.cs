@@ -28,7 +28,7 @@ namespace DealsWhat.Domain.Services
                 var category =
                     this.repositoryFactory.CreateDealCategoryRepository()
                         .GetAll()
-                        .FirstOrDefault(c => c.Key.Equals(query.CategoryId));
+                        .FirstOrDefault(c => c.Key.ToString().Equals(query.CategoryId));
 
                 if (category == null)
                 {

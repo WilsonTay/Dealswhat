@@ -47,6 +47,7 @@
     <Compile Include="DealModel.cs" />
     <Compile Include="DealCategoryModel.cs" />
     <Compile Include="DealStatus.cs" />
+    <Compile Include="IAggregateRoot.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

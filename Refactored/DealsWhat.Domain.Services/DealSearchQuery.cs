@@ -10,6 +10,6 @@ namespace DealsWhat.Domain.Services
     public sealed class DealSearchQuery
     {
         public string SearchTerm { get; set; }
-        public object CategoryId { get; set; }
+        public string CategoryId { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DealsWhat.Domain.Model
 {
-    public sealed class DealCategoryModel : IEntity
+    public sealed class DealCategoryModel : IAggregateRoot, IEntity
     {
         public object Key { get; internal set; }
 

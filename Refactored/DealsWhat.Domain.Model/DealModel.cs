@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DealsWhat.Domain.Model
 {
-    public class DealModel : IEntity
+    public class DealModel : IAggregateRoot, IEntity
     {
         public string ShortTitle { get; private set; }
         public string LongTitle { get; private set; }
@@ -28,7 +28,7 @@ namespace DealsWhat.Domain.Model
         public object Key { get; internal set; }
 
         private DealModel()
-        {           
+        {
         }
 
         public static DealModel Create(
@@ -100,7 +100,7 @@ namespace DealsWhat.Domain.Model
         {
             if (obj == null) return false;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((DealModel) obj);
+            return Equals((DealModel)obj);
         }
 
         private bool Equals(DealModel other)

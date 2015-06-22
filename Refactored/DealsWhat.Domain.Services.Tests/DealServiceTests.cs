@@ -211,7 +211,7 @@ namespace DealsWhat.Domain.Services.Tests
 
             var query = new DealSearchQuery
             {
-                CategoryId = categoryId
+                CategoryId = categoryId.ToString()
             };
 
             var deals = dealService.SearchDeals(query).ToList();

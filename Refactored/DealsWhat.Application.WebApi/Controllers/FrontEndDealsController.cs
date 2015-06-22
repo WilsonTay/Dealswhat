@@ -27,31 +27,33 @@ namespace DealsWhat.Application.WebApi.Controllers
         // GET api/values
         public IEnumerable<FrontEndDeal> Get()
         {
-            var query = new DealSearchQuery();
+            var query = Request.GetQueryNameValuePairs().ToList();
+            var searchQuery = new DealSearchQuery();
 
-            return this.dealService.SearchDeals(query)
+            var searchTerm = query.FirstOrDefault(k => k.Key.Equals("search", StringComparison.OrdinalIgnoreCase));
+            var categoryId = query.FirstOrDefault(k => k.Key.Equals("categoryid", StringComparison.OrdinalIgnoreCase));
+
+            // Category id, search term, sorted by, all
+            if (KeyHasValue(categoryId))
+            {
+                searchQuery = new DealSearchQuery
+                {
+                    CategoryId = categoryId.Value
+                };
+            }
+
+            return this.dealService.SearchDeals(searchQuery)
                 .Select(d => AutoMapper.Mapper.Map<FrontEndDeal>(d));
         }
 
-        // GET api/values/5
-        public DealModel Get(int id)
+        private static bool KeyHasValue(KeyValuePair<string, string> kvp)
         {
-            return null;
-        }
+            if (!kvp.Equals(default(KeyValuePair<string, string>)) && !string.IsNullOrEmpty(kvp.Value))
+            {
+                return true;
+            }
 
-        // POST api/values
-        public void Post([FromBody]DealModel value)
-        {
-        }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody]DealModel value)
-        {
-        }
-
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
+            return false;
         }
     }
 }
