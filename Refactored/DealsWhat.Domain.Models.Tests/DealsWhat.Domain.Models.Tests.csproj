@@ -73,6 +73,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DealCategoryTests.cs" />
+    <Compile Include="DealOptionTests.cs" />
     <Compile Include="DealTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

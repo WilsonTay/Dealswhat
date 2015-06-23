@@ -44,9 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DealAttributeModel.cs" />
     <Compile Include="DealImageModel.cs" />
     <Compile Include="DealModel.cs" />
     <Compile Include="DealCategoryModel.cs" />
+    <Compile Include="DealOptionModel.cs" />
     <Compile Include="DealStatus.cs" />
     <Compile Include="IAggregateRoot.cs" />
     <Compile Include="IEntity.cs" />

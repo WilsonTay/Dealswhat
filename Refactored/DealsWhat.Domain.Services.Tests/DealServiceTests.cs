@@ -340,7 +340,7 @@ namespace DealsWhat.Domain.Services.Tests
             string canonicalUrl = "url",
             object id = null)
         {
-            var deal = DealModel.Create(shortTitle, shortDescription, longTitle, longDescription, finePrint, highlight);
+            var deal = DealTestFactory.CreateCompleteDeal(shortTitle, shortDescription, longTitle, longDescription, finePrint, highlight);
 
             deal.AddImage(DealTestFactory.CreateDealImage());
 

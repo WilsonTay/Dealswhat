@@ -51,7 +51,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
         public void GetSingleDealById_AllFieldMatches()
         {
             var deals = CreateSampleDeals();
-            var matchingDeal = DealTestFactory.CreateDeal();
+            var matchingDeal = DealTestFactory.CreateCompleteDeal();
             deals.Add(matchingDeal);
 
             var baseEndpoints = new List<string>();
@@ -80,7 +80,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
         public void GetSingleDealByCanonicalUrl_AllFieldMatches()
         {
             var deals = CreateSampleDeals();
-            var matchingDeal = DealTestFactory.CreateDeal();
+            var matchingDeal = DealTestFactory.CreateCompleteDeal();
             deals.Add(matchingDeal);
 
             var baseEndpoints = new List<string>();
@@ -110,7 +110,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
         {
             var categoryName = "category1";
             var sampleDeals = CreateSampleDeals();
-            var category = DealCategoryModel.Create(categoryName);
+            var category = DealTestFactory.CreateDealCategory(name: categoryName);
 
             sampleDeals.ToList().ForEach(d =>
             {
@@ -119,7 +119,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
 
             var categoryName2 = "category2";
             var sampleDeals2 = CreateSampleDeals();
-            var category2 = DealCategoryModel.Create(categoryName);
+            var category2 = DealTestFactory.CreateDealCategory(name: categoryName2);
 
             sampleDeals2.ToList().ForEach(d =>
             {
@@ -213,10 +213,10 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
             var query = "PuChOng BbQ";
             var sampleDeals = CreateSampleDeals().ToList();
             var validDeals = new List<DealModel>();
-            var matchingDeal1 = DealModel.Create("10% discount for puchong bbq", "description", "a", "b", "c", "d");
-            var matchingDeal2 = DealModel.Create("a", "10% discount for puchong bbq", "a", "b", "c", "d");
-            var matchingDeal3 = DealModel.Create("a", "description", "a", "10% discount for puchong bbq", "c", "d");
-            var matchingDeal4 = DealModel.Create("a", "c", "a", "10% discount for puchong bbq", "c", "d");
+            var matchingDeal1 = DealTestFactory.CreateDeal("10% discount for puchong bbq", "description", "a", "b", "c", "d");
+            var matchingDeal2 = DealTestFactory.CreateDeal("a", "10% discount for puchong bbq", "a", "b", "c", "d");
+            var matchingDeal3 = DealTestFactory.CreateDeal("a", "description", "a", "10% discount for puchong bbq", "c", "d");
+            var matchingDeal4 = DealTestFactory.CreateDeal("a", "c", "a", "10% discount for puchong bbq", "c", "d");
 
             validDeals.Add(matchingDeal1);
             validDeals.Add(matchingDeal2);
@@ -327,6 +327,11 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
             deal.SpecialPrice.Should().Be(matchingDeal.SpecialPrice);
             deal.StartTime.Should().Be(matchingDeal.StartTime);
             deal.EndTime.Should().Be(matchingDeal.EndTime);
+
+            foreach (var image in matchingDeal.Images)
+            {
+                Assert.IsTrue(deal.ImageUrls.Any(a => image.RelativeUrl.Equals(a)));
+            }
         }
     }
 }

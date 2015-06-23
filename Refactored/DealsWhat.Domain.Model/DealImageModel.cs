@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DealsWhat.Domain.Model
 {
-    public class DealImageModel
+    public sealed class DealImageModel
     {
         public string RelativeUrl { get; private set; }
         public int Order { get; private set; }

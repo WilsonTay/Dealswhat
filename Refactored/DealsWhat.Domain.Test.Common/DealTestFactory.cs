@@ -11,7 +11,7 @@ namespace DealsWhat.Domain.Test.Common
 {
     public static class DealTestFactory
     {
-        private static IFixture fixture = new Fixture().Customize(new AutoMoqCustomization());
+        private static readonly IFixture fixture = new Fixture().Customize(new AutoMoqCustomization());
 
         public static DealModel CreateCompleteDeal(
             string shortTitle = "",
@@ -57,6 +57,11 @@ namespace DealsWhat.Domain.Test.Common
             {
                 deal.CanonicalUrl = canonicalUrl;
             }
+
+            var regularPrice = fixture.Create<double>();
+            var specialPrice = fixture.Create<double>(regularPrice);
+        
+            deal.SetPrice(regularPrice, specialPrice);
 
             return deal;
         }

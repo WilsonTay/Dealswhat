@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DealsWhat.Domain.Model
 {
-    public class DealModel : IAggregateRoot, IEntity
+    public sealed class DealModel : IAggregateRoot, IEntity
     {
-        private IList<DealImageModel> images; 
+        private readonly IList<DealImageModel> images; 
 
         public string ShortTitle { get; private set; }
         public string LongTitle { get; private set; }

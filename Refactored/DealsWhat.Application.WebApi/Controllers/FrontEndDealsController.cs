@@ -24,7 +24,8 @@ namespace DealsWhat.Application.WebApi.Controllers
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()));
 
             AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealModel, FrontEndSpecificDeal>()
-               .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()));
+               .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()))
+               .ForMember(dest => dest.ImageUrls, opt => opt.MapFrom(src => src.Images.Select(i => i.RelativeUrl)));
         }
 
         // GET api/values
