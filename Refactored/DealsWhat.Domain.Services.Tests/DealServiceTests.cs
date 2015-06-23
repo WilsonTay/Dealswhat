@@ -342,8 +342,6 @@ namespace DealsWhat.Domain.Services.Tests
         {
             var deal = DealTestFactory.CreateCompleteDeal(shortTitle, shortDescription, longTitle, longDescription, finePrint, highlight);
 
-            deal.AddImage(DealTestFactory.CreateDealImage());
-
             if (id != null)
             {
                 deal.Key = id;

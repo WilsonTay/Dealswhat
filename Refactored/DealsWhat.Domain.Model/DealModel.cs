@@ -8,7 +8,8 @@ namespace DealsWhat.Domain.Model
 {
     public sealed class DealModel : IAggregateRoot, IEntity
     {
-        private readonly IList<DealImageModel> images; 
+        private readonly IList<DealOptionModel> options;
+        private readonly IList<DealImageModel> images;
 
         public string ShortTitle { get; private set; }
         public string LongTitle { get; private set; }
@@ -30,6 +31,11 @@ namespace DealsWhat.Domain.Model
             get { return images; }
         }
 
+        public IEnumerable<DealOptionModel> Options
+        {
+            get { return options; }
+        }
+
         public string CanonicalUrl { get; internal set; }
 
         public object Key { get; internal set; }
@@ -37,6 +43,7 @@ namespace DealsWhat.Domain.Model
         private DealModel()
         {
             images = new List<DealImageModel>();
+            options = new List<DealOptionModel>();
         }
 
         public static DealModel Create(
@@ -107,36 +114,36 @@ namespace DealsWhat.Domain.Model
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((DealModel) obj);
+            return obj is DealModel && Equals((DealModel) obj);
         }
 
-        protected bool Equals(DealModel other)
+        private bool Equals(DealModel other)
         {
-            return string.Equals(ShortTitle, other.ShortTitle) && string.Equals(LongTitle, other.LongTitle) && string.Equals(ShortDescription, other.ShortDescription) && RegularPrice.Equals(other.RegularPrice) && string.Equals(LongDescription, other.LongDescription) && SpecialPrice.Equals(other.SpecialPrice) && string.Equals(SKU, other.SKU) && DateAdded.Equals(other.DateAdded) && StartTime.Equals(other.StartTime) && EndTime.Equals(other.EndTime) && string.Equals(Highlight, other.Highlight) && string.Equals(FinePrint, other.FinePrint) && IsFeatured.Equals(other.IsFeatured) && Equals(Images, other.Images) && Status == other.Status && string.Equals(CanonicalUrl, other.CanonicalUrl) && Equals(Key, other.Key);
+            return Equals(options, other.options) && Equals(images, other.images) && string.Equals(ShortTitle, other.ShortTitle) && string.Equals(LongTitle, other.LongTitle) && string.Equals(ShortDescription, other.ShortDescription) && string.Equals(LongDescription, other.LongDescription) && RegularPrice.Equals(other.RegularPrice) && string.Equals(SKU, other.SKU) && DateAdded.Equals(other.DateAdded) && SpecialPrice.Equals(other.SpecialPrice) && StartTime.Equals(other.StartTime) && IsFeatured.Equals(other.IsFeatured) && string.Equals(CanonicalUrl, other.CanonicalUrl) && Equals(Key, other.Key) && Status == other.Status && string.Equals(Highlight, other.Highlight) && string.Equals(FinePrint, other.FinePrint) && EndTime.Equals(other.EndTime);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                var hashCode = (ShortTitle != null ? ShortTitle.GetHashCode() : 0);
+                var hashCode = (options != null ? options.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (images != null ? images.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (ShortTitle != null ? ShortTitle.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (LongTitle != null ? LongTitle.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (ShortDescription != null ? ShortDescription.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ RegularPrice.GetHashCode();
                 hashCode = (hashCode*397) ^ (LongDescription != null ? LongDescription.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ SpecialPrice.GetHashCode();
+                hashCode = (hashCode*397) ^ RegularPrice.GetHashCode();
                 hashCode = (hashCode*397) ^ (SKU != null ? SKU.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ DateAdded.GetHashCode();
+                hashCode = (hashCode*397) ^ SpecialPrice.GetHashCode();
                 hashCode = (hashCode*397) ^ StartTime.GetHashCode();
-                hashCode = (hashCode*397) ^ EndTime.GetHashCode();
-                hashCode = (hashCode*397) ^ (Highlight != null ? Highlight.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (FinePrint != null ? FinePrint.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ IsFeatured.GetHashCode();
-                hashCode = (hashCode*397) ^ (Images != null ? Images.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (int) Status;
                 hashCode = (hashCode*397) ^ (CanonicalUrl != null ? CanonicalUrl.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Key != null ? Key.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (int) Status;
+                hashCode = (hashCode*397) ^ (Highlight != null ? Highlight.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (FinePrint != null ? FinePrint.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ EndTime.GetHashCode();
                 return hashCode;
             }
         }
@@ -144,6 +151,11 @@ namespace DealsWhat.Domain.Model
         public void AddImage(DealImageModel image)
         {
             images.Add(image);
+        }
+
+        public void AddOption(DealOptionModel option)
+        {
+            options.Add(option);
         }
     }
 }

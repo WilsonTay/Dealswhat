@@ -10,5 +10,19 @@ namespace DealsWhat.Domain.Model
     {
         public string Name { get; set; }
         public string Value { get; set; }
+
+        private DealAttributeModel()
+        {
+
+        }
+
+        public static DealAttributeModel Create(string name, string value)
+        {
+            return new DealAttributeModel
+            {
+                Name = name,
+                Value = value
+            };
+        }
     }
 }

@@ -22,6 +22,6 @@ namespace DealsWhat.Application.WebApi.Models
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
 
-        // Deal Options.
+        // TODO: Deal Options.
     }
 }

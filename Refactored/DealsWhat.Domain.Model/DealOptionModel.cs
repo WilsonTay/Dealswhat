@@ -12,6 +12,31 @@ namespace DealsWhat.Domain.Model
         public double RegularPrice { get; set; }
         public double SpecialPrice { get; set; }
 
-        public IList<DealAttributeModel> Attributes { get; set; }
+        public IEnumerable<DealAttributeModel> Attributes
+        {
+            get { return attributes; }
+        }
+
+        private readonly IList<DealAttributeModel> attributes;
+
+        private DealOptionModel()
+        {
+            attributes = new List<DealAttributeModel>();
+        }
+
+        public static DealOptionModel Create(string shortTitle, double regularPrice, double specialPrice)
+        {
+            return new DealOptionModel
+            {
+                ShortTitle = shortTitle,
+                RegularPrice = regularPrice,
+                SpecialPrice = specialPrice
+            };
+        }
+
+        public void AddAttribute(DealAttributeModel attribute)
+        {
+            attributes.Add(attribute);
+        }
     }
 }

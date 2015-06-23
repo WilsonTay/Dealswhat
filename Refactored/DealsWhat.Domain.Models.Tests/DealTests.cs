@@ -135,12 +135,29 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void SetPrice_PriceSetCorrectly()
         {
-            var deal = fixture.Create<DealModel>();
+            var deal = DealTestFactory.CreateDeal();
 
             deal.SetPrice(20, 15);
 
             deal.RegularPrice.ShouldBeEquivalentTo(20);
             deal.SpecialPrice.ShouldBeEquivalentTo(15);
+        }
+
+        [TestMethod]
+        public void AddDealOptions_OptionsAreAdded()
+        {
+            var options = Enumerable.Range(0, 10).Select(a => DealTestFactory.CreateDealOption()).ToList();
+            var deal = DealTestFactory.CreateDeal();
+
+            foreach (var option in options)
+            {
+                deal.AddOption(option);
+            }
+
+            foreach (var option in options)
+            {
+                deal.Options.Should().Contain(option);
+            }
         }
     }
 }

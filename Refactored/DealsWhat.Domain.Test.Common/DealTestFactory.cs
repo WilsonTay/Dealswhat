@@ -30,6 +30,11 @@ namespace DealsWhat.Domain.Test.Common
                 deal.AddImage(CreateDealImage());
             }
 
+            for (int i = 1; i < 5; i++)
+            {
+                deal.AddOption(CreateDealOptionWithAttributes());
+            }
+
             return deal;
         }
 
@@ -60,7 +65,7 @@ namespace DealsWhat.Domain.Test.Common
 
             var regularPrice = fixture.Create<double>();
             var specialPrice = fixture.Create<double>(regularPrice);
-        
+
             deal.SetPrice(regularPrice, specialPrice);
 
             return deal;
@@ -88,6 +93,50 @@ namespace DealsWhat.Domain.Test.Common
             }
 
             return DealImageModel.Create(relativeUrl, order);
+        }
+
+        public static DealOptionModel CreateDealOption(
+            string shortTitle = "",
+            double regularPrice = 0,
+            double specialPrice = 0)
+        {
+            if (regularPrice == 0 && specialPrice == 0)
+            {
+                regularPrice = fixture.Create<double>();
+                specialPrice = fixture.Create<double>(regularPrice);
+            }
+
+            var dealOption = DealOptionModel.Create(
+                shortTitle.Equals("") ? fixture.Create<string>() : shortTitle,
+                regularPrice,
+                specialPrice);
+
+            return dealOption;
+        }
+
+        public static DealOptionModel CreateDealOptionWithAttributes(
+            string shortTitle = "",
+            double regularPrice = 0,
+            double specialPrice = 0,
+            int optionsToCreate = 3)
+        {
+            var dealOption = CreateDealOption(shortTitle, regularPrice, specialPrice);
+
+            for (int i = 0; i < optionsToCreate; i++)
+            {
+                var attribute = CreateDealAttribute();
+
+                dealOption.AddAttribute(attribute);
+            }
+
+            return dealOption;
+        }
+
+        public static DealAttributeModel CreateDealAttribute(string name = "", string value = "")
+        {
+            return DealAttributeModel.Create(
+                name.Equals("") ? fixture.Create<string>() : name,
+                value.Equals("") ? fixture.Create<string>() : value);
         }
     }
 }
