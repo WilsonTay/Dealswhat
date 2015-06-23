@@ -39,13 +39,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
 
             for (int i = 0; i < 100; i++)
             {
-                var deal = DealModel.Create(
-                    fixture.Create<string>(),
-                    fixture.Create<string>(),
-                    fixture.Create<string>(),
-                    fixture.Create<string>(),
-                    fixture.Create<string>(),
-                    fixture.Create<string>());
+                var deal = DealTestFactory.CreateDeal();
 
                 deals.Add(deal);
             }
@@ -57,7 +51,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
         public void GetSingleDealById_AllFieldMatches()
         {
             var deals = CreateSampleDeals();
-            var matchingDeal = DealModel.Create("a", "b", "c", "d", "e", "f");
+            var matchingDeal = DealTestFactory.CreateDeal();
             deals.Add(matchingDeal);
 
             var baseEndpoints = new List<string>();
@@ -86,7 +80,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
         public void GetSingleDealByCanonicalUrl_AllFieldMatches()
         {
             var deals = CreateSampleDeals();
-            var matchingDeal = DealModel.Create("a", "b", "c", "d", "e", "f");
+            var matchingDeal = DealTestFactory.CreateDeal();
             deals.Add(matchingDeal);
 
             var baseEndpoints = new List<string>();

@@ -62,6 +62,8 @@ namespace DealsWhat.Domain.Models.Tests
             deal.Status.ShouldBeEquivalentTo(DealStatus.Draft);
             deal.Key.Should().BeOfType<Guid>();
             deal.SKU.Should().NotBeEmpty();
+
+            deal.Images.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -111,6 +113,23 @@ namespace DealsWhat.Domain.Models.Tests
             {
                 deal.SKU.Should().NotContain(a.ToString());
             });
+        }
+
+        [TestMethod]
+        public void AddImages_ImagesAdded()
+        {
+            var images = fixture.CreateMany<DealImageModel>(10);
+            var deal = DealTestFactory.CreateDeal();
+
+            foreach (var image in images)
+            {
+                deal.AddImage(image);
+            }
+
+            foreach (var image in images)
+            {
+                deal.Images.Should().Contain(image);
+            }
         }
 
         [TestMethod]
