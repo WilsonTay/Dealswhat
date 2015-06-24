@@ -19,7 +19,7 @@ namespace DealsWhat.Domain.Models.Tests
             var regularPrice = 10.5;
             var specialPrice = 5.5;
 
-            var dealOption = DealTestFactory.CreateDealOption(shortTitle, regularPrice, specialPrice);
+            var dealOption = TestModelFactory.CreateDealOption(shortTitle, regularPrice, specialPrice);
 
             dealOption.ShortTitle.ShouldBeEquivalentTo(shortTitle);
             dealOption.RegularPrice.ShouldBeEquivalentTo(regularPrice);
@@ -29,9 +29,9 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void AddAttributes_AttributesValid()
         {
-            var dealOption = DealTestFactory.CreateDealOption();
+            var dealOption = TestModelFactory.CreateDealOption();
 
-            var attributes = Enumerable.Range(0, 10).Select(a => DealTestFactory.CreateDealAttribute()).ToList();
+            var attributes = Enumerable.Range(0, 10).Select(a => TestModelFactory.CreateDealAttribute()).ToList();
 
             foreach (var attribute in attributes)
             {

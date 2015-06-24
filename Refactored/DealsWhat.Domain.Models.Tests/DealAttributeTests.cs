@@ -14,7 +14,7 @@ namespace DealsWhat.Domain.Models.Tests
             var name = "Size";
             var value = "M";
 
-            var attribute = DealTestFactory.CreateDealAttribute(name, value);
+            var attribute = TestModelFactory.CreateDealAttribute(name, value);
 
             attribute.Name.ShouldBeEquivalentTo(name);
             attribute.Value.ShouldBeEquivalentTo(value);

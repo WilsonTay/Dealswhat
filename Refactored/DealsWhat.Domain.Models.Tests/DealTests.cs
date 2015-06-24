@@ -69,7 +69,7 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void CreateDeal_SKU_ShouldNotContainSpecialCharacter()
         {
-            var deal = DealTestFactory.CreateDeal(shortTitle: "BBQ in Puchong & Sunway");
+            var deal = TestModelFactory.CreateDeal(shortTitle: "BBQ in Puchong & Sunway");
 
             deal.SKU.Should().NotContain("&");
         }
@@ -77,7 +77,7 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void CreateDeal_CanonicalUrl_ShouldNotContainSpecialCharacter2()
         {
-            var deal = DealTestFactory.CreateDeal(shortTitle: "BBQ in Puchong & Sunway !@#$%^&*()");
+            var deal = TestModelFactory.CreateDeal(shortTitle: "BBQ in Puchong & Sunway !@#$%^&*()");
 
             "!@#$%^&* ()".ToList().ForEach(a =>
             {
@@ -91,7 +91,7 @@ namespace DealsWhat.Domain.Models.Tests
             var shorTitle = "this is a deal";
             var shortTitleWithDash = shorTitle.Replace(" ", "-");
 
-            var deal = DealTestFactory.CreateDeal(shortTitle: shorTitle);
+            var deal = TestModelFactory.CreateDeal(shortTitle: shorTitle);
 
             deal.CanonicalUrl.Should().Contain(shortTitleWithDash);
         }
@@ -99,7 +99,7 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void CreateDeal_CanonicalUrl_ShouldNotContainSpecialCharacter()
         {
-            var deal = DealTestFactory.CreateDeal(shortTitle: "BBQ in Puchong & Sunway");
+            var deal = TestModelFactory.CreateDeal(shortTitle: "BBQ in Puchong & Sunway");
 
             deal.CanonicalUrl.Should().NotContain("&");
         }
@@ -107,7 +107,7 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void CreateDeal_SKU_ShouldNotContainSpecialCharacter2()
         {
-            var deal = DealTestFactory.CreateDeal(shortTitle: "BBQ in Puchong & Sunway !@#$%^&* ()");
+            var deal = TestModelFactory.CreateDeal(shortTitle: "BBQ in Puchong & Sunway !@#$%^&* ()");
 
             "!@#$%^&* ()".ToList().ForEach(a =>
             {
@@ -119,7 +119,7 @@ namespace DealsWhat.Domain.Models.Tests
         public void AddImages_ImagesAdded()
         {
             var images = fixture.CreateMany<DealImageModel>(10);
-            var deal = DealTestFactory.CreateDeal();
+            var deal = TestModelFactory.CreateDeal();
 
             foreach (var image in images)
             {
@@ -135,7 +135,7 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void SetPrice_PriceSetCorrectly()
         {
-            var deal = DealTestFactory.CreateDeal();
+            var deal = TestModelFactory.CreateDeal();
 
             deal.SetPrice(20, 15);
 
@@ -146,8 +146,8 @@ namespace DealsWhat.Domain.Models.Tests
         [TestMethod]
         public void AddDealOptions_OptionsAreAdded()
         {
-            var options = Enumerable.Range(0, 10).Select(a => DealTestFactory.CreateDealOption()).ToList();
-            var deal = DealTestFactory.CreateDeal();
+            var options = Enumerable.Range(0, 10).Select(a => TestModelFactory.CreateDealOption()).ToList();
+            var deal = TestModelFactory.CreateDeal();
 
             foreach (var option in options)
             {

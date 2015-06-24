@@ -39,7 +39,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
 
             for (int i = 0; i < 100; i++)
             {
-                var deal = DealTestFactory.CreateDeal();
+                var deal = TestModelFactory.CreateDeal();
 
                 deals.Add(deal);
             }
@@ -51,7 +51,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
         public void GetSingleDealById_AllFieldMatches()
         {
             var deals = CreateSampleDeals();
-            var matchingDeal = DealTestFactory.CreateCompleteDeal();
+            var matchingDeal = TestModelFactory.CreateCompleteDeal();
             deals.Add(matchingDeal);
 
             var baseEndpoints = new List<string>();
@@ -80,7 +80,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
         public void GetSingleDealByCanonicalUrl_AllFieldMatches()
         {
             var deals = CreateSampleDeals();
-            var matchingDeal = DealTestFactory.CreateCompleteDeal();
+            var matchingDeal = TestModelFactory.CreateCompleteDeal();
             deals.Add(matchingDeal);
 
             var baseEndpoints = new List<string>();
@@ -110,7 +110,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
         {
             var categoryName = "category1";
             var sampleDeals = CreateSampleDeals();
-            var category = DealTestFactory.CreateDealCategory(name: categoryName);
+            var category = TestModelFactory.CreateDealCategory(name: categoryName);
 
             sampleDeals.ToList().ForEach(d =>
             {
@@ -119,7 +119,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
 
             var categoryName2 = "category2";
             var sampleDeals2 = CreateSampleDeals();
-            var category2 = DealTestFactory.CreateDealCategory(name: categoryName2);
+            var category2 = TestModelFactory.CreateDealCategory(name: categoryName2);
 
             sampleDeals2.ToList().ForEach(d =>
             {
@@ -213,10 +213,10 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
             var query = "PuChOng BbQ";
             var sampleDeals = CreateSampleDeals().ToList();
             var validDeals = new List<DealModel>();
-            var matchingDeal1 = DealTestFactory.CreateDeal("10% discount for puchong bbq", "description", "a", "b", "c", "d");
-            var matchingDeal2 = DealTestFactory.CreateDeal("a", "10% discount for puchong bbq", "a", "b", "c", "d");
-            var matchingDeal3 = DealTestFactory.CreateDeal("a", "description", "a", "10% discount for puchong bbq", "c", "d");
-            var matchingDeal4 = DealTestFactory.CreateDeal("a", "c", "a", "10% discount for puchong bbq", "c", "d");
+            var matchingDeal1 = TestModelFactory.CreateDeal("10% discount for puchong bbq", "description", "a", "b", "c", "d");
+            var matchingDeal2 = TestModelFactory.CreateDeal("a", "10% discount for puchong bbq", "a", "b", "c", "d");
+            var matchingDeal3 = TestModelFactory.CreateDeal("a", "description", "a", "10% discount for puchong bbq", "c", "d");
+            var matchingDeal4 = TestModelFactory.CreateDeal("a", "c", "a", "10% discount for puchong bbq", "c", "d");
 
             validDeals.Add(matchingDeal1);
             validDeals.Add(matchingDeal2);

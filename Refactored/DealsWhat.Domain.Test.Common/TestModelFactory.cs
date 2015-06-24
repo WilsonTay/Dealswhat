@@ -9,7 +9,7 @@ using Ploeh.AutoFixture.AutoMoq;
 
 namespace DealsWhat.Domain.Test.Common
 {
-    public static class DealTestFactory
+    public static class TestModelFactory
     {
         private static readonly IFixture fixture = new Fixture().Customize(new AutoMoqCustomization());
 

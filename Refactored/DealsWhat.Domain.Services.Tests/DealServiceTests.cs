@@ -202,8 +202,8 @@ namespace DealsWhat.Domain.Services.Tests
             var dealService = GenerateDealCategoryAndCreateService(dealCategories);
 
             var categoryId = Guid.NewGuid();
-            var validDeal = DealTestFactory.CreateDeal(shortTitle: "valid deal");
-            var dealCategory = DealTestFactory.CreateDealCategory(name: "category", key: categoryId);
+            var validDeal = TestModelFactory.CreateDeal(shortTitle: "valid deal");
+            var dealCategory = TestModelFactory.CreateDealCategory(name: "category", key: categoryId);
 
             dealCategory.AddDeal(validDeal);
 
@@ -223,7 +223,7 @@ namespace DealsWhat.Domain.Services.Tests
         private DealService GenerateDealCategoryAndCreateService(List<DealCategoryModel> dealCategories)
         {
             var deals = Enumerable.Range(0, 10).Select(a => CreateDeal()).ToList();
-            var otherDealCategory = DealTestFactory.CreateDealCategory("other category");
+            var otherDealCategory = TestModelFactory.CreateDealCategory("other category");
 
             foreach (var deal in deals)
             {
@@ -340,7 +340,7 @@ namespace DealsWhat.Domain.Services.Tests
             string canonicalUrl = "url",
             object id = null)
         {
-            var deal = DealTestFactory.CreateCompleteDeal(shortTitle, shortDescription, longTitle, longDescription, finePrint, highlight);
+            var deal = TestModelFactory.CreateCompleteDeal(shortTitle, shortDescription, longTitle, longDescription, finePrint, highlight);
 
             if (id != null)
             {
