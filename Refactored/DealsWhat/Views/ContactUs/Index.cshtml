@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div class="gap-medium"></div>
+
+
+<article class="post">
+    <div class="post-inner">
+        <header class="post-header">
+            <h3 class="post-title">Contact Us</h3>
+        </header>
+        <div class="post-inner">
+             <h4 class="post-title">Our Email Address</h4>
+            <div class="post-desciption">For any sales related enquiries, please contact<br/>
+                <a href="support@dealswhat.com">support@dealswhat.com</a>
+                <br/> <br/>
+            </div>
+
+            <h4 class="post-title">Our Office Number</h4>
+            <div class="post-desciption">Tel: 03-2297 5258<br/>
+                Fax: 03-2297 5262
+                <br/> <br/>
+                Working Hours: 9 AM - 5.30 PM (Monday - Friday)
+            </div>
+     
+            <h4 class="post-title">Our Office Address</h4>
+            <div class="post-desciption">
+                Strategic Multideals (SSM: 002423756-H)<br/>
+                D-109, Block D, Kelana Square, <br/> Jalan SS 7/26, Kelana Jaya, <br/>47301 Petaling Jaya,<br/> Selangor
+            </div>
+            <div id="map-canvas" style="width: 100%; height: 500px;"></div>
+        </div>
+    </div>
+</article>
+
+
+
+
+@section scripts {
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYaq2aZgiq0kOG8Fz5--d91Z321qzcNW4"></script>
+    <script>
+        $(document).ready(function () {
+            //$("#map-canvas").insertAfter("#main-container");
+            updateGoogleMap2();
+        });
+
+        function updateGoogleMap2() {
+            var lat = "3.1061226";
+            var lng = "101.592364";
+
+            if ($('#map-canvas').length) {
+                var map,
+                    service;
+                jQuery(function ($) {
+                    $(document).ready(function () {
+                        var latlng = new google.maps.LatLng(lat, lng);
+                        var myOptions = {
+                            zoom: 16,
+                            center: latlng,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                        };
+
+                        map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+
+
+                        var marker = new google.maps.Marker({
+                            position: latlng,
+                            map: map
+                        });
+                        marker.setMap(map);
+
+
+                        $('a[href="#google-map-tab"]').on('shown.bs.tab', function (e) {
+                            google.maps.event.trigger(map, 'resize');
+                            map.setCenter(latlng);
+                        });
+                    });
+                });
+            }
+        }
+
+    </script>
+
+}

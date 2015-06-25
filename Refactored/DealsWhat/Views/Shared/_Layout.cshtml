@@ -1,0 +1,258 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>DealsWhat</title>
+    <!-- meta info -->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="keywords" content="dealswhat,deals in malaysia" />
+    <meta name="description" content="DealsWhat - Best Deals in Malaysia">
+    <meta name="author" content="Tsoy">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap styles -->
+    <link rel="stylesheet" href="~/content/css/boostrap.css">
+    <!-- Font Awesome styles (icons) -->
+    <link rel="stylesheet" href="~/content/css/font_awesome.css">
+    <!-- Bootstrap social styles (icons) -->
+    <link rel="stylesheet" href="~/content/css/bootstrap-social.css">
+    <!-- Main Template styles -->
+    <link rel="stylesheet" href="~/content/css/styles.css">
+
+    <link rel="stylesheet" href="~/content/css/schemes/blaze-orange.css">
+    <!-- IE 8 Fallback -->
+    <!--[if lt IE 9]>
+	<link rel="stylesheet" type="text/css" href="~/content/css/ie.css" />
+<![endif]-->
+
+    <!-- Your custom styles (blank file) -->
+    <link rel="stylesheet" href="~/content/css/mystyles.css">
+
+    @RenderSection("styles", required: false)
+
+    <style>
+        .btn-bootstrap {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="global-wrap">
+
+
+        <!-- //////////////////////////////////
+	//////////////MAIN HEADER///////////// 
+	////////////////////////////////////-->
+        @*<div class="top-main-area text-center">
+            <div class="container">
+                <a href="@Url.Action("Index", "Home")" class="logo mt5">
+                    <img src="~/content/img/logo-small-dark.png" alt="Image Alternative text" title="Image Title" />
+                </a>
+            </div>
+        </div>*@
+        <header class="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <!-- MAIN NAVIGATION -->
+                        <div class="flexnav-menu-button" id="flexnav-menu-button">Menu</div>
+                        <nav>
+                            <ul class="nav nav-pills flexnav" id="navigations" data-breakpoint="800">
+                                <li><a href="@Url.Action("Index", "Home")">
+                                    <img style="width: 110px" src="~/content/img/dw-logo.png" width="90"></a>
+                                <li id="nav-home"><a href="@Url.Action("Index", "Home")">Home</a>
+                                </li>
+                                <li id="nav-aboutus"><a href="@Url.Action("Index", "AboutUs")">About Us</a>
+                                </li>
+                                <li id="nav-faq"><a href="@Url.Action("Index", "Faq")">FAQ</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- END MAIN NAVIGATION -->
+                    </div>
+                    <div class="col-md-6">
+                        <!-- LOGIN REGISTER LINKS -->
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+        <!-- //////////////////////////////////
+	//////////////END MAIN HEADER////////// 
+	////////////////////////////////////-->
+        @RenderSection("featured", required: false)
+
+        <!-- //////////////////////////////////
+	//////////////PAGE CONTENT///////////// 
+	////////////////////////////////////-->
+
+
+
+        <div id="main-container" class="container">
+            @RenderBody()
+            <div class="gap"></div>
+        </div>
+
+
+        <!-- //////////////////////////////////
+	//////////////END PAGE CONTENT///////// 
+	////////////////////////////////////-->
+
+
+
+        <!-- //////////////////////////////////
+	//////////////MAIN FOOTER////////////// 
+	////////////////////////////////////-->
+
+        <footer class="main">
+            <div class="footer-top-area">
+                <div class="container">
+                    <div class="row row-wrap">
+                        <div class="col-md-3">
+                            <a href="@Url.Action("Index", "Home")">
+                                <img src="~/content/img/dw-logo.png" alt="logo" title="logo" class="" width="90px">
+                            </a>
+                            <p>&nbsp;</p>
+                            @*                            <ul class="list list-social">
+                                <li>
+                                    <a class="fa fa-facebook box-icon" href="#" data-toggle="tooltip" title="Facebook"></a>
+                                </li>
+                                <li>
+                                    <a class="fa fa-twitter box-icon" href="#" data-toggle="tooltip" title="Twitter"></a>
+                                </li>
+                                <li>
+                                    <a class="fa fa-flickr box-icon" href="#" data-toggle="tooltip" title="Flickr"></a>
+                                </li>
+                                <li>
+                                    <a class="fa fa-linkedin box-icon" href="#" data-toggle="tooltip" title="LinkedIn"></a>
+                                </li>
+                                <li>
+                                    <a class="fa fa-tumblr box-icon" href="#" data-toggle="tooltip" title="Tumblr"></a>
+                                </li>
+                            </ul>*@
+                            <p>Discover easy and pleasing shopping experience with DealsWhat. With our great mix of big name stores and offerings, you'll be spoilt for choice.</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Sign Up To Our Newsletters</h4>
+                            <div class="box">
+                                <form>
+                                    <div class="form-group mb10">
+                                        <label>E-mail</label>
+                                        <input type="text" class="form-control" />
+                                    </div>
+                                    <p class="mb10">We promise to keep your email address secure and private and will not use it for other purposes. Please review our <a href="@Url.Action("Index", "PrivacyPolicy")">Privacy Policy</a> for more details.</p>
+                                    <input type="submit" class="btn btn-primary" value="Sign Up" />
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Find Us On Facebook</h4>
+                            <div class="fb-page" data-href="https://www.facebook.com/dealswhat" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false" data-show-posts="true">
+                                <div class="fb-xfbml-parse-ignore">
+                                    <blockquote cite="https://www.facebook.com/dealswhat"><a href="https://www.facebook.com/dealswhat">DealsWhat</a></blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Navigations</h4>
+                            <a class="footer-links" href="@Url.Action("Index", "Home")">Home</a><br />
+                            <a class="footer-links" href="@Url.Action("Index", "AboutUs")">About Us</a><br />
+                            <a class="footer-links" href="@Url.Action("Index", "ContactUs")">Contact Us</a><br />
+                            <a class="footer-links" href="@Url.Action("Index", "Faq")">FAQ</a><br />
+                            <a class="footer-links" href="@Url.Action("Index", "PrivacyPolicy")">Privacy Policy</a><br />
+                            <a class="footer-links" href="@Url.Action("Index", "ReturnPolicy")">Return Policy</a><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>Copyright © 2015, DealsWhat, All Rights Reserved</p>
+                        </div>
+                        <div class="col-md-6 col-md-offset-2">
+                            <div class="pull-right">
+                                <ul class="list-inline list-payment">
+                                    <li>
+                                        <img src="~/content/img/payment/american-express-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                    </li>
+                                    <li>
+                                        <img src="~/content/img/payment/cirrus-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                    </li>
+                                    <li>
+                                        <img src="~/content/img/payment/discover-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                    </li>
+                                    <li>
+                                        <img src="~/content/img/payment/ebay-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                    </li>
+                                    <li>
+                                        <img src="~/content/img/payment/maestro-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                    </li>
+                                    <li>
+                                        <img src="~/content/img/payment/mastercard-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                    </li>
+                                    <li>
+                                        <img src="~/content/img/payment/visa-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- //////////////////////////////////
+	//////////////END MAIN  FOOTER///////// 
+	////////////////////////////////////-->
+
+    </div>
+</body>
+<!-- Scripts queries -->
+<script src="~/content/js/jquery.js"></script>
+<script src="~/content/js/boostrap.min.js"></script>
+<script src="~/content/js/countdown.min.js"></script>
+<script src="~/content/js/flexnav.min.js"></script>
+<script src="~/content/js/magnific.js"></script>
+<script src="~/content/js/tweet.min.js"></script>
+<script src="~/content/js/fitvids.min.js"></script>
+<script src="~/content/js/mail.min.js"></script>
+<script src="~/content/js/ionrangeslider.js"></script>
+<script src="~/content/js/icheck.js"></script>
+<script src="~/content/js/fotorama.js"></script>
+<script src="~/content/js/card-payment.js"></script>
+<script src="~/content/js/owl-carousel.js"></script>
+<script src="~/content/js/masonry.js"></script>
+<script src="~/content/js/imagesloaded.js"></script>
+<script src="~/content/js/nicescroll.js"></script>
+<script src="~/Content/js/facebook.js"></script>
+
+<!-- Custom scripts -->
+<script src="~/content/js/custom.js"></script>
+@RenderSection("scripts", required: false)
+</html>

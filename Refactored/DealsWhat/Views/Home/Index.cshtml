@@ -1,0 +1,248 @@
+﻿@model DealsWhat.ViewModels.IndexViewModel
+
+<style>
+    .countdown.countdown-inline > div:first-child span.count {
+        font-size: 18px;
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    .countdown.countdown-inline > div:first-child span.title {
+        font-size: 15px;
+        font-weight: bold;
+        display: inline;
+        margin-right: 10px;
+    }
+
+    .countdown.countdown-inline > div span.count {
+        font-size: 15px;
+    }
+</style>
+
+@section featured {
+    <!-- TOP AREA -->
+    <div class="top-area">
+        <div class="owl-carousel owl-slider" id="owl-carousel-slider" data-inner-pagination="true" data-white-pagination="true" data-nav="false">
+            <div>
+                <div class="bg-holder">
+                    <img src="~/Content/img/banner1.jpg" alt="Image Alternative text" title="Bridge" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END TOP AREA -->
+
+    <!-- SEARCH AREA -->
+    <form class="search-area form-group search-area-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-11 clearfix">
+                    <label>
+                        <i class="fa fa-search"></i><span>I am searching for</span>
+                    </label>
+                    <div class="search-area-division search-area-division-input">
+                        <input id="main-search-textbox" class="form-control" type="text" placeholder="Food Deals" />
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <button id="main-search-btn" class="btn btn-block btn-white search-btn" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- END SEARCH AREA -->
+}
+<div class="gap"></div>
+
+<div class="row">
+    <div class="col-md-3">
+        <aside class="sidebar-left">
+            <ul id="main-category-list" class="nav nav-tabs nav-stacked nav-coupon-category nav-coupon-category-left">
+
+                <li class="active"><a data-deal-category-id="-1" class="deal-category-single"><i class="fa fa-cutlery"></i>All</a>
+                </li>
+                @foreach (var category in Model.Categories)
+                {
+                    <li><a data-deal-category-id="@category.Id" class="deal-category-single"><i class="fa @category.Icon"></i>@category.Name</a>
+                    </li>
+                }
+            </ul>
+        </aside>
+    </div>
+    <div class="col-md-9">
+        <div id="main-item-list-loader" class="loader"></div>
+        <div class="row row-wrap" id="masonry" data-effect="mfp-move-from-top">
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var baseUrl = '@Url.Content("~")';
+
+        $(document).ready(function () {
+            setupDealCategoryEventHandler();
+            hideItemListLoader();
+            showItemList();
+
+            loadDeals("", "");
+            setMenuActive("#nav-home");
+        });
+
+
+        function initializeCountDown() {
+            $('.countdown').each(function () {
+                var count = $(this);
+                $(this).countdown({
+                    zeroCallback: function (options) {
+                        $(count).countdown({
+                            unixFormat: true
+                        });
+                    }
+                });
+            });
+        }
+
+        function showItemList() {
+            $('#main-item-list').show();
+        }
+        function hideItemList() {
+            $('#main-item-list').hide();
+        }
+        function hideItemListLoader() {
+            $('#main-item-list-loader').hide();
+        }
+        function showItemListLoader() {
+            $('#main-item-list-loader').show();
+        }
+
+
+        $('#main-search-btn').click(function () {
+            var searchTerm = $('#main-search-textbox').val();
+
+            loadDeals("search", searchTerm);
+        });
+
+        $('.index-deal-list').on('click', '.view-deal-link', function () {
+            loadDealBasicInformation($(this));
+        });
+
+        function setupDealCategoryEventHandler() {
+            $('.deal-category-single').click(function () {
+                var categoryId = $(this).attr('data-deal-category-id');
+
+                loadDeals("categoryid", categoryId);
+
+                $('#main-category-list').find('li').removeClass('active');
+                $(this).closest('li').addClass('active');
+            });
+        }
+
+
+        function loadDeals(query, parameter) {
+            var baseUrl = '@Url.Content("~")';
+
+            $.ajax({
+                url: baseUrl + "api/deals?" + query + "=" + parameter + "&sort=dateposted",
+                dataType: 'json',
+                cache: false,
+                beforeSend: function () {
+                    showItemListLoader();
+                    hideItemList();
+                    $('#masonry').empty();
+                },
+                success: function (deals) {
+
+                    var elements = [];
+                    $.each(deals, function (index, value) {
+                        var element = buildDealInformation(value);
+                        elements.push(element);
+                    });
+
+                    var temp = Masonry.data($('#masonry')[0]);
+                    if (temp != null) {
+                        Masonry.data($('#masonry')[0]).destroy();
+                    }
+
+                    $(elements).hide();
+                    $('#masonry').append(elements);
+
+                    $('#masonry').imagesLoaded(function () {
+                        var masonry = $('#masonry').masonry({
+                            itemSelector: '.col-masonry'
+                        });
+                    });
+                },
+                complete: function () {
+                    hideItemListLoader();
+                    showItemList();
+                    initializeCountDown();
+                }
+            });
+        }
+
+        function clearMasonry() {
+            $('#main-item-list').empty();
+            $('#main-item-list').masonry('reloadItems');
+        }
+
+        function buildDealInformation(deal) {
+            var sortedImages = deal.Thumbnails.sort(function (a, b) { return a.Order - b.Order });
+
+            var coverPageUrl = '';
+            if (sortedImages[0] != null) {
+                coverPageUrl = sortedImages[0].RelativeUrl;
+            }
+
+            var dom = '<a class="col-md-4 col-masonry popup-text view-deal-link" href="' + baseUrl + 'deal/index/' + deal.CanonicalUrl + '" data-deal-id="' + deal.Id + '" data-effect="mfp-move-from-top">' +
+                '<div class="product-thumb"><header class="product-header"><img height="197" src="' + coverPageUrl + '?width=190&height=126" />' +
+                '<div class="product-quick-view"><span class="fa fa-eye"></span></div></header>' +
+                '<div class="product-inner"><table height="70" align="center"><tr><td valign="top"><h5 class="product-title">' + deal.ShortTitle + '</h5></td></tr></table><div class="product-desciption">' + deal.ShortDescription + '</div><div class="product-meta">' +
+                '<span class="product-time"><span data-countdown="' + deal.EndTime + '" class="countdown countdown-inline"></span></span><ul class="product-price-list">' +
+                '<li><span class="product-price">RM ' + deal.SpecialPrice.toFixed(2) + '</span><span class="product-old-price">RM ' + deal.RegularPrice.toFixed(2) + '</span>' +
+                '</li></ul></div><p class="product-location"><i class="fa fa-map-marker"></i>&nbsp;Selangor</p></div></div></a>';
+
+            return dom;
+        }
+
+        function loadDealBasicInformation(activeElement) {
+            var dealId = $(activeElement).attr("data-deal-id");
+            var baseUrl = '@Url.Content("~")';
+
+            $.ajax({
+                url: baseUrl + "api/dealapi/" + dealId,
+                dataType: 'json',
+                cache: false,
+                success: function (deal) {
+
+                    var converted = deal;
+                    var totalSavings = converted.RegularPrice - converted.SpecialPrice;
+                    var percentage = (totalSavings * 100) / converted.RegularPrice;
+
+                    $('#product-quick-view-title').text(converted.ShortTitle);
+
+                    $('#product-quick-view-short-description').text(converted.ShortDescription);
+                    $('#product-quick-view-discounted-price').text("RM " + converted.SpecialPrice.toFixed(2));
+                    $('#product-quick-view-original-price').text("RM " + converted.RegularPrice.toFixed(2));
+                    $('#product-quick-view-total-savings').text("RM " + totalSavings.toFixed(2));
+                    $('#product-quick-view-discount-percentage').text(percentage + "%");
+
+                    $('#product-quick-view-more-details').attr('href', '/Deal/Index/' + converted.CanonicalUrl);
+
+                    buildQuickViewImageList(converted.Pictures);
+                },
+                complete: function () {
+                }
+            });
+        }
+
+        function buildQuickViewImageList(pictures) {
+            var element = $('#product-quick-view-image-list');
+
+            $.each(pictures, function (index, value) {
+                element.append("<img src=\"~/Content/img/deals/" + value.RelativeUrl + "\"/>");
+            });
+        }
+    </script>
+
+}

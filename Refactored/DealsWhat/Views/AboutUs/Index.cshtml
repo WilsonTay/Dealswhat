@@ -1,0 +1,36 @@
+﻿<div class="gap"></div>
+
+<h3>About Us</h3>
+<div class="row row-wrap">
+    <div class="col-md-8">
+        <!-- START BOOTSTRAP CAROUSEL -->
+        <div id="my-carousel" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="active item">
+                    <img src="~/Content/img/aboutus.png" alt="Image Alternative text" title="cascada" />
+                </div>
+            </div>
+            <a class="carousel-control left" href="#my-carousel" data-slide="prev"></a>
+            <a class="carousel-control right" href="#my-carousel" data-slide="next"></a>
+        </div>
+        <!-- END BOOTSTRAP CAROUSEL -->
+    </div>
+    <div class="col-md-4">
+        <h3>The Company</h3>
+        <p>Welcome to Dealswhat Founded in 2015, We are Malaysia’s online shopping destination, featuring an exclusive selection of products from leisure, entertainment, food and drink , consumer electronics, state-of-the-art gadgets, luxury accessories and more.</p>
+        <p>To ensure our customers enjoy a superior shopping experience, we handpick our offerings and work only with highly reputable, select merchants and brands. We are further committed to the quick and seamless fulfillment and delivery of your order, and in the rare circumstance something should not go to plan, our customer service is standing by to assist in any way they can.</p>
+    </div>
+</div>
+<div class="gap gap-small"></div>
+
+<div class="gap gap-small"></div>
+<div class="gap gap-small"></div>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            setMenuActive("#nav-aboutus");
+        });
+    </script>
+}

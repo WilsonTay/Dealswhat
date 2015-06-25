@@ -1,0 +1,83 @@
+﻿<div class="gap"></div>
+
+<h3>Account Settings</h3>
+<div class="row">
+    <div class="col-md-3">
+        <aside class="sidebar-left">
+            <ul class="nav nav-pills nav-stacked nav-arrow">
+                <li class="active">
+                    <a href="page-my-account-settings.html">Settings</a>
+                </li>
+                <li>
+                    <a href="page-my-account-addresses.html">Address Book</a>
+                </li>
+                <li>
+                    <a href="page-my-account-orders.html">Orders History</a>
+                </li>
+                <li>
+                    <a href="page-my-account-wishlist.html">Wishlist</a>
+                </li>
+            </ul>
+        </aside>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-6">
+                <form action="@Url.Action("Manage","Account")" method="post">
+                    <div class="form-group">
+                        <label for="">First Name</label>
+                        <input name="FirstName" type="text" value="John" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Last Name</label>
+                        <input name="LastName" type="text" value="Doe" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="">E-mail</label>
+                        <input name="Email" type="text" value="johndoe@gmail.com" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Phone Number</label>
+                        <input name="PhoneNumber" type="text" value="+1 202 555 0113" class="form-control">
+                    </div>
+                    <input type="submit" value="Save Changes" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+        <div class="gap"></div>
+    </div>
+</div>
+
+
+@*@model DealsWhat.Models.LocalPasswordModel
+@{
+    ViewBag.Title = "Manage Account";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<p class="message-success">@ViewBag.StatusMessage</p>
+
+<p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+
+@if (ViewBag.HasLocalPassword)
+{
+    @Html.Partial("_ChangePasswordPartial")
+}
+else
+{ 
+    @Html.Partial("_SetPasswordPartial")
+}
+
+<section id="externalLogins">
+    @Html.Action("RemoveExternalLogins")
+
+    <h3>Add an external login</h3>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

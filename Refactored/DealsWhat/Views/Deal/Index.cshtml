@@ -1,0 +1,344 @@
+﻿@using DealsWhat.Helpers
+@model DealsWhat.ViewModels.DealSpecificProductViewModel
+
+<div class="gap-medium"></div>
+<div id="purchase-dialog" style="max-width: 600px" class="mfp-with-anim mfp-dialog clearfix mfp-hide">
+    <h3 style="margin-bottom: 0px">Choose your deal</h3>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th width="100%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var option in Model.DealOptions)
+            {
+                <tr>
+                    <td>
+                        <form method="post" action="">
+                            <h4>@option.ShortTitle</h4>
+
+                            <table width="100%">
+                                @foreach (var attributes in option.DealAttributes.GroupBy(a => a.Name))
+                                {
+                                    <tr>
+                                        <td>@attributes.Key</td>
+                                        <td>
+                                            <select style="width: 100%" name="@attributes.Key" class="deal-attribute-list">
+                                                @foreach (var attribute in attributes)
+                                                {
+                                                    <option value="@attribute.Id">@attribute.Value</option>
+                                                }
+                                            </select>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                            <table width="100%" style="margin-top: 10px; table-layout: fixed; text-align: center">
+                                <tr>
+                                    <td>Price</td>
+                                    <td>Savings</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="deal-option-original-price">RM @option.RegularPrice.ToString("0.00")</span><span class="deal-option-special-price">RM @option.SpecialPrice.ToString("0.00")</span></td>
+                                    <td><span class="deal-option-special-price">@(((option.RegularPrice - option.SpecialPrice) / option.RegularPrice * 100).ToString("0.##"))%</span></td>
+                                    <td>
+                                        <form>
+                                            <input type="hidden" name="DealOptionId" value="@option.Id"/>
+                                            <input type="button" style="width: 100%" class="purchase-deal-option-button btn btn-primary" value="Buy">
+                                        </form>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </td>
+
+                </tr>
+
+            
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+
+        <div class="fotorama" data-nav="thumbs" data-allowfullscreen="1" data-width="100%" data-thumbheight="100" data-thumbwidth="100">
+            @foreach (var url in Model.ImageUrls)
+            {
+                <img src="@Url.Content(PathHelper.ConvertRelativeToAbsoluteDealImagePath(url))" />
+            }
+        </div>
+        <div class="gap gap-small"></div>
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active">
+                    <a href="#tab-1" data-toggle="tab"><i class="fa fa-tag"></i>The Deal</a>
+                </li>
+@*                <li>
+                    <a href="#google-map-tab" data-toggle="tab"><i class="fa fa-map-marker"></i>Location</a>
+                </li>
+                <li>
+                    <a href="#tab-3" data-toggle="tab"><i class="fa fa-comments"></i>Comments</a>
+                </li>
+                <li>
+                    <a href="#tab-4" data-toggle="tab"><i class="fa fa-info"></i>The Company</a>
+                </li>*@
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="tab-1">
+                    <div class="row text-smaller">
+                        <div class="col-md-6">
+                            <h4>Highlight</h4>
+                            @Html.Raw(@Model.Highlight)
+                        </div>
+                          <div class="col-md-6">
+                            <h4>Fine Print</h4>
+                            @Html.Raw(Model.Fineprint)
+                        </div>
+                    </div>
+                    <div class="gap-small"></div>
+                    <div class="row text-smaller">
+                        <div class="col-md-12">
+                            <h4>Description</h4>
+                            @Html.Raw(@Model.LongDescription)
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="google-map-tab">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div id="map-canvas" style="width: 100%; height: 500px;"></div>
+                        </div>
+                        <div class="col-md-3">
+                            <ul class="list">
+                                @Model.Merchant.FullAddress
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tab-3">
+                    <!-- START COMMENTS -->
+                    <ul class="comments-list">
+                        @foreach (var comment in Model.Comments)
+                        {
+                            <li>
+                                <!-- COMMENT -->
+                                <article class="comment">
+                                    <div class="comment-author">
+                                        <img src="~/Content/img/50x50.png" />
+                                    </div>
+                                    <div class="comment-inner">
+                                        <span class="comment-author-name">@comment.PosterName</span>
+                                        <p class="comment-content">@comment.Message</p>
+                                        <span class="comment-time">@comment.DatePosted</span>
+                                    </div>
+                                </article>
+                            </li>
+                        }
+                    </ul>
+                    <!-- END COMMENTS -->
+                    <div class="text-center">
+                        <a class="btn btn-primary"><i class="fa fa-pencil"></i>Leave a Comment</a>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tab-4">
+                    <h3>@Model.Merchant.CompanyName</h3>
+                    @Model.Merchant.About
+                    <br />
+                    <a class="btn btn-primary" href="@Model.Merchant.Website">Company Website <i class="fa fa-external-link"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="gap gap-small"></div>
+    </div>
+    <div class="col-md-3">
+        <div class="product-page-meta box sidebar-box">
+            <h4>@Model.LongTitle</h4>
+            <p>@Model.ShortDescription</p>
+            <a class="popup-text btn btn-primary btn-lg btn-block" href="#purchase-dialog" data-effect="mfp-move-from-top">RM @Model.DiscountedPrice.ToString("0.00") Buy Now</a>
+            @* <a class="btn btn-primary @(Model.DealEnded ? "disabled" : "") btn-lg btn-block" href="javascript:document.getElementById('buyDealForm').submit()">RM @Model.DiscountedPrice.ToString("0.00") Buy Now
+            </a>
+            @using (Html.BeginForm("Add", "Cart", FormMethod.Post, new { id = "buyDealForm" }))
+            {
+                <input type="hidden" name="dealId" value="@Model.Id" />
+                @Html.AntiForgeryToken()
+            }*@
+            <ul class="list product-page-meta-info">
+                <li>
+                    <ul class="list product-page-meta-price-list">
+                        <li>
+                            <span class="product-page-meta-title">List Price</span><span class="product-page-meta-price">RM @Model.OriginalPrice.ToString("0.00")</span>
+                        </li>
+                        <li>
+                            <span class="product-page-meta-title">Discount</span><span class="product-page-meta-price">@(((Model.OriginalPrice - Model.DiscountedPrice) / Model.OriginalPrice * 100).ToString("0.##"))%</span>
+                        </li>
+                        <li>
+                            <span class="product-page-meta-title">Savings</span><span class="product-page-meta-price">RM @((Model.OriginalPrice - Model.DiscountedPrice).ToString("0.00"))</span>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="product-page-meta-title">Time Left to Buy</span>
+                    <!-- COUNTDOWN -->
+                    @if (@Model.DealEnded)
+                    {
+                        <strong class="text-color">Sorry. The Deal Has Ended.</strong>
+                    }
+                    else
+                    {
+                        <div data-countdown="@Model.EndDate" class="countdown countdown-inline"></div>
+                    }
+                </li>
+                <li>
+                    <span class="product-page-meta-title">0 bought</span>
+                </li>
+            </ul>
+        </div>
+        @Html.Partial("_Sidebar", Model.PopularDeals)
+    </div>
+</div>
+@section styles{
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .deal-option-price-header {
+        }
+
+        .deal-option-original-price {
+            text-decoration: line-through;
+            white-space: nowrap;
+            margin-right: 5px;
+            color: grey;
+        }
+
+        .deal-option-special-price {
+            white-space: nowrap;
+            font-size: 17px;
+            text-align: center;
+            font-weight: 600;
+        }
+    </style>
+
+}
+
+@section scripts {
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYaq2aZgiq0kOG8Fz5--d91Z321qzcNW4"></script>
+    <script>
+        var baseUrl = '@Url.Content("~")';
+
+        $('.purchase-deal-option-button').click(function () {
+
+            var form = $(this).closest('form');
+            var selects = form.find('select');
+            var dealOptionId = form.find('input[name=DealOptionId]').val();
+
+            var selectedDealOption = {};
+            selectedDealOption.DealOptionId = dealOptionId;
+
+            var selectedAttributes = [];
+
+            $.each(selects, function (index, value) {
+                var selectedName = $(value).attr('name');
+                var selectedValue = $(value).val();
+
+                var attribute = {};
+                attribute.Name = selectedName;
+                attribute.Value = selectedValue;
+
+                selectedAttributes.push(attribute);
+            });
+
+            selectedDealOption.SelectedAttributes = selectedAttributes;
+
+            $.ajax({
+                url: baseUrl + "api/ordersapi/",
+                data: selectedDealOption,
+                method: 'post',
+                dataType: 'json',
+                cache: false,
+                success: function (deal) {
+                },
+                complete: function () {
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            updateGoogleMap2();
+            $('.deal-attribute-list').select2({
+                minimumResultsForSearch: Infinity
+            });
+        });
+
+        function updateGoogleMap2() {
+            var lat = "0";
+            var lng = "0";
+
+            @if (string.IsNullOrEmpty(Model.Merchant.AddressLat))
+            {
+                Html.Raw("lat = " + @Model.Merchant.AddressLat);
+                Html.Raw("lng = " + @Model.Merchant.AddressLng);
+            }
+
+            if ($('#map-canvas').length) {
+                var map,
+                    service;
+                jQuery(function ($) {
+                    $(document).ready(function () {
+                        var latlng = new google.maps.LatLng(lat, lng);
+                        var myOptions = {
+                            zoom: 14,
+                            center: latlng,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                        };
+
+                        map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+
+
+                        var marker = new google.maps.Marker({
+                            position: latlng,
+                            map: map
+                        });
+                        marker.setMap(map);
+
+
+                        $('a[href="#google-map-tab"]').on('shown.bs.tab', function (e) {
+                            google.maps.event.trigger(map, 'resize');
+                            map.setCenter(latlng);
+                        });
+                    });
+                });
+            }
+        }
+
+        function updateGoogleMap() {
+
+            var lat = "0";
+            var lng = "0";
+
+            @if (string.IsNullOrEmpty(Model.Merchant.AddressLat))
+            {
+                Html.Raw("lat = " + @Model.Merchant.AddressLat);
+                Html.Raw("lng = " + @Model.Merchant.AddressLng);
+            }
+
+            mapOptions = {
+                zoom: 14,
+                center: new google.maps.LatLng(lat, lng)
+            };
+            var map = new google.maps.Map(document.getElementById('map-canvas'),
+                mapOptions);
+
+            var latlng = new google.maps.LatLng(lat, lng);
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map
+            });
+            marker.setMap(map);
+
+        }
+    </script>
+}
