@@ -30,9 +30,26 @@ namespace DealsWhat.Infrastructure.DataAccess
                 .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => src.StartTime))
                 .ForMember(dest => dest.EndTime, opt => opt.MapFrom(src => src.EndTime))
                 .ForMember(dest => dest.DateAdded, opt => opt.MapFrom(src => src.DateAdded))
-                .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()));
+                .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()))
+                .AfterMap((dest, src) =>
+                {
+                    foreach (var img in dest.Pictures.ToList())
+                    {
+                        src.AddImage(DealImageModel.Create(img.RelativeUrl, img.Order));
+                    }
+                });
 
-            AutoMapper.Mapper.CreateMap<Models.DealCategory, DealsWhat.Domain.Model.DealCategoryModel>();
+            AutoMapper.Mapper.CreateMap<Models.DealCategory, DealsWhat.Domain.Model.DealCategoryModel>()
+                .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()))
+                .AfterMap((dest, opt) =>
+                {
+                    foreach (var d in dest.Deals)
+                    {
+                        var deal = AutoMapper.Mapper.Map<DealModel>(d);
+
+                        opt.Deals.Add(deal);
+                    }
+                });
         }
 
         public IRepository<DealModel> CreateDealRepository()

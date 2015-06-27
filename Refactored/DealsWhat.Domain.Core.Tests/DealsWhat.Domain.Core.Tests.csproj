@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B8DAD0D2-8DD1-46E1-98C6-8EAFFE7039EF}</ProjectGuid>
+    <ProjectGuid>{42ED8852-257E-452A-888E-B4B244732DA9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DealsWhat.Domain.Services.Tests</RootNamespace>
-    <AssemblyName>DealsWhat.Domain.Services.Tests</AssemblyName>
+    <RootNamespace>DealsWhat.Domain.Core.Tests</RootNamespace>
+    <AssemblyName>DealsWhat.Domain.Core.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,29 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentAssertions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentAssertions.3.3.0\lib\net45\FluentAssertions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="FluentAssertions.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentAssertions.3.3.0\lib\net45\FluentAssertions.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Moq, Version=4.2.1502.911, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Ploeh.AutoFixture, Version=3.30.8.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoFixture.3.30.8\lib\net40\Ploeh.AutoFixture.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Ploeh.AutoFixture.AutoMoq, Version=3.30.8.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoFixture.AutoMoq.3.30.8\lib\net40\Ploeh.AutoFixture.AutoMoq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -72,29 +50,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DealServiceTests.cs" />
+    <Compile Include="Helpers\ImageHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DealsWhat.Domain.Interfaces\DealsWhat.Domain.Core.csproj">
       <Project>{580b0db6-0daf-45ca-8955-c0e0f55ec7c2}</Project>
       <Name>DealsWhat.Domain.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DealsWhat.Domain.Model\DealsWhat.Domain.Models.csproj">
-      <Project>{29e2570c-a982-496f-b4b1-097751465ed1}</Project>
-      <Name>DealsWhat.Domain.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DealsWhat.Domain.Services\DealsWhat.Domain.Services.csproj">
-      <Project>{84a789a0-45f7-47be-8e5a-908218e495a4}</Project>
-      <Name>DealsWhat.Domain.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DealsWhat.Domain.Test.Common\DealsWhat.Domain.Test.Common.csproj">
-      <Project>{1a5533d9-ad62-4648-bb0a-0fc97a1f756f}</Project>
-      <Name>DealsWhat.Domain.Test.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using DealsWhat.Application.WebApi.Models;
 using DealsWhat.Domain.Interfaces;
+using DealsWhat.Domain.Interfaces.Helpers;
 using DealsWhat.Domain.Model;
 using DealsWhat.Domain.Services;
 
@@ -21,7 +22,11 @@ namespace DealsWhat.Application.WebApi.Controllers
             this.dealService = dealService;
 
             AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealModel, FrontEndDeal>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()));
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()))
+                .AfterMap((dest, src) =>
+                {
+                    src.ThumbnailUrls = dest.Images.Select(i => ImageHelper.GenerateThumbnailPath(i.RelativeUrl)).ToList();
+                });
 
             AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealModel, FrontEndSpecificDeal>()
                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()))

@@ -15,5 +15,7 @@ namespace DealsWhat.Application.WebApi.Models
         public string CanonicalUrl { get; set; }
 
         public string Id { get; set; }
+
+        public IList<string> ThumbnailUrls { get; set; }
     }
 }

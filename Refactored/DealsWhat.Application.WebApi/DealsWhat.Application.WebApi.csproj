@@ -350,9 +350,9 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DealsWhat.Domain.Interfaces\DealsWhat.Domain.Interfaces.csproj">
+    <ProjectReference Include="..\DealsWhat.Domain.Interfaces\DealsWhat.Domain.Core.csproj">
       <Project>{580b0db6-0daf-45ca-8955-c0e0f55ec7c2}</Project>
-      <Name>DealsWhat.Domain.Interfaces</Name>
+      <Name>DealsWhat.Domain.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\DealsWhat.Domain.Model\DealsWhat.Domain.Models.csproj">
       <Project>{29e2570c-a982-496f-b4b1-097751465ed1}</Project>

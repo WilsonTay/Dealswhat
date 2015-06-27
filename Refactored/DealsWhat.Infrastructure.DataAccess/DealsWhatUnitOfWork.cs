@@ -34,7 +34,7 @@ namespace DealsWhat.Infrastructure.DataAccess
 
         public IDbSet<TEntity> Set<TEntity>() where TEntity : class
         {
-            return this.Set<TEntity>();
+            return base.Set<TEntity>();
         }
 
         public void Commit()

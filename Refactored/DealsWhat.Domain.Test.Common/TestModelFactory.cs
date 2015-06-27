@@ -84,7 +84,7 @@ namespace DealsWhat.Domain.Test.Common
         {
             if (string.IsNullOrEmpty(relativeUrl))
             {
-                relativeUrl = fixture.Create<string>();
+                relativeUrl = fixture.Create<string>() + ".jpg";
             }
 
             if (order == -1)

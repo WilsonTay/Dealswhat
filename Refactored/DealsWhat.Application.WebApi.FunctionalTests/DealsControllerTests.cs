@@ -106,6 +106,39 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
         }
 
         [TestMethod]
+        public void GetDeals_ThumbnailsCorrectlyLoaded()
+        {
+            var sampleDeals = CreateSampleDeals();
+
+            foreach (var deal in sampleDeals)
+            {
+                var sampleImages =
+                    Enumerable.Range(0, 10).ToList().Select(a => TestModelFactory.CreateDealImage(order: a)).ToList();
+
+                foreach (var img in sampleImages)
+                {
+                    deal.AddImage(img);
+                }
+            }
+
+            var endpoint = "http://localhost:9000/api/deals";
+
+            var response = CreateWebApiServiceAndGetResponse(
+                sampleDeals,
+                new List<DealCategoryModel>(),
+                endpoint);
+
+            var deals = JsonConvert.DeserializeObject<IEnumerable<FrontEndDeal>>(response).ToList();
+
+            foreach (var deal in deals)
+            {
+                var matchingDeal = sampleDeals.First(d => d.Key.ToString().Equals(deal.Id));
+                AssertFrontEndDealEquality(deal, matchingDeal);
+            }
+
+        }
+
+        [TestMethod]
         public void GetDealByCategory_AllFieldMatches()
         {
             var categoryName = "category1";
@@ -310,6 +343,15 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
             deal.RegularPrice.Should().BeEquivalentTo(matchingDeal.RegularPrice.ToString());
             deal.SpecialPrice.Should().BeEquivalentTo(matchingDeal.SpecialPrice.ToString());
             deal.CanonicalUrl.Should().BeEquivalentTo(matchingDeal.CanonicalUrl);
+
+            foreach (var image in matchingDeal.Images)
+            {
+                var extension = Path.GetExtension(image.RelativeUrl);
+                var thumbPostfix = "_thumb" + extension;
+                var thumbUrl = image.RelativeUrl.Replace(extension, thumbPostfix);
+
+                Assert.IsTrue(deal.ThumbnailUrls.Any(d => d.EndsWith(thumbUrl)));
+            }
         }
 
         private static void AssertFrontEndSpecificDealEquality(FrontEndSpecificDeal deal, DealModel matchingDeal)
