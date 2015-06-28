@@ -23,5 +23,11 @@ namespace DealsWhat.Application.WebApi.Models
         public string LongDescription { get; set; }
 
         // TODO: Deal Options.
+        public IList<FrontDealSpecificDealOption> DealOptions { get; set; }
+
+        public FrontEndSpecificDeal()
+        {
+            DealOptions = new List<FrontDealSpecificDealOption>();
+        }
     }
 }

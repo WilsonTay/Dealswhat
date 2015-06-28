@@ -11,6 +11,8 @@ namespace DealsWhat.Domain.Model
         public string Name { get; set; }
         public string Value { get; set; }
 
+        public object Key { get; internal set; }
+
         private DealAttributeModel()
         {
 
@@ -21,7 +23,8 @@ namespace DealsWhat.Domain.Model
             return new DealAttributeModel
             {
                 Name = name,
-                Value = value
+                Value = value,
+                Key = Guid.NewGuid()
             };
         }
     }

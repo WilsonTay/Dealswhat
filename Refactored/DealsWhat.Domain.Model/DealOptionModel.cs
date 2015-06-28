@@ -12,6 +12,8 @@ namespace DealsWhat.Domain.Model
         public double RegularPrice { get; set; }
         public double SpecialPrice { get; set; }
 
+        public object Key { get; internal set; }
+
         public IEnumerable<DealAttributeModel> Attributes
         {
             get { return attributes; }
@@ -30,7 +32,8 @@ namespace DealsWhat.Domain.Model
             {
                 ShortTitle = shortTitle,
                 RegularPrice = regularPrice,
-                SpecialPrice = specialPrice
+                SpecialPrice = specialPrice,
+                Key = Guid.NewGuid()
             };
         }
 

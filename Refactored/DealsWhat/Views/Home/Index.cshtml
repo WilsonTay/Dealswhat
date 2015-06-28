@@ -78,7 +78,8 @@
 
 @section scripts {
     <script>
-        var baseUrl = '@Url.Content("~")';
+        var baseUrl = 'http://localhost:39874/';
+        var currentUrl = '@Url.Content("~")';
 
         $(document).ready(function () {
             setupDealCategoryEventHandler();
@@ -138,9 +139,8 @@
             });
         }
 
-
         function loadDeals(query, parameter) {
-            var baseUrl = '@Url.Content("~")';
+            var baseUrl = 'http://localhost:39874/';
 
             $.ajax({
                 url: baseUrl + "api/deals?" + query + "=" + parameter + "&sort=dateposted",
@@ -187,14 +187,14 @@
         }
 
         function buildDealInformation(deal) {
-            var sortedImages = deal.Thumbnails.sort(function (a, b) { return a.Order - b.Order });
+            var sortedImages = deal.ThumbnailUrls.sort(function (a, b) { return a.Order - b.Order });
 
             var coverPageUrl = '';
             if (sortedImages[0] != null) {
-                coverPageUrl = sortedImages[0].RelativeUrl;
+                coverPageUrl = sortedImages[0];
             }
 
-            var dom = '<a class="col-md-4 col-masonry popup-text view-deal-link" href="' + baseUrl + 'deal/index/' + deal.CanonicalUrl + '" data-deal-id="' + deal.Id + '" data-effect="mfp-move-from-top">' +
+            var dom = '<a class="col-md-4 col-masonry popup-text view-deal-link" href="' + currentUrl + 'deal/index/' + deal.CanonicalUrl + '" data-deal-id="' + deal.Id + '" data-effect="mfp-move-from-top">' +
                 '<div class="product-thumb"><header class="product-header"><img height="197" src="' + coverPageUrl + '?width=190&height=126" />' +
                 '<div class="product-quick-view"><span class="fa fa-eye"></span></div></header>' +
                 '<div class="product-inner"><table height="70" align="center"><tr><td valign="top"><h5 class="product-title">' + deal.ShortTitle + '</h5></td></tr></table><div class="product-desciption">' + deal.ShortDescription + '</div><div class="product-meta">' +

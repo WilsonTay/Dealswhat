@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DealsWhat.Domain.Interfaces;
 using DealsWhat.Domain.Model;
+using DealsWhat.Models;
 
 namespace DealsWhat.Infrastructure.DataAccess
 {
@@ -15,6 +16,20 @@ namespace DealsWhat.Infrastructure.DataAccess
         public EFRepositoryFactory(DealsWhatUnitOfWork dbContext)
         {
             this.dbContext = dbContext;
+
+            AutoMapper.Mapper.CreateMap<DealAttribute, DealsWhat.Domain.Model.DealAttributeModel>()
+                .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()));
+
+            AutoMapper.Mapper.CreateMap<DealOption, DealsWhat.Domain.Model.DealOptionModel>()
+                .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()))
+                .AfterMap((dest, src) =>
+                {
+                    foreach (var attr in dest.Attributes)
+                    {
+                        var converted = AutoMapper.Mapper.Map<DealAttributeModel>(attr);
+                        src.AddAttribute(converted);
+                    }
+                });
 
             AutoMapper.Mapper.CreateMap<Models.Deal, DealsWhat.Domain.Model.DealModel>()
                 .ForMember(dest => dest.ShortTitle, opt => opt.MapFrom(src => src.ShortTitle))
@@ -36,6 +51,12 @@ namespace DealsWhat.Infrastructure.DataAccess
                     foreach (var img in dest.Pictures.ToList())
                     {
                         src.AddImage(DealImageModel.Create(img.RelativeUrl, img.Order));
+                    }
+
+                    foreach (var option in dest.DealOptions.ToList())
+                    {
+                        var model = AutoMapper.Mapper.Map<DealOptionModel>(option);
+                        src.AddOption(model);
                     }
                 });
 

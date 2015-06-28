@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DealsWhat.Domain.Model;
 using DealsWhat.Domain.Test.Common;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -42,6 +43,19 @@ namespace DealsWhat.Domain.Models.Tests
             {
                 dealOption.Attributes.Should().Contain(attribute);
             }
+        }
+
+        [TestMethod]
+        public void Create_IdNotNull()
+        {
+            var shortTitle = "short title";
+            var regularPrice = 10.5;
+            var specialPrice = 5.5;
+
+            var option = DealOptionModel.Create(shortTitle, regularPrice, specialPrice);
+
+            option.Key.Should().NotBeNull();
+            option.Key.Should().NotBe(string.Empty);
         }
     }
 }

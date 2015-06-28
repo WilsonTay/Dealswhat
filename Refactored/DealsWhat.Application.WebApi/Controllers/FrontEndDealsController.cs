@@ -28,9 +28,31 @@ namespace DealsWhat.Application.WebApi.Controllers
                     src.ThumbnailUrls = dest.Images.Select(i => ImageHelper.GenerateThumbnailPath(i.RelativeUrl)).ToList();
                 });
 
+            AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealAttributeModel, FrontEndSpecificDealAttribute>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()));
+
+            AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealOptionModel, FrontDealSpecificDealOption>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()))
+                .AfterMap((dest, src) =>
+                {
+                    foreach (var attr in dest.Attributes)
+                    {
+                        var converted = AutoMapper.Mapper.Map<FrontEndSpecificDealAttribute>(attr);
+                        src.DealAttributes.Add(converted);
+                    }
+                });
+
             AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealModel, FrontEndSpecificDeal>()
-               .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()))
-               .ForMember(dest => dest.ImageUrls, opt => opt.MapFrom(src => src.Images.Select(i => i.RelativeUrl)));
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()))
+                .ForMember(dest => dest.ImageUrls, opt => opt.MapFrom(src => src.Images.Select(i => i.RelativeUrl)))
+                .AfterMap((dest, src) =>
+                {
+                    foreach (var option in dest.Options)
+                    {
+                        var converted = AutoMapper.Mapper.Map<FrontDealSpecificDealOption>(option);
+                        src.DealOptions.Add(converted);
+                    }
+                });
         }
 
         // GET api/values
@@ -57,8 +79,20 @@ namespace DealsWhat.Application.WebApi.Controllers
 
             //TODO: Combine search term and category.
 
-            return this.dealService.SearchDeals(searchQuery)
-                .Select(d => AutoMapper.Mapper.Map<FrontEndDeal>(d));
+            var convertedSearchResults = this.dealService.SearchDeals(searchQuery)
+                .Select(d => AutoMapper.Mapper.Map<FrontEndDeal>(d))
+                .ToList();
+
+            foreach (var result in convertedSearchResults)
+            {
+                for (int i = 0; i < result.ThumbnailUrls.Count; i++)
+                {
+                    result.ThumbnailUrls[i] =
+                        PathHelper.ConvertRelativeToAbsoluteDealImagePath(result.ThumbnailUrls[i]);
+                }
+            }
+
+            return convertedSearchResults;
         }
 
         [HttpGet]
@@ -82,7 +116,14 @@ namespace DealsWhat.Application.WebApi.Controllers
             }
 
             var searchResult = this.dealService.SearchSingleDeal(searchQuery);
+
             var convertedSearchResult = AutoMapper.Mapper.Map<DealModel, FrontEndSpecificDeal>(searchResult);
+
+            for (int i = 0; i < convertedSearchResult.ImageUrls.Count; i++)
+            {
+                convertedSearchResult.ImageUrls[i] =
+                    PathHelper.ConvertRelativeToAbsoluteDealImagePath(convertedSearchResult.ImageUrls[i]);
+            }
 
             return convertedSearchResult;
         }

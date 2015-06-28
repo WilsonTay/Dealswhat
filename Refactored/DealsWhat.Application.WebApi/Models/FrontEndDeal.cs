@@ -9,8 +9,8 @@ namespace DealsWhat.Application.WebApi.Models
     {
         public string ShortTitle { get; set; }
         public string ShortDescription { get; set; }
-        public string RegularPrice { get; set; }
-        public string SpecialPrice { get; set; }
+        public double RegularPrice { get; set; }
+        public double SpecialPrice { get; set; }
 
         public string CanonicalUrl { get; set; }
 

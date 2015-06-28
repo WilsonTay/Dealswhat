@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -106,6 +107,69 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
         }
 
         [TestMethod]
+        public void GetSingleDeal_DealOptionMatches()
+        {
+            var deals = CreateSampleDeals();
+            var matchingDeal = TestModelFactory.CreateCompleteDeal();
+
+            for (int i = 0; i < 10; i++)
+            {
+                var option = TestModelFactory.CreateDealOptionWithAttributes();
+                matchingDeal.AddOption(option);
+            }
+
+            deals.Add(matchingDeal);
+
+            var endpoint = "http://localhost:9000/api/deal?url=" + matchingDeal.CanonicalUrl;
+
+            var response = CreateWebApiServiceAndGetResponse(
+                deals,
+                new List<DealCategoryModel>(),
+                endpoint);
+
+            var actualDeal = JsonConvert.DeserializeObject<FrontEndSpecificDeal>(response);
+
+            AssertFrontEndSpecificDealEquality(actualDeal, matchingDeal);
+        }
+
+        [TestMethod]
+        public void GetSingleDeal_ImageUrlCorrectlyConstructed()
+        {
+            var baseImageUrl = "http://www.dealswhat.com/dealimages/";
+
+            ConfigurationManager.AppSettings["DealImageBaseUrl"] = baseImageUrl;
+
+            var deals = CreateSampleDeals();
+            var matchingDeal = TestModelFactory.CreateCompleteDeal();
+
+            for (int i = 0; i < 10; i++)
+            {
+                var option = TestModelFactory.CreateDealOptionWithAttributes();
+                matchingDeal.AddOption(option);
+            }
+
+            deals.Add(matchingDeal);
+
+            var endpoint = "http://localhost:9000/api/deal?url=" + matchingDeal.CanonicalUrl;
+
+            var response = CreateWebApiServiceAndGetResponse(
+                deals,
+                new List<DealCategoryModel>(),
+                endpoint);
+
+            var actualDeal = JsonConvert.DeserializeObject<FrontEndSpecificDeal>(response);
+
+            var images = actualDeal.ImageUrls;
+
+            images.Should().NotBeEmpty();
+
+            foreach (var image in images)
+            {
+                Assert.IsTrue(image.StartsWith(baseImageUrl));
+            }
+        }
+
+        [TestMethod]
         public void GetDeals_ThumbnailsCorrectlyLoaded()
         {
             var sampleDeals = CreateSampleDeals();
@@ -136,6 +200,47 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
                 AssertFrontEndDealEquality(deal, matchingDeal);
             }
 
+        }
+
+        [TestMethod]
+        public void GetDeals_ThumbnailUrlsCorrectlyConstructed()
+        {
+            var baseImageUrl = "http://www.dealswhat.com/dealimages/";
+
+            ConfigurationManager.AppSettings["DealImageBaseUrl"] = baseImageUrl;
+
+            var sampleDeals = CreateSampleDeals();
+
+            foreach (var deal in sampleDeals)
+            {
+                var sampleImages =
+                    Enumerable.Range(0, 10).ToList().Select(a => TestModelFactory.CreateDealImage(order: a)).ToList();
+
+                foreach (var img in sampleImages)
+                {
+                    deal.AddImage(img);
+                }
+            }
+
+            var endpoint = "http://localhost:9000/api/deals";
+
+            var response = CreateWebApiServiceAndGetResponse(
+                sampleDeals,
+                new List<DealCategoryModel>(),
+                endpoint);
+
+            var deals = JsonConvert.DeserializeObject<IEnumerable<FrontEndDeal>>(response).ToList();
+
+            foreach (var deal in deals)
+            {
+                var matchingDeal = sampleDeals.First(d => d.Key.ToString().Equals(deal.Id));
+                AssertFrontEndDealEquality(deal, matchingDeal);
+
+                foreach (var url in deal.ThumbnailUrls)
+                {
+                    Assert.IsTrue(url.StartsWith(baseImageUrl));
+                }
+            }
         }
 
         [TestMethod]
@@ -340,8 +445,8 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
         {
             deal.ShortTitle.Should().BeEquivalentTo(matchingDeal.ShortTitle);
             deal.ShortDescription.Should().BeEquivalentTo(matchingDeal.ShortDescription);
-            deal.RegularPrice.Should().BeEquivalentTo(matchingDeal.RegularPrice.ToString());
-            deal.SpecialPrice.Should().BeEquivalentTo(matchingDeal.SpecialPrice.ToString());
+            deal.RegularPrice.Should().Be(matchingDeal.RegularPrice);
+            deal.SpecialPrice.Should().Be(matchingDeal.SpecialPrice);
             deal.CanonicalUrl.Should().BeEquivalentTo(matchingDeal.CanonicalUrl);
 
             foreach (var image in matchingDeal.Images)
@@ -370,9 +475,24 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
             deal.StartTime.Should().Be(matchingDeal.StartTime);
             deal.EndTime.Should().Be(matchingDeal.EndTime);
 
+            matchingDeal.Images.Count().ShouldBeEquivalentTo(deal.ImageUrls.Count);
             foreach (var image in matchingDeal.Images)
             {
-                Assert.IsTrue(deal.ImageUrls.Any(a => image.RelativeUrl.Equals(a)));
+                Assert.IsTrue(deal.ImageUrls.Any(a => a.Contains(image.RelativeUrl)), string.Format("Image {0} is not found.", image.RelativeUrl));
+            }
+
+            foreach (var option in matchingDeal.Options)
+            {
+                var matchingOption =
+                    deal.DealOptions.First(
+                        d =>
+                            d.ShortTitle.Equals(option.ShortTitle) && d.RegularPrice.Equals(option.RegularPrice) &&
+                            d.SpecialPrice.Equals(option.SpecialPrice));
+
+                foreach (var attribute in option.Attributes)
+                {
+                    Assert.IsTrue(matchingOption.DealAttributes.Any(att => attribute.Name.Equals(att.Name) && attribute.Value.Equals(att.Value)));
+                }
             }
         }
     }
