@@ -10,50 +10,50 @@
                 <th width="100%"></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="deal-options-table-body">
             @foreach (var option in Model.DealOptions)
             {
-            <tr>
-                <td>
-                    <form method="post" action="">
-                        <h4>@option.ShortTitle</h4>
+                <tr>
+                    <td>
+                        <form method="post" action="">
+                            <h4>@option.ShortTitle</h4>
 
-                        <table width="100%">
-                            @foreach (var attributes in option.DealAttributes.GroupBy(a => a.Name))
+                            <table width="100%">
+                                @foreach (var attributes in option.DealAttributes.GroupBy(a => a.Name))
                                 {
-                                <tr>
-                                    <td>@attributes.Key</td>
-                                    <td>
-                                        <select style="width: 100%" name="@attributes.Key" class="deal-attribute-list">
-                                            @foreach (var attribute in attributes)
+                                    <tr>
+                                        <td>@attributes.Key</td>
+                                        <td>
+                                            <select style="width: 100%" name="@attributes.Key" class="deal-attribute-list">
+                                                @foreach (var attribute in attributes)
                                                 {
-                                                <option value="@attribute.Id">@attribute.Value</option>
+                                                    <option value="@attribute.Id">@attribute.Value</option>
                                                 }
-                                        </select>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                            <table width="100%" style="margin-top: 10px; table-layout: fixed; text-align: center">
+                                <tr>
+                                    <td>Price</td>
+                                    <td>Savings</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="deal-option-original-price">RM @option.RegularPrice.ToString("0.00")</span><span class="deal-option-special-price">RM @option.SpecialPrice.ToString("0.00")</span></td>
+                                    <td><span class="deal-option-special-price">@(((option.RegularPrice - option.SpecialPrice) / option.RegularPrice * 100).ToString("0.##"))%</span></td>
+                                    <td>
+                                        <form>
+                                            <input type="hidden" name="DealOptionId" value="@option.Id" />
+                                            <input type="button" style="width: 100%" class="purchase-deal-option-button btn btn-primary" value="Buy">
+                                        </form>
                                     </td>
                                 </tr>
-                                }
-                        </table>
-                        <table width="100%" style="margin-top: 10px; table-layout: fixed; text-align: center">
-                            <tr>
-                                <td>Price</td>
-                                <td>Savings</td>
-                            </tr>
-                            <tr>
-                                <td><span class="deal-option-original-price">RM @option.RegularPrice.ToString("0.00")</span><span class="deal-option-special-price">RM @option.SpecialPrice.ToString("0.00")</span></td>
-                                <td><span class="deal-option-special-price">@(((option.RegularPrice - option.SpecialPrice) / option.RegularPrice * 100).ToString("0.##"))%</span></td>
-                                <td>
-                                    <form>
-                                        <input type="hidden" name="DealOptionId" value="@option.Id" />
-                                        <input type="button" style="width: 100%" class="purchase-deal-option-button btn btn-primary" value="Buy">
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                </td>
+                            </table>
+                        </form>
+                    </td>
 
-            </tr>
+                </tr>
 
 
             }
@@ -64,11 +64,11 @@
 <div class="row">
     <div class="col-md-9">
 
-        <div class="fotorama"  data-auto="false" data-nav="thumbs" data-allowfullscreen="1" data-width="100%" data-thumbheight="100" data-thumbwidth="100">
+        <div class="fotorama" data-auto="false" data-nav="thumbs" data-allowfullscreen="1" data-width="100%" data-thumbheight="100" data-thumbwidth="100">
             @*@foreach (var url in Model.ImageUrls)
-            {
-                <img src="@Url.Content(PathHelper.ConvertRelativeToAbsoluteDealImagePath(url))" />
-            }*@
+                {
+                    <img src="@Url.Content(PathHelper.ConvertRelativeToAbsoluteDealImagePath(url))" />
+                }*@
         </div>
         <div class="gap gap-small"></div>
         <div class="tabbable">
@@ -106,35 +106,31 @@
     </div>
     <div class="col-md-3">
         <div class="product-page-meta box sidebar-box">
-            <h4>@Model.LongTitle</h4>
+            <h4 id="deal-long-title"></h4>
             <p>@*@Model.ShortDescription*@<div id="deal-short-description"></div></p>
-            <a class="popup-text btn btn-primary btn-lg btn-block" href="#purchase-dialog" data-effect="mfp-move-from-top">RM <div id="deal-discounted-price"></div> @*@Model.DiscountedPrice.ToString("0.00")*@ Buy Now</a>
+            <a class="popup-text btn btn-primary btn-lg btn-block" href="#purchase-dialog" data-effect="mfp-move-from-top"><div id="deal-discounted-price"></div> @*@Model.DiscountedPrice.ToString("0.00")*@ Buy Now</a>
 
             <ul class="list product-page-meta-info">
                 <li>
                     <ul class="list product-page-meta-price-list">
                         <li>
-                            <span class="product-page-meta-title">List Price</span><span class="product-page-meta-price">RM <div id="deal-regular-price"></div> @*@Model.OriginalPrice.ToString("0.00")*@</span>
+                            <span class="product-page-meta-title">List Price</span><span class="product-page-meta-price"><span id="deal-regular-price"></span> @*@Model.OriginalPrice.ToString("0.00")*@</span>
                         </li>
                         <li>
-                            <span class="product-page-meta-title">Discount</span><span class="product-page-meta-price">@(((Model.OriginalPrice - Model.DiscountedPrice) / Model.OriginalPrice * 100).ToString("0.##"))%</span>
+                            <span class="product-page-meta-title">Discount</span><span class="product-page-meta-price"><span id="deal-discount-percentage"></span></span>
                         </li>
                         <li>
-                            <span class="product-page-meta-title">Savings</span><span class="product-page-meta-price">RM @((Model.OriginalPrice - Model.DiscountedPrice).ToString("0.00"))</span>
+                            <span class="product-page-meta-title">Savings</span><span class="product-page-meta-price"><span id="deal-total-savings"></span></span>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <span class="product-page-meta-title">Time Left to Buy</span>
                     <!-- COUNTDOWN -->
-                    @if (@Model.DealEnded)
-                    {
-                        <strong class="text-color">Sorry. The Deal Has Ended.</strong>
-                    }
-                    else
-                    {
-                        <div data-countdown="@Model.EndDate" class="countdown countdown-inline"></div>
-                    }
+                    <div id="deal-time-left">
+
+                    </div>
+
                 </li>
                 <li>
                     <span class="product-page-meta-title">0 bought</span>
@@ -170,10 +166,12 @@
 @section scripts {
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYaq2aZgiq0kOG8Fz5--d91Z321qzcNW4"></script>
+    <script src="~/Content/js/moment.js"></script>
+    <script src="~/Content/js/underscore-min.js"></script>
     <script>
         var baseUrl = 'http://localhost:39874/';
 
-        $('.purchase-deal-option-button').click(function() {
+        $('.purchase-deal-option-button').click(function () {
 
             var form = $(this).closest('form');
             var selects = form.find('select');
@@ -184,7 +182,7 @@
 
             var selectedAttributes = [];
 
-            $.each(selects, function(index, value) {
+            $.each(selects, function (index, value) {
                 var selectedName = $(value).attr('name');
                 var selectedValue = $(value).val();
 
@@ -203,26 +201,59 @@
                 method: 'post',
                 dataType: 'json',
                 cache: false,
-                success: function(deal) {
+                success: function (deal) {
                 },
-                complete: function() {
+                complete: function () {
                 }
             });
         });
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             loadDealInformation();
             $('.deal-attribute-list').select2({
                 minimumResultsForSearch: Infinity
             });
         });
 
+        function loadDealTimeLeft(deal) {
+            var dateStarted = deal.StartTime;
+            var dateEnded = deal.EndTime;
+
+            console.log(dateStarted);
+            console.log(dateEnded);
+
+            var element = $('#deal-time-left');
+            if (dateStarted > dateEnded) {
+                handleDealEnded(element);
+            } else {
+                handleDealNotEnded(deal, element);
+            }
+        }
+
+        function handleDealEnded(element) {
+            var temp = $('<strong class="text-color">Sorry. The Deal Has Ended.</strong>');
+
+            element.append(temp);
+        }
+
+        function handleDealNotEnded(deal, element) {
+
+            var endTime = moment(deal.EndTime, 'M/d/yyyy hh:mm:ss tt');
+            var temp = $('<div id="deal-countdown" data-countdown="' + endTime + '" class="countdown countdown-inline"></div>');
+
+            element.append(temp);
+
+            $('#deal-countdown').countdown({
+                unixFormat: true
+            });
+        }
+
         function loadDealInformation() {
             $.ajax({
                 url: baseUrl + "api/deal?id=ee97f6c8-c95a-4d0c-b32b-0021c3315478",
                 dataType: 'json',
                 cache: false,
-                success: function(deal) {
+                success: function (deal) {
 
                     $('#deal-highlight').html(deal.Highlight);
                     $('#deal-fineprint').html(deal.Fineprint);
@@ -231,11 +262,17 @@
                     $('#deal-short-description').html(deal.ShortDescription);
                     $('#deal-short-title').html(deal.ShortTitle);
 
-                    $('#deal-regular-price').html(deal.RegularPrice);
-                    $('#deal-special-price').html(deal.SpecialPrice);
+                    $('#deal-regular-price').html("RM " + deal.RegularPrice);
+                    $('#deal-special-price').html("RM " + deal.SpecialPrice);
+
+                    var totalSavings = deal.RegularPrice - deal.SpecialPrice;
+                    var percentage = totalSavings * 100 / deal.RegularPrice;
+
+                    $('#deal-total-savings').html("RM " + totalSavings);
+                    $('#deal-discount-percentage').html(percentage + "%");
 
                     var imageData = [];
-                    $.each(deal.ImageUrls, function(index, img) {
+                    $.each(deal.ImageUrls, function (index, img) {
                         var data = {};
                         data.img = img;
 
@@ -245,10 +282,39 @@
                     $('.fotorama').fotorama({
                         data: imageData
                     });
+
+                    loadDealTimeLeft(deal);
+
+                    $.each(deal.DealOptions, function (index, option) {
+
+                        var groupedAttr = option.DealAttributes;
+                        console.log('a');
+                        console.log(_.groupBy(groupedAttr, function (attr) { return attr.Name }));
+                    });
                 },
-                complete: function() {
+                complete: function () {
                 }
             });
+        }
+
+        function buildDealOptionDom(dealOption) {
+            var dom = '<tr><td><form method="post" action=""><h4>' + dealOption.ShortTitle + '</h4>';
+
+        }
+
+        function buildDealAttributesDom(attributeKey, attributeValues, element) {
+            var dom = '<tr><td>' + attributeKey + '</td><td>' +
+                '<select style="width: 100%" name="' + attributeKey + '" class="deal-attribute-list">';
+
+            $.each(attributeValues, function (index, attr) {
+                var id = attr.Id;
+                var value = attr.Value;
+                dom = + '<option value="' + id + '">' + value + '</option>';
+            });
+
+            dom += '</select></td></tr>';
+
+            return dom;
         }
     </script>
 }

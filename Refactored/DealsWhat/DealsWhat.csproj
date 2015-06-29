@@ -538,10 +538,12 @@
     <Content Include="Content\js\mail.js" />
     <Content Include="Content\js\mail.min.js" />
     <Content Include="Content\js\masonry.js" />
+    <Content Include="Content\js\moment.js" />
     <Content Include="Content\js\nicescroll.js" />
     <Content Include="Content\js\owl-carousel.js" />
     <Content Include="Content\js\tweet.js" />
     <Content Include="Content\js\tweet.min.js" />
+    <Content Include="Content\js\underscore-min.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />

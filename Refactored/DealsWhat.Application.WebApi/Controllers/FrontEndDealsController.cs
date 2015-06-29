@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -45,6 +46,7 @@ namespace DealsWhat.Application.WebApi.Controllers
             AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealModel, FrontEndSpecificDeal>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()))
                 .ForMember(dest => dest.ImageUrls, opt => opt.MapFrom(src => src.Images.Select(i => i.RelativeUrl)))
+                .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => src.StartTime))
                 .AfterMap((dest, src) =>
                 {
                     foreach (var option in dest.Options)

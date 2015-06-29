@@ -24,6 +24,11 @@ namespace DealsWhat.Infrastructure.DataAccess
                 .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()))
                 .AfterMap((dest, src) =>
                 {
+                    if (src.Attributes.Any())
+                    {
+                        return;
+                    }
+
                     foreach (var attr in dest.Attributes)
                     {
                         var converted = AutoMapper.Mapper.Map<DealAttributeModel>(attr);
@@ -48,6 +53,12 @@ namespace DealsWhat.Infrastructure.DataAccess
                 .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()))
                 .AfterMap((dest, src) =>
                 {
+                    // Skip if mapped.
+                    if (src.Options.Any())
+                    {
+                        return;    
+                    }
+
                     foreach (var img in dest.Pictures.ToList())
                     {
                         src.AddImage(DealImageModel.Create(img.RelativeUrl, img.Order));
@@ -64,6 +75,11 @@ namespace DealsWhat.Infrastructure.DataAccess
                 .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()))
                 .AfterMap((dest, opt) =>
                 {
+                    if (opt.Deals.Any())
+                    {
+                        return;
+                    }
+
                     foreach (var d in dest.Deals)
                     {
                         var deal = AutoMapper.Mapper.Map<DealModel>(d);
