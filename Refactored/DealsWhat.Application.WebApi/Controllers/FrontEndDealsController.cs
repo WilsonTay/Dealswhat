@@ -36,6 +36,11 @@ namespace DealsWhat.Application.WebApi.Controllers
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()))
                 .AfterMap((dest, src) =>
                 {
+                    if (src.DealAttributes.Any())
+                    {
+                        return;
+                    }
+
                     foreach (var attr in dest.Attributes)
                     {
                         var converted = AutoMapper.Mapper.Map<FrontEndSpecificDealAttribute>(attr);
@@ -49,6 +54,11 @@ namespace DealsWhat.Application.WebApi.Controllers
                 .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => src.StartTime))
                 .AfterMap((dest, src) =>
                 {
+                    if (src.DealOptions.Any())
+                    {
+                        return;
+                    }
+
                     foreach (var option in dest.Options)
                     {
                         var converted = AutoMapper.Mapper.Map<FrontDealSpecificDealOption>(option);

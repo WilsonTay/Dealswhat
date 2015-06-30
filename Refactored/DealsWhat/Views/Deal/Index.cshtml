@@ -11,52 +11,7 @@
             </tr>
         </thead>
         <tbody id="deal-options-table-body">
-            @foreach (var option in Model.DealOptions)
-            {
-                <tr>
-                    <td>
-                        <form method="post" action="">
-                            <h4>@option.ShortTitle</h4>
 
-                            <table width="100%">
-                                @foreach (var attributes in option.DealAttributes.GroupBy(a => a.Name))
-                                {
-                                    <tr>
-                                        <td>@attributes.Key</td>
-                                        <td>
-                                            <select style="width: 100%" name="@attributes.Key" class="deal-attribute-list">
-                                                @foreach (var attribute in attributes)
-                                                {
-                                                    <option value="@attribute.Id">@attribute.Value</option>
-                                                }
-                                            </select>
-                                        </td>
-                                    </tr>
-                                }
-                            </table>
-                            <table width="100%" style="margin-top: 10px; table-layout: fixed; text-align: center">
-                                <tr>
-                                    <td>Price</td>
-                                    <td>Savings</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="deal-option-original-price">RM @option.RegularPrice.ToString("0.00")</span><span class="deal-option-special-price">RM @option.SpecialPrice.ToString("0.00")</span></td>
-                                    <td><span class="deal-option-special-price">@(((option.RegularPrice - option.SpecialPrice) / option.RegularPrice * 100).ToString("0.##"))%</span></td>
-                                    <td>
-                                        <form>
-                                            <input type="hidden" name="DealOptionId" value="@option.Id" />
-                                            <input type="button" style="width: 100%" class="purchase-deal-option-button btn btn-primary" value="Buy">
-                                        </form>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </td>
-
-                </tr>
-
-
-            }
         </tbody>
     </table>
 </div>
@@ -285,11 +240,10 @@
 
                     loadDealTimeLeft(deal);
 
+                    var tbody = $('#deal-options-table-body');
                     $.each(deal.DealOptions, function (index, option) {
 
-                        var groupedAttr = option.DealAttributes;
-                        console.log('a');
-                        console.log(_.groupBy(groupedAttr, function (attr) { return attr.Name }));
+                        buildDealOptionDom(option, tbody);
                     });
                 },
                 complete: function () {
@@ -297,19 +251,57 @@
             });
         }
 
-        function buildDealOptionDom(dealOption) {
+        function buildDealOptionDom(dealOption, element) {
+            var attr = dealOption.DealAttributes;
+            var attrNames = [];
+
+            var groupedAttr = _.groupBy(attr, function (attr) {
+                var attrName = attr.Name;
+
+                if (attrNames.indexOf(attrName) == -1) {
+                    attrNames.push(attrName);
+                }
+
+                return attrName;
+            });
+
+
+            var table = '<table width="100%">';
+            $.each(attrNames, function (i, attrName) {
+            
+                table += buildDealAttributesDom(attrName, groupedAttr[attrName]);
+            });
+            table += '</table>';
+
             var dom = '<tr><td><form method="post" action=""><h4>' + dealOption.ShortTitle + '</h4>';
 
+            dom += table;
+
+            var percentage = (dealOption.RegularPrice - dealOption.SpecialPrice) * 100 / dealOption.RegularPrice + "%";
+
+            dom += ' <table width="100%" style="margin-top: 10px; table-layout: fixed; text-align: center">' +
+                '<tr><td>Price</td><td>Savings</td></tr>' +
+                '<tr><td><span class="deal-option-original-price">RM ' + dealOption.RegularPrice + '</span><span class="deal-option-special-price">RM ' + dealOption.SpecialPrice + '</span></td>' +
+                '<td><span class="deal-option-special-price">' + percentage  + '</span></td>' +
+                '<td><form><input type="hidden" name="DealOptionId" value="' + dealOption.Id + '" /><input type="button" style="width: 100%" class="purchase-deal-option-button btn btn-primary" value="Buy"></form>' +
+                '</td></tr></table>';
+
+            element.append($(dom));
         }
 
-        function buildDealAttributesDom(attributeKey, attributeValues, element) {
+        function buildDealAttributesDom(attributeKey, attributeValues) {
+
+            //var filtered = _.filter(attributeValues, function(index, value) {
+            //    return
+            //});
+
             var dom = '<tr><td>' + attributeKey + '</td><td>' +
                 '<select style="width: 100%" name="' + attributeKey + '" class="deal-attribute-list">';
 
             $.each(attributeValues, function (index, attr) {
                 var id = attr.Id;
                 var value = attr.Value;
-                dom = + '<option value="' + id + '">' + value + '</option>';
+                dom += '<option value="' + id + '">' + value + '</option>';
             });
 
             dom += '</select></td></tr>';
