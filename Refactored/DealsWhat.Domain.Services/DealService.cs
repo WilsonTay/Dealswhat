@@ -45,12 +45,13 @@ namespace DealsWhat.Domain.Services
             if (!string.IsNullOrEmpty(query.SearchTerm))
             {
 
-                deals = deals.Where(d =>
+                deals = deals
+                    .Where(d =>
                             ContainsIgnoreCase(d.ShortTitle, query.SearchTerm) ||
                             ContainsIgnoreCase(d.ShortDescription, query.SearchTerm) ||
                             ContainsIgnoreCase(d.LongTitle, query.SearchTerm) ||
-                            ContainsIgnoreCase(d.LongDescription, query.SearchTerm)
-                ).ToList();
+                            ContainsIgnoreCase(d.LongDescription, query.SearchTerm))
+                    .ToList();
             }
 
             return deals;

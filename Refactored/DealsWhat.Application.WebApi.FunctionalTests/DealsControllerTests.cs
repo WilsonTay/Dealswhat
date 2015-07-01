@@ -443,6 +443,7 @@ namespace DealsWhat.Application.WebApi.FunctionalTests
 
         private static void AssertFrontEndDealEquality(FrontEndDeal deal, DealModel matchingDeal)
         {
+            deal.EndTime.Should().Be(matchingDeal.EndTime);
             deal.ShortTitle.Should().BeEquivalentTo(matchingDeal.ShortTitle);
             deal.ShortDescription.Should().BeEquivalentTo(matchingDeal.ShortDescription);
             deal.RegularPrice.Should().Be(matchingDeal.RegularPrice);

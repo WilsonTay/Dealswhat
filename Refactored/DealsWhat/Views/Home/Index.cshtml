@@ -1,4 +1,5 @@
-﻿@model DealsWhat.ViewModels.IndexViewModel
+﻿@using System.Configuration
+@model DealsWhat.ViewModels.IndexViewModel
 
 <style>
     .countdown.countdown-inline > div:first-child span.count {
@@ -78,7 +79,7 @@
 
 @section scripts {
     <script>
-        var baseUrl = 'http://localhost:39874/';
+        var baseUrl = '@ConfigurationManager.AppSettings["WebserviceBaseUrl"]';
         var currentUrl = '@Url.Content("~")';
 
         $(document).ready(function () {
@@ -140,8 +141,6 @@
         }
 
         function loadDeals(query, parameter) {
-            var baseUrl = 'http://localhost:39874/';
-
             $.ajax({
                 url: baseUrl + "api/deals?" + query + "=" + parameter + "&sort=dateposted",
                 dataType: 'json',
@@ -152,7 +151,6 @@
                     $('#masonry').empty();
                 },
                 success: function (deals) {
-
                     var elements = [];
                     $.each(deals, function (index, value) {
                         var element = buildDealInformation(value);
