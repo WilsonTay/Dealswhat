@@ -11,9 +11,7 @@
                 <th width="100%"></th>
             </tr>
         </thead>
-        <tbody id="deal-options-table-body">
-
-        </tbody>
+        <tbody id="deal-options-table-body"></tbody>
     </table>
 </div>
 
@@ -64,7 +62,7 @@
         <div class="product-page-meta box sidebar-box">
             <h4 id="deal-long-title"></h4>
             <p>@*@Model.ShortDescription*@<div id="deal-short-description"></div></p>
-            <a class="popup-text btn btn-primary btn-lg btn-block" href="#purchase-dialog" data-effect="mfp-move-from-top"><div id="deal-discounted-price"></div> @*@Model.DiscountedPrice.ToString("0.00")*@ Buy Now</a>
+            <a class="popup-text btn btn-primary btn-lg btn-block" href="#purchase-dialog" data-effect="mfp-move-from-top"><span id="deal-special-price"></span> @*@Model.DiscountedPrice.ToString("0.00")*@ Buy Now</a>
 
             <ul class="list product-page-meta-info">
                 <li>
@@ -127,7 +125,7 @@
     <script>
         var baseUrl = '@ConfigurationManager.AppSettings["WebserviceBaseUrl"]';
 
-        $('.purchase-deal-option-button').click(function () {
+        $('#deal-options-table-body').on('click', '.purchase-deal-option-button', function () {
 
             var form = $(this).closest('form');
             var selects = form.find('select');
@@ -266,12 +264,11 @@
                 return attrName;
             });
 
-
             var table = '<table width="100%">';
             $.each(attrNames, function (i, attrName) {
-            
                 table += buildDealAttributesDom(attrName, groupedAttr[attrName]);
             });
+
             table += '</table>';
 
             var dom = '<tr><td><form method="post" action=""><h4>' + dealOption.ShortTitle + '</h4>';
@@ -283,7 +280,7 @@
             dom += ' <table width="100%" style="margin-top: 10px; table-layout: fixed; text-align: center">' +
                 '<tr><td>Price</td><td>Savings</td></tr>' +
                 '<tr><td><span class="deal-option-original-price">RM ' + dealOption.RegularPrice.toFixed(2) + '</span><span class="deal-option-special-price">RM ' + dealOption.SpecialPrice.toFixed(2) + '</span></td>' +
-                '<td><span class="deal-option-special-price">' + percentage  + '</span></td>' +
+                '<td><span class="deal-option-special-price">' + percentage + '</span></td>' +
                 '<td><form><input type="hidden" name="DealOptionId" value="' + dealOption.Id + '" /><input type="button" style="width: 100%" class="purchase-deal-option-button btn btn-primary" value="Buy"></form>' +
                 '</td></tr></table>';
 
