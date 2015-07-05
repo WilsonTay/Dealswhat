@@ -72,6 +72,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CartItemModelTests.cs" />
     <Compile Include="DealAttributeTests.cs" />
     <Compile Include="DealCategoryTests.cs" />
     <Compile Include="DealOptionTests.cs" />

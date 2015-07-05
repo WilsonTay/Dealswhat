@@ -12,5 +12,11 @@ namespace DealsWhat.Domain.Interfaces
         where T : IAggregateRoot
     {
         IEnumerable<T> GetAll();
+
+        void Create(T model);
+
+        T FindByKey(object key);
+
+        void Save();
     }
 }

@@ -71,6 +71,39 @@ namespace DealsWhat.Domain.Test.Common
             return deal;
         }
 
+        public static UserModel CreateUser(object key = null, string emailAddress = "")
+        {
+            if (string.IsNullOrWhiteSpace(emailAddress))
+            {
+                emailAddress = string.Format("{0}@{1}.com", fixture.Create<string>(), fixture.Create<string>());
+            }
+
+            var user = UserModel.Create(emailAddress);
+
+            user.Key = key ?? fixture.Create<string>();
+
+            return user;
+        }
+
+        public static CartItemModel CreateCartItem(DealOptionModel dealOption = null, List<DealAttributeModel> dealAttributes = null)
+        {
+            if (dealOption == null)
+            {
+                dealOption = CreateDealOptionWithAttributes();
+            }
+
+            if (dealAttributes == null)
+            {
+                dealAttributes = new List<DealAttributeModel>();
+                foreach (var attr in dealOption.Attributes)
+                {
+                    dealAttributes.Add(attr);
+                }
+            }
+
+            return CartItemModel.Create(dealOption, dealAttributes);
+        }
+
         public static DealCategoryModel CreateDealCategory(object key = null, string name = "")
         {
             var category = DealCategoryModel.Create(name.Equals("") ? fixture.Create<string>() : name);

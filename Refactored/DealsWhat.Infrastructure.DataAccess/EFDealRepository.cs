@@ -28,6 +28,21 @@ namespace DealsWhat.Infrastructure.DataAccess
             }
         }
 
+        public void Create(DealModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DealModel FindByKey(object key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
         private DealsWhat.Domain.Model.DealModel Convert(Models.Deal source)
         {
             var mappedDeal = Mapper.Map<Models.Deal, DealsWhat.Domain.Model.DealModel>(source);

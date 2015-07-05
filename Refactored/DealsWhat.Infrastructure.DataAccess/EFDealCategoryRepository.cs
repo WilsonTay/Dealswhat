@@ -26,6 +26,21 @@ namespace DealsWhat.Infrastructure.DataAccess
             }
         }
 
+        public void Create(DealCategoryModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DealCategoryModel FindByKey(object key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
         private DealsWhat.Domain.Model.DealCategoryModel Convert(Models.DealCategory source)
         {
             var mappedDeal = Mapper.Map<Models.DealCategory, DealsWhat.Domain.Model.DealCategoryModel>(source);

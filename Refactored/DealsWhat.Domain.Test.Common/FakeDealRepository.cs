@@ -25,5 +25,20 @@ namespace DealsWhat.Domain.Test.Common
         {
             return deals;
         }
+
+        public void Create(DealModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DealModel FindByKey(object key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

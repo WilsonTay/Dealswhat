@@ -98,5 +98,10 @@ namespace DealsWhat.Infrastructure.DataAccess
         {
             return new EFDealCategoryRepository(this.dbContext);
         }
+
+        public IRepository<UserModel> CreateUserRepository()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
