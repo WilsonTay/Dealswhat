@@ -54,9 +54,9 @@ namespace DealsWhat.Application.WebApi
             //    consumerKey: "",
             //    consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //    appId: "",
-            //    appSecret: "");
+            app.UseFacebookAuthentication(
+                appId: "392147070992775",
+                appSecret: "c127a69c0dd797ff005a15cd0b0203ec");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

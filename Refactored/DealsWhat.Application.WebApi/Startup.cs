@@ -9,9 +9,15 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.WebApi;
 using DealsWhat.Application.WebApi.Controllers;
+using DealsWhat.Application.WebApi.Models;
+using DealsWhat.Application.WebApi.Providers;
 using DealsWhat.Domain.Interfaces;
 using DealsWhat.Infrastructure.DataAccess;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.OAuth;
 using Owin;
 
 [assembly: OwinStartup(typeof(DealsWhat.Application.WebApi.Startup))]
@@ -22,6 +28,8 @@ namespace DealsWhat.Application.WebApi
     {
         public void Configuration(IAppBuilder app)
         {
+            ConfigureAuth(app);
+
             HttpConfiguration config = new HttpConfiguration();
 
             config.DependencyResolver = WebApiContext.DefaultResolver;
