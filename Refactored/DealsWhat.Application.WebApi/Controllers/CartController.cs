@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace DealsWhat.Application.WebApi.Controllers
 {
@@ -35,6 +36,12 @@ namespace DealsWhat.Application.WebApi.Controllers
         // DELETE api/<controller>/5
         public void Delete(int id)
         {
+        }
+
+        [AllowAnonymous]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
     }
 }
