@@ -8,7 +8,7 @@ using DealsWhat.Domain.Model;
 
 namespace DealsWhat.Domain.Services
 {
-    public class CartService
+    public class CartService : ICartService
     {
         private readonly IRepositoryFactory repositoryFactory;
 

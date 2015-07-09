@@ -10,9 +10,9 @@ namespace DealsWhat.Domain.Test.Common
 {
     public class FakeUserRepository : IRepository<UserModel>
     {
-        private List<UserModel> users;
+        private IList<UserModel> users;
 
-        public FakeUserRepository(List<UserModel> users)
+        public FakeUserRepository(IList<UserModel> users)
         {
             this.users = users;
         }
