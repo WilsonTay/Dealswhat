@@ -12,7 +12,7 @@ namespace DealsWhat.Domain.Interfaces
         IRepository<DealModel> CreateDealRepository();
         IRepository<DealCategoryModel> CreateDealCategoryRepository();
 
-        IRepository<UserModel> CreateUserRepository();
+        IUserRepository CreateUserRepository();
 
 
     }

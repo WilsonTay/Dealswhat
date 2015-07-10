@@ -8,7 +8,7 @@ using DealsWhat.Domain.Model;
 
 namespace DealsWhat.Domain.Test.Common
 {
-    public class FakeUserRepository : IRepository<UserModel>
+    public class FakeUserRepository : IUserRepository
     {
         private IList<UserModel> users;
 
@@ -34,6 +34,11 @@ namespace DealsWhat.Domain.Test.Common
 
         public void Save()
         {
+        }
+
+        public UserModel FindByEmailAddress(string emailAddress)
+        {
+            return users.First(a => a.EmailAddress.ToString().Equals(emailAddress));
         }
     }
 }

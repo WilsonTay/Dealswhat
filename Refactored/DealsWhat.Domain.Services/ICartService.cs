@@ -5,8 +5,8 @@ namespace DealsWhat.Domain.Services
 {
     public interface ICartService
     {
-        void AddCartItem(string userId, CartItemModel model);
-        IEnumerable<CartItemModel> GetCartItems(string userId);
-        void RemoveCartItem(string userId, string cartItemId);
+        void AddCartItem(string emailAddress, CartItemModel model);
+        IEnumerable<CartItemModel> GetCartItems(string emailAddress);
+        void RemoveCartItem(string emailAddress, string cartItemId);
     }
 }

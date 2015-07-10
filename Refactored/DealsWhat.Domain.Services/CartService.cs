@@ -17,31 +17,31 @@ namespace DealsWhat.Domain.Services
             this.repositoryFactory = repositoryFactory;
         }
 
-        public void AddCartItem(string userId, CartItemModel model)
+        public void AddCartItem(string emailAddress, CartItemModel model)
         {
             var repository = this.repositoryFactory.CreateUserRepository();
 
-            var user = repository.FindByKey(userId);
+            var user = repository.FindByEmailAddress(emailAddress);
 
             user.AddToCart(model);
 
             repository.Save();
         }
 
-        public IEnumerable<CartItemModel> GetCartItems(string userId)
+        public IEnumerable<CartItemModel> GetCartItems(string emailAddress)
         {
             var repository = this.repositoryFactory.CreateUserRepository();
 
-            var user = repository.FindByKey(userId);
+            var user = repository.FindByKey(emailAddress);
 
             return user.CartItems.ToList();
         }
 
-        public void RemoveCartItem(string userId, string cartItemId)
+        public void RemoveCartItem(string emailAddress, string cartItemId)
         {
             var repository = this.repositoryFactory.CreateUserRepository();
 
-            var user = repository.FindByKey(userId);
+            var user = repository.FindByKey(emailAddress);
             var toRemove = user.CartItems.FirstOrDefault(c => c.Key.ToString().Equals(cartItemId));
 
             user.RemoveFromCart(toRemove);

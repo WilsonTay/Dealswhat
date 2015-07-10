@@ -12,12 +12,12 @@ namespace DealsWhat.Domain.Test.Common
     {
         private readonly IRepository<DealModel> dealRepository;
         private readonly IRepository<DealCategoryModel> dealCategoryRepository;
-        private readonly IRepository<UserModel> userRepository;  
+        private readonly IUserRepository userRepository;  
 
         public FakeRepositoryFactory(
             IRepository<DealModel> dealRepository = null,
             IRepository<DealCategoryModel> dealCategoryRepository = null,
-            IRepository<UserModel> userRepository = null)
+            IUserRepository userRepository = null)
         {
             this.dealRepository = dealRepository;
             this.dealCategoryRepository = dealCategoryRepository;
@@ -34,7 +34,7 @@ namespace DealsWhat.Domain.Test.Common
             return dealCategoryRepository;
         }
 
-        public IRepository<UserModel> CreateUserRepository()
+        IUserRepository IRepositoryFactory.CreateUserRepository()
         {
             return userRepository;
         }

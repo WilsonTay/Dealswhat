@@ -18,6 +18,7 @@ namespace DealsWhat.Domain.Services.Tests
     public class CartServiceTests
     {
         private IFixture fixture;
+        private string emailAddress = "email@email.com";
 
         [TestInitialize]
         public void Initialize()
@@ -31,14 +32,14 @@ namespace DealsWhat.Domain.Services.Tests
         [TestMethod]
         public void AddCartItem_GetUserFromRepository()
         {
-            var mockedRepository = Mock.Get(fixture.Freeze<IRepository<UserModel>>());
-            mockedRepository.Setup(m => m.FindByKey("user")).Returns(TestModelFactory.CreateUser());
+            var mockedRepository = Mock.Get(fixture.Freeze<IUserRepository>());
+            mockedRepository.Setup(m => m.FindByEmailAddress(emailAddress)).Returns(TestModelFactory.CreateUser());
 
             var service = CreateCartService(userRepository: mockedRepository.Object);
 
-            service.AddCartItem("user", TestModelFactory.CreateCartItem());
+            service.AddCartItem(emailAddress, TestModelFactory.CreateCartItem());
 
-            mockedRepository.Verify(m => m.FindByKey("user"), Times.Once);
+            mockedRepository.Verify(m => m.FindByEmailAddress(emailAddress), Times.Once);
         }
 
         [TestMethod]
@@ -52,7 +53,7 @@ namespace DealsWhat.Domain.Services.Tests
             var cartItem = TestModelFactory.CreateCartItem();
 
             var service = CreateCartService(users);
-            service.AddCartItem(user.Key.ToString(), cartItem);
+            service.AddCartItem(user.EmailAddress.ToString(), cartItem);
 
             user.CartItems.Should().Contain(cartItem);
         }
@@ -60,13 +61,13 @@ namespace DealsWhat.Domain.Services.Tests
         [TestMethod]
         public void AddCartItem_AfterAdded_SaveCalled()
         {
-            var mockedRepository = Mock.Get(fixture.Freeze<IRepository<UserModel>>());
-            mockedRepository.Setup(m => m.FindByKey("user")).Returns(TestModelFactory.CreateUser());
+            var mockedRepository = Mock.Get(fixture.Freeze<IUserRepository>());
+            mockedRepository.Setup(m => m.FindByEmailAddress(emailAddress)).Returns(TestModelFactory.CreateUser());
 
             var cartItem = TestModelFactory.CreateCartItem();
 
             var service = CreateCartService(userRepository: mockedRepository.Object);
-            service.AddCartItem("user", cartItem);
+            service.AddCartItem(emailAddress, cartItem);
 
             mockedRepository.Verify(m => m.Save(), Times.Once);
         }
@@ -101,7 +102,7 @@ namespace DealsWhat.Domain.Services.Tests
             users.Add(user);
 
             var service = CreateCartService(users);
-            service.AddCartItem(user.Key.ToString(), cartItem);
+            service.AddCartItem(user.EmailAddress.ToString(), cartItem);
 
             var actualCartItem = user.CartItems.First();
             actualCartItem.DealOption.ShouldBeEquivalentTo(dealOption);
@@ -162,14 +163,14 @@ namespace DealsWhat.Domain.Services.Tests
             user.CartItems.First().ShouldBeEquivalentTo(cartItem2);
         }
 
-        private CartService CreateCartService(List<UserModel> users = null, IRepository<UserModel> userRepository = null)
+        private CartService CreateCartService(List<UserModel> users = null, IUserRepository userRepository = null)
         {
             if (userRepository == null)
             {
                 userRepository = new FakeUserRepository(users ?? new List<UserModel>());
             }
 
-            fixture.Register<IRepository<UserModel>>(() => userRepository);
+            fixture.Register<IUserRepository>(() => userRepository);
 
             var fakeRepositoryFactory = fixture.Create<FakeRepositoryFactory>();
             fixture.Register<IRepositoryFactory>(() => fakeRepositoryFactory);
