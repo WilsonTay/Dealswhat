@@ -85,6 +85,35 @@ namespace DealsWhat.Domain.Test.Common
             return user;
         }
 
+        public static NewCartItemModel CreateNewCartItem(
+            string dealId = null,
+            string dealOptionId = null,
+            IList<string> selectedAttributesId = null)
+        {
+            if (string.IsNullOrWhiteSpace(dealId))
+            {
+                dealId = fixture.Create<string>();
+            }
+
+            if (string.IsNullOrWhiteSpace(dealOptionId))
+            {
+                dealOptionId = fixture.Create<string>();
+            }
+
+            if (selectedAttributesId == null)
+            {
+                selectedAttributesId = new List<string>();
+                var random = new Random().Next(0, 3);
+
+                for (int i = 0; i < random; i++)
+                {
+                    selectedAttributesId.Add(fixture.Create<string>());
+                }
+            }
+
+            return NewCartItemModel.Create(dealId, dealOptionId, selectedAttributesId);
+        }
+
         public static CartItemModel CreateCartItem(DealOptionModel dealOption = null, List<DealAttributeModel> dealAttributes = null)
         {
             if (dealOption == null)

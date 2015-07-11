@@ -16,7 +16,7 @@ namespace DealsWhat.Application.WebApi.Areas.HelpPage
             Text = text;
         }
 
-        public string Text { get; private set; }
+        public string Text { get; }
 
         public override bool Equals(object obj)
         {

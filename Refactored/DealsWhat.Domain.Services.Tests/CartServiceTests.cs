@@ -35,9 +35,17 @@ namespace DealsWhat.Domain.Services.Tests
             var mockedRepository = Mock.Get(fixture.Freeze<IUserRepository>());
             mockedRepository.Setup(m => m.FindByEmailAddress(emailAddress)).Returns(TestModelFactory.CreateUser());
 
-            var service = CreateCartService(userRepository: mockedRepository.Object);
+            var deal = TestModelFactory.CreateCompleteDeal();
+            var dealOption = deal.Options.First();
+            var dealOptionAttributes = dealOption.Attributes.Select(a => a.Key.ToString()).ToList();
 
-            service.AddCartItem(emailAddress, TestModelFactory.CreateCartItem());
+            var mockedDealRepository = Mock.Get(fixture.Freeze<IRepository<DealModel>>());
+            mockedDealRepository.Setup(m => m.FindByKey(It.IsAny<object>()))
+                .Returns(deal);
+
+            var service = CreateCartService(userRepository: mockedRepository.Object, dealRepository: mockedDealRepository.Object);
+
+            service.AddCartItem(emailAddress, TestModelFactory.CreateNewCartItem(deal.Key.ToString(), dealOption.Key.ToString(), dealOptionAttributes));
 
             mockedRepository.Verify(m => m.FindByEmailAddress(emailAddress), Times.Once);
         }
@@ -50,12 +58,23 @@ namespace DealsWhat.Domain.Services.Tests
             var users = new List<UserModel>();
             users.Add(user);
 
-            var cartItem = TestModelFactory.CreateCartItem();
+            var deal = TestModelFactory.CreateCompleteDeal();
+            var deals = new List<DealModel>() { deal };
 
-            var service = CreateCartService(users);
+            var dealOption = deal.Options.First();
+            var dealAttributes = dealOption.Attributes.ToList();
+
+            var cartItem = TestModelFactory.CreateNewCartItem(
+                deal.Key.ToString(),
+                dealOption.Key.ToString(),
+                dealAttributes.Select(a => a.Key.ToString()).ToList());
+
+            var service = CreateCartService(users, deals: deals);
             service.AddCartItem(user.EmailAddress.ToString(), cartItem);
 
-            user.CartItems.Should().Contain(cartItem);
+            var userCartItem = user.CartItems.First();
+            userCartItem.DealOption.ShouldBeEquivalentTo(dealOption);
+            userCartItem.AttributeValues.ShouldAllBeEquivalentTo(dealAttributes);
         }
 
         [TestMethod]
@@ -64,9 +83,15 @@ namespace DealsWhat.Domain.Services.Tests
             var mockedRepository = Mock.Get(fixture.Freeze<IUserRepository>());
             mockedRepository.Setup(m => m.FindByEmailAddress(emailAddress)).Returns(TestModelFactory.CreateUser());
 
-            var cartItem = TestModelFactory.CreateCartItem();
+            var deal = TestModelFactory.CreateCompleteDeal();
+            var dealOption = deal.Options.First();
+            var dealOptionAttributes = dealOption.Attributes.Select(a => a.Key.ToString()).ToList();
+            var cartItem = TestModelFactory.CreateNewCartItem(deal.Key.ToString(), dealOption.Key.ToString(), dealOptionAttributes);
 
-            var service = CreateCartService(userRepository: mockedRepository.Object);
+            var service = CreateCartService(
+                userRepository: mockedRepository.Object,
+                deals: new List<DealModel>() { deal });
+
             service.AddCartItem(emailAddress, cartItem);
 
             mockedRepository.Verify(m => m.Save(), Times.Once);
@@ -94,14 +119,17 @@ namespace DealsWhat.Domain.Services.Tests
 
             //TODO: Add validation when adding new order. Check and make sure
             // all attributes under the deal has a value.
-            var cartItem = CartItemModel.Create(dealOption, selectedAttributeValues);
+            var cartItem = NewCartItemModel.Create(
+                dealModel.Key.ToString(),
+                dealOption.Key.ToString(),
+                selectedAttributeValues.Select(a => a.Key.ToString()));
 
             var user = TestModelFactory.CreateUser();
 
             var users = new List<UserModel>();
             users.Add(user);
 
-            var service = CreateCartService(users);
+            var service = CreateCartService(users, deals: new List<DealModel>() { dealModel });
             service.AddCartItem(user.EmailAddress.ToString(), cartItem);
 
             var actualCartItem = user.CartItems.First();
@@ -123,7 +151,7 @@ namespace DealsWhat.Domain.Services.Tests
             users.Add(user);
 
             var service = CreateCartService(users);
-            var cartItems = service.GetCartItems(user.Key.ToString());
+            var cartItems = service.GetCartItems(user.EmailAddress.ToString());
 
             cartItems.Count().ShouldBeEquivalentTo(1);
             cartItems.First().ShouldBeEquivalentTo(cartItem);
@@ -138,7 +166,7 @@ namespace DealsWhat.Domain.Services.Tests
             users.Add(user);
 
             var service = CreateCartService(users);
-            var cartItems = service.GetCartItems(user.Key.ToString());
+            var cartItems = service.GetCartItems(user.EmailAddress.ToString());
 
             cartItems.Should().BeEmpty();
         }
@@ -157,20 +185,30 @@ namespace DealsWhat.Domain.Services.Tests
             users.Add(user);
 
             var service = CreateCartService(users);
-            service.RemoveCartItem(user.Key.ToString(), cartItem1.Key.ToString());
+            service.RemoveCartItem(user.EmailAddress.ToString(), cartItem1.Key.ToString());
 
             user.CartItems.Count().Should().Be(1);
             user.CartItems.First().ShouldBeEquivalentTo(cartItem2);
         }
 
-        private CartService CreateCartService(List<UserModel> users = null, IUserRepository userRepository = null)
+        private CartService CreateCartService(
+            List<UserModel> users = null,
+            IUserRepository userRepository = null,
+            List<DealModel> deals = null,
+            IRepository<DealModel> dealRepository = null)
         {
             if (userRepository == null)
             {
                 userRepository = new FakeUserRepository(users ?? new List<UserModel>());
             }
 
+            if (dealRepository == null)
+            {
+                dealRepository = new FakeDealRepository(deals ?? new List<DealModel>());
+            }
+
             fixture.Register<IUserRepository>(() => userRepository);
+            fixture.Register<IRepository<DealModel>>(() => dealRepository);
 
             var fakeRepositoryFactory = fixture.Create<FakeRepositoryFactory>();
             fixture.Register<IRepositoryFactory>(() => fakeRepositoryFactory);

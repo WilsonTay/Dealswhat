@@ -16,7 +16,7 @@ namespace DealsWhat.Application.WebApi.Areas.HelpPage
             ErrorMessage = errorMessage;
         }
 
-        public string ErrorMessage { get; private set; }
+        public string ErrorMessage { get; }
 
         public override bool Equals(object obj)
         {

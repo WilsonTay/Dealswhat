@@ -9,6 +9,7 @@ namespace DealsWhat.Domain.Model
     public sealed class DealAttributeModel
     {
         public string Name { get; set; }
+
         public string Value { get; set; }
 
         public object Key { get; internal set; }

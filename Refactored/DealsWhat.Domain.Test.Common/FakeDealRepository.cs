@@ -33,7 +33,7 @@ namespace DealsWhat.Domain.Test.Common
 
         public DealModel FindByKey(object key)
         {
-            throw new NotImplementedException();
+            return deals.FirstOrDefault(d => d.Key.Equals(key));
         }
 
         public void Save()

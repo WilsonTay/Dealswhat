@@ -17,13 +17,19 @@ namespace DealsWhat.Domain.Services
             this.repositoryFactory = repositoryFactory;
         }
 
-        public void AddCartItem(string emailAddress, CartItemModel model)
+        public void AddCartItem(string emailAddress, NewCartItemModel model)
         {
             var repository = this.repositoryFactory.CreateUserRepository();
+            var dealRepository = this.repositoryFactory.CreateDealRepository();
 
             var user = repository.FindByEmailAddress(emailAddress);
+            var deal = dealRepository.FindByKey(model.DealId);
 
-            user.AddToCart(model);
+            var dealOption = deal.Options.First(d => d.Key.ToString().Equals(model.DealOptionId));
+            var attributes = dealOption.Attributes.Where(d => model.SelectedAttributes.Contains(d.Key.ToString())).ToList();
+
+            var cartItem = CartItemModel.Create(dealOption, attributes);
+             user.AddToCart(cartItem);
 
             repository.Save();
         }
@@ -32,7 +38,7 @@ namespace DealsWhat.Domain.Services
         {
             var repository = this.repositoryFactory.CreateUserRepository();
 
-            var user = repository.FindByKey(emailAddress);
+            var user = repository.FindByEmailAddress(emailAddress);
 
             return user.CartItems.ToList();
         }
@@ -41,7 +47,7 @@ namespace DealsWhat.Domain.Services
         {
             var repository = this.repositoryFactory.CreateUserRepository();
 
-            var user = repository.FindByKey(emailAddress);
+            var user = repository.FindByEmailAddress(emailAddress);
             var toRemove = user.CartItems.FirstOrDefault(c => c.Key.ToString().Equals(cartItemId));
 
             user.RemoveFromCart(toRemove);

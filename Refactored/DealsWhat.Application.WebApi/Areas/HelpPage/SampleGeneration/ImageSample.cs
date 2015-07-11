@@ -20,7 +20,7 @@ namespace DealsWhat.Application.WebApi.Areas.HelpPage
             Src = src;
         }
 
-        public string Src { get; private set; }
+        public string Src { get; }
 
         public override bool Equals(object obj)
         {

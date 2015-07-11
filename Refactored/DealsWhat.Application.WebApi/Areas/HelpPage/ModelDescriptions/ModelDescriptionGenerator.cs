@@ -97,7 +97,7 @@ namespace DealsWhat.Application.WebApi.Areas.HelpPage.ModelDescriptions
             GeneratedModels = new Dictionary<string, ModelDescription>(StringComparer.OrdinalIgnoreCase);
         }
 
-        public Dictionary<string, ModelDescription> GeneratedModels { get; private set; }
+        public Dictionary<string, ModelDescription> GeneratedModels { get; }
 
         private IModelDocumentationProvider DocumentationProvider
         {

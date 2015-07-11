@@ -100,7 +100,7 @@ namespace DealsWhat.Application.WebApi.Areas.HelpPage
         /// <value>
         /// The name of the controller.
         /// </value>
-        public string ControllerName { get; private set; }
+        public string ControllerName { get; }
 
         /// <summary>
         /// Gets the name of the action.
@@ -108,7 +108,7 @@ namespace DealsWhat.Application.WebApi.Areas.HelpPage
         /// <value>
         /// The name of the action.
         /// </value>
-        public string ActionName { get; private set; }
+        public string ActionName { get; }
 
         /// <summary>
         /// Gets the media type.
@@ -116,19 +116,19 @@ namespace DealsWhat.Application.WebApi.Areas.HelpPage
         /// <value>
         /// The media type.
         /// </value>
-        public MediaTypeHeaderValue MediaType { get; private set; }
+        public MediaTypeHeaderValue MediaType { get; }
 
         /// <summary>
         /// Gets the parameter names.
         /// </summary>
-        public HashSet<string> ParameterNames { get; private set; }
+        public HashSet<string> ParameterNames { get; }
 
-        public Type ParameterType { get; private set; }
+        public Type ParameterType { get; }
 
         /// <summary>
         /// Gets the <see cref="SampleDirection"/>.
         /// </summary>
-        public SampleDirection? SampleDirection { get; private set; }
+        public SampleDirection? SampleDirection { get; }
 
         public override bool Equals(object obj)
         {

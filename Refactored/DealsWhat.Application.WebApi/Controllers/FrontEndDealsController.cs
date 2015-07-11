@@ -22,17 +22,17 @@ namespace DealsWhat.Application.WebApi.Controllers
         {
             this.dealService = dealService;
 
-            AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealModel, FrontEndDeal>()
+            AutoMapper.Mapper.CreateMap<DealModel, FrontEndDeal>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()))
                 .AfterMap((dest, src) =>
                 {
                     src.ThumbnailUrls = dest.Images.Select(i => ImageHelper.GenerateThumbnailPath(i.RelativeUrl)).ToList();
                 });
 
-            AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealAttributeModel, FrontEndSpecificDealAttribute>()
+            AutoMapper.Mapper.CreateMap<DealAttributeModel, FrontEndSpecificDealAttribute>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()));
 
-            AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealOptionModel, FrontDealSpecificDealOption>()
+            AutoMapper.Mapper.CreateMap<DealOptionModel, FrontDealSpecificDealOption>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()))
                 .AfterMap((dest, src) =>
                 {
@@ -48,7 +48,7 @@ namespace DealsWhat.Application.WebApi.Controllers
                     }
                 });
 
-            AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealModel, FrontEndSpecificDeal>()
+            AutoMapper.Mapper.CreateMap<DealModel, FrontEndSpecificDeal>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()))
                 .ForMember(dest => dest.ImageUrls, opt => opt.MapFrom(src => src.Images.Select(i => i.RelativeUrl)))
                 .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => src.StartTime))
@@ -91,7 +91,7 @@ namespace DealsWhat.Application.WebApi.Controllers
 
             //TODO: Combine search term and category.
 
-            var convertedSearchResults = this.dealService.SearchDeals(searchQuery)
+            var convertedSearchResults = dealService.SearchDeals(searchQuery)
                 .Select(d => AutoMapper.Mapper.Map<FrontEndDeal>(d))
                 .ToList();
 
@@ -127,7 +127,7 @@ namespace DealsWhat.Application.WebApi.Controllers
                 searchQuery.CanonicalUrl = url.Value;
             }
 
-            var searchResult = this.dealService.SearchSingleDeal(searchQuery);
+            var searchResult = dealService.SearchSingleDeal(searchQuery);
 
             var convertedSearchResult = AutoMapper.Mapper.Map<DealModel, FrontEndSpecificDeal>(searchResult);
 

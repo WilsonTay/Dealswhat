@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace DealsWhat.Domain.Model
+namespace WebApplication3
 {
-    public class CartModel
+    public class AppSettings
     {
+        public string SiteTitle { get; set; }
     }
 }
