@@ -28,6 +28,11 @@ namespace DealsWhat.Domain.Test.Common
             return dealCategories;
         }
 
+        public void Update(DealCategoryModel model)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Create(DealCategoryModel model)
         {
             throw new NotImplementedException();

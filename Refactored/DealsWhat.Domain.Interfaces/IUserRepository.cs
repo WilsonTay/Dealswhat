@@ -10,5 +10,7 @@ namespace DealsWhat.Domain.Interfaces
     public interface IUserRepository : IRepository<UserModel>
     {
         UserModel FindByEmailAddress(string emailAddress);
+
+        void AddToCart(string emailAddress, CartItemModel cart);
     }
 }

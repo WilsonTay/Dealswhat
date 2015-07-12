@@ -207,7 +207,7 @@
 
         function loadDealInformation() {
             $.ajax({
-                url: baseUrl + "api/deal?id=ee97f6c8-c95a-4d0c-b32b-0021c3315478",
+                url: baseUrl + "api/deal?id=" + "@Model.Id",
                 dataType: 'json',
                 cache: false,
                 success: function (deal) {

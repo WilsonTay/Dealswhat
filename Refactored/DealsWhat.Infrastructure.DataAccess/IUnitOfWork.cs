@@ -13,5 +13,8 @@ namespace DealsWhat.Infrastructure.DataAccess
             where TEntity : class;
 
         void Commit();
+
+        void Update<TEntity>(TEntity entity)
+            where TEntity : class;
     }
 }

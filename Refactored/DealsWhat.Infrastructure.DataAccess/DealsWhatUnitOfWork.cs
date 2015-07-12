@@ -19,6 +19,17 @@ namespace DealsWhat.Infrastructure.DataAccess
         {
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Cart>()
+                   .HasMany<DealAttribute>(b => b.DealAttributes)
+                   .WithMany(r => r.Carts)
+                   .Map(cs =>
+                   {
+                       cs.ToTable("CartDealAttributes");
+                   });
+        }
+
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
@@ -37,9 +48,17 @@ namespace DealsWhat.Infrastructure.DataAccess
             return base.Set<TEntity>();
         }
 
+        public void Update<TEntity>(TEntity entity)
+            where TEntity : class
+        {
+            base.Entry<TEntity>(entity).State = EntityState.Modified;
+            base.Set<TEntity>().Attach(entity);
+            
+        }
+
         public void Commit()
         {
-             this.SaveChanges();
+            this.SaveChanges();
         }
     }
 }

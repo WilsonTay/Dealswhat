@@ -26,6 +26,11 @@ namespace DealsWhat.Infrastructure.DataAccess
             }
         }
 
+        public void Update(DealCategoryModel model)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Create(DealCategoryModel model)
         {
             throw new NotImplementedException();

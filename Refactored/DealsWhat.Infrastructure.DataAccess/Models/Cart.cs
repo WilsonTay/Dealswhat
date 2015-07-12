@@ -18,5 +18,10 @@ namespace DealsWhat.Models
         public DealOption DealOption { get; set; }
         public IList<DealAttribute> DealAttributes { get; set; }
         //public virtual IList<DealOptionAttribute> SelectedAttributes { get; set; }
+
+        public Cart()
+        {
+            DealAttributes = new List<DealAttribute>();
+        }
     }
 }

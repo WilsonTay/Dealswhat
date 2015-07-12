@@ -22,6 +22,11 @@ namespace DealsWhat.Domain.Test.Common
             return this.users;
         }
 
+        public void Update(UserModel model)
+        {
+         
+        }
+
         public void Create(UserModel model)
         {
             this.users.Add(model);
@@ -39,6 +44,11 @@ namespace DealsWhat.Domain.Test.Common
         public UserModel FindByEmailAddress(string emailAddress)
         {
             return users.First(a => a.EmailAddress.ToString().Equals(emailAddress));
+        }
+
+        public void AddToCart(string emailAddress, CartItemModel cart)
+        {
+            throw new NotImplementedException();
         }
     }
 }

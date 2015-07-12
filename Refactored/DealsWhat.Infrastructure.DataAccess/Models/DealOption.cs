@@ -15,5 +15,10 @@ namespace DealsWhat.Models
 
         [JsonIgnore]
         public virtual Deal Deal { get; set; }
+
+        public DealOption()
+        {
+            Attributes = new List<DealAttribute>();
+        }
     }
 }

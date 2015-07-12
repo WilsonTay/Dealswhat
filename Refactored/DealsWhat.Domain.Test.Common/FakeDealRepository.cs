@@ -26,6 +26,11 @@ namespace DealsWhat.Domain.Test.Common
             return deals;
         }
 
+        public void Update(DealModel model)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Create(DealModel model)
         {
             throw new NotImplementedException();

@@ -13,6 +13,7 @@ namespace DealsWhat.Domain.Interfaces
     {
         IEnumerable<T> GetAll();
 
+        void Update(T model);
         void Create(T model);
 
         T FindByKey(object key);

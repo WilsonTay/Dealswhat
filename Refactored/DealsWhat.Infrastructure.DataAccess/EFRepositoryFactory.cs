@@ -17,11 +17,46 @@ namespace DealsWhat.Infrastructure.DataAccess
         {
             this.dbContext = dbContext;
 
+            AutoMapper.Mapper.CreateMap<CartItemModel, Cart>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.Parse(src.Key.ToString())))
+                .AfterMap((dest, src) =>
+                {
+                    if (src.DealAttributes.Any())
+                    {
+                        return;
+                    }
+
+                    foreach (var attr in dest.AttributeValues)
+                    {
+                        var entity = AutoMapper.Mapper.Map<DealAttribute>(attr);
+                        src.DealAttributes.Add(entity);
+                    }
+                });
+
+            AutoMapper.Mapper.CreateMap<UserModel, User>()
+             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key.ToString()))
+             .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.EmailAddress))
+             .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.EmailAddress))
+             .AfterMap((dest, src) =>
+             {
+                 if (src.Carts.Any())
+                 {
+                     return;
+                 }
+
+                 foreach (var cart in dest.CartItems)
+                 {
+                     var entity = AutoMapper.Mapper.Map<Cart>(cart);
+                     src.Carts.Add(entity);
+                 }
+             });
+
             AutoMapper.Mapper.CreateMap<Cart, CartItemModel>()
-                   .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()));
+                .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()));
 
             AutoMapper.Mapper.CreateMap<User, UserModel>()
                 .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()))
+                .ForMember(dest=>dest.EmailAddress,opt=>opt.MapFrom(src=>src.Email))
                 .AfterMap((dest, src) =>
                 {
                     if (src.CartItems.Any())
@@ -33,6 +68,25 @@ namespace DealsWhat.Infrastructure.DataAccess
                     {
                         var model = AutoMapper.Mapper.Map<CartItemModel>(cart);
                         src.AddToCart(model);
+                    }
+                });
+
+            AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealAttributeModel, DealAttribute>()
+              .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.Parse(src.Key.ToString())));
+
+            AutoMapper.Mapper.CreateMap<DealsWhat.Domain.Model.DealOptionModel, DealOption>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.Parse(src.Key.ToString())))
+                .AfterMap((dest, src) =>
+                {
+                    if (src.Attributes.Any())
+                    {
+                        return;
+                    }
+
+                    foreach (var attr in dest.Attributes)
+                    {
+                        var converted = AutoMapper.Mapper.Map<DealAttribute>(attr);
+                        src.Attributes.Add(converted);
                     }
                 });
 
@@ -120,7 +174,7 @@ namespace DealsWhat.Infrastructure.DataAccess
 
         IUserRepository IRepositoryFactory.CreateUserRepository()
         {
-           return new EFUserRepository(this.dbContext);
+            return new EFUserRepository(this.dbContext);
         }
     }
 }

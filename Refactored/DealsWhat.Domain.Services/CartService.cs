@@ -29,7 +29,8 @@ namespace DealsWhat.Domain.Services
             var attributes = dealOption.Attributes.Where(d => model.SelectedAttributes.Contains(d.Key.ToString())).ToList();
 
             var cartItem = CartItemModel.Create(dealOption, attributes);
-             user.AddToCart(cartItem);
+
+            repository.AddToCart(emailAddress, cartItem);
 
             repository.Save();
         }
