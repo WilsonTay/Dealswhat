@@ -35,7 +35,17 @@ namespace DealsWhat.Infrastructure.DataAccess
 
         public DealModel FindByKey(object key)
         {
-            throw new NotImplementedException();
+            // HACK: Optimize this.
+            var entity = this.unitOfWork.Set<Models.Deal>()
+                .ToList()
+                .FirstOrDefault(u => u.Id.ToString() == key.ToString());
+
+            if (entity != null)
+            {
+                return Convert(entity);
+            }
+
+            return null;
         }
 
         public void Save()

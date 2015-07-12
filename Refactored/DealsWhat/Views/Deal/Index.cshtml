@@ -133,6 +133,7 @@
 
             var selectedDealOption = {};
             selectedDealOption.DealOptionId = dealOptionId;
+            selectedDealOption.DealId = "@Model.Id";
 
             var selectedAttributes = [];
 
@@ -141,17 +142,19 @@
                 var selectedValue = $(value).val();
 
                 var attribute = {};
-                attribute.Name = selectedName;
-                attribute.Value = selectedValue;
+               // attribute.Name = selectedName;
+                //attribute.Value = selectedValue;
 
-                selectedAttributes.push(attribute);
+                //selectedAttributes.push(attribute);
+
+                selectedAttributes.push(selectedValue);
             });
 
             selectedDealOption.SelectedAttributes = selectedAttributes;
 
             $.ajax({
-                url: baseUrl + "api/ordersapi/",
-                data: JSON.stringify(selectedDealOption),
+                url: baseUrl + "api/cart/",
+                data: selectedDealOption,
                 method: 'post',
                 dataType: 'json',
                 cache: false,

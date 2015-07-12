@@ -38,6 +38,7 @@ namespace DealsWhat.Application.WebApi
             builder.RegisterApiControllers(typeof(FrontEndDealsController).Assembly);
 
             builder.RegisterType<DealService>().As<IDealService>();
+            builder.RegisterType<CartService>().As<ICartService>();
 
             var container = builder.Build();
 

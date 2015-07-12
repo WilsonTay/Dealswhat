@@ -17,6 +17,25 @@ namespace DealsWhat.Infrastructure.DataAccess
         {
             this.dbContext = dbContext;
 
+            AutoMapper.Mapper.CreateMap<Cart, CartItemModel>()
+                   .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()));
+
+            AutoMapper.Mapper.CreateMap<User, UserModel>()
+                .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()))
+                .AfterMap((dest, src) =>
+                {
+                    if (src.CartItems.Any())
+                    {
+                        return;
+                    }
+
+                    foreach (var cart in dest.Carts)
+                    {
+                        var model = AutoMapper.Mapper.Map<CartItemModel>(cart);
+                        src.AddToCart(model);
+                    }
+                });
+
             AutoMapper.Mapper.CreateMap<DealAttribute, DealsWhat.Domain.Model.DealAttributeModel>()
                 .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id.ToString()));
 
@@ -56,7 +75,7 @@ namespace DealsWhat.Infrastructure.DataAccess
                     // Skip if mapped.
                     if (src.Options.Any())
                     {
-                        return;    
+                        return;
                     }
 
                     foreach (var img in dest.Pictures.ToList())
@@ -101,7 +120,7 @@ namespace DealsWhat.Infrastructure.DataAccess
 
         IUserRepository IRepositoryFactory.CreateUserRepository()
         {
-            throw new NotImplementedException();
+           return new EFUserRepository(this.dbContext);
         }
     }
 }

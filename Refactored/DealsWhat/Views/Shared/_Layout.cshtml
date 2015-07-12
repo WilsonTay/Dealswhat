@@ -289,25 +289,32 @@
 
         var json = JSON.stringify(payload);
 
-        //$.ajax({
-        //    type: "POST",
-        //    url: baseUrl + "token",
-        //    data: payload,
-        //    cache: false,
-        //    success: function (result) {
-        //        console.log(result);
-        //    },
-        //    complete: function () {
-        //    }
-        //});
-
         $.ajax({
-            type: "GET",
-            url: baseUrl + "api/cart",
-            beforeSend: function (request) {
-                request.setRequestHeader("Authorization", "Bearer PIl8Lw9Slc7NLmf1Dm_MGCIEYfUjRIiyEUwk6yYlMckFuo4hDCWjzUxcx0ICb19fEOCaAmGwEBJxkKnsUjbJET1dyzHgzoYQxZlinXv1mTuJymgyqF7enmMkelsXXzzfpLw5X6rnGHR3vn1BqjktpfNxdmrAWxQw8a_dsEHdgFlPR9iApraTYRN_Pfvi5hNJhaBRE7gN0Ru9z2ttV0kwIn9A_lVbwjmqQHhyNpL7-Qoc_B8ZFw1Fv_wzLxHXQgj92DXr9IfaN5yq96OYM1l-3LsxYbbZkPD8nFgMMsH0H-KT01nd2da0RggnsA_pGQaQCz4bk7UcN3X9zRgdKo-TwxqSRtA_GYUxhmifJfqg47ud9709ghM8isPbcM0jCK947dcLsJcVFskGlk9fz31mqXL6jHa8wcGPbg3qvY9fhUw9bd3IlQwCJJZRb0YNu79y2FD3WZjeR3FMCQOrLY2Vhe9tyYHD7KSGgnrFlSYcQcY");
+            type: "POST",
+            url: baseUrl + "token",
+            data: payload,
+            cache: false,
+            success: function (result) {
+                var token = result.access_token;
+           
+                $.ajaxSetup({
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+                    }
+                });
+                console.log(token);
+            },
+            complete: function () {
             }
         });
+
+        //$.ajax({
+        //    type: "GET",
+        //    url: baseUrl + "api/cart",
+        //    beforeSend: function (request) {
+        //        request.setRequestHeader("Authorization", "Bearer PIl8Lw9Slc7NLmf1Dm_MGCIEYfUjRIiyEUwk6yYlMckFuo4hDCWjzUxcx0ICb19fEOCaAmGwEBJxkKnsUjbJET1dyzHgzoYQxZlinXv1mTuJymgyqF7enmMkelsXXzzfpLw5X6rnGHR3vn1BqjktpfNxdmrAWxQw8a_dsEHdgFlPR9iApraTYRN_Pfvi5hNJhaBRE7gN0Ru9z2ttV0kwIn9A_lVbwjmqQHhyNpL7-Qoc_B8ZFw1Fv_wzLxHXQgj92DXr9IfaN5yq96OYM1l-3LsxYbbZkPD8nFgMMsH0H-KT01nd2da0RggnsA_pGQaQCz4bk7UcN3X9zRgdKo-TwxqSRtA_GYUxhmifJfqg47ud9709ghM8isPbcM0jCK947dcLsJcVFskGlk9fz31mqXL6jHa8wcGPbg3qvY9fhUw9bd3IlQwCJJZRb0YNu79y2FD3WZjeR3FMCQOrLY2Vhe9tyYHD7KSGgnrFlSYcQcY");
+        //    }
+        //});
     });
 </script>
 
